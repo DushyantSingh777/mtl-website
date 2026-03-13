@@ -39,16 +39,29 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-3 group" prefetch={true}>
-          <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-tron-purple to-tron-cyan flex items-center justify-center">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M12 2L2 7l10 5 10-5-10-5z" />
-              <path d="M2 17l10 5 10-5" />
-              <path d="M2 12l10 5 10-5" />
-            </svg>
-          </div>
+          <div className="flex items-center gap-3 mb-4">
+  <div className="relative w-8 h-8">
+    <img 
+      src="/logo-glow.png" 
+      alt="Mytron Labs Logo"
+      className="w-8 h-8 object-contain"
+      style={{
+        filter: 'grayscale(1) brightness(2)',
+      }}
+    />
+    <div 
+      className="absolute inset-0 rounded"
+      style={{
+        background: 'linear-gradient(135deg, #ec4899, #8b5cf6, #06b6d4)',
+        mixBlendMode: 'multiply',
+        pointerEvents: 'none',
+      }}
+    />
+  </div>
           <span className="font-display font-bold text-xl tracking-wider text-white group-hover:text-tron-purple transition-colors duration-300">
             MYTRON LABS
           </span>
+          </div>
         </Link>
 
         {/* Desktop nav - pill style */}

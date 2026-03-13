@@ -8,16 +8,37 @@ export default function Footer() {
           {/* Brand */}
           <div className="md:col-span-2">
             <div className="flex items-center gap-3 mb-4">
-              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-tron-purple to-tron-cyan flex items-center justify-center">
+              {/* <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-tron-purple to-tron-cyan flex items-center justify-center">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M12 2L2 7l10 5 10-5-10-5z" />
                   <path d="M2 17l10 5 10-5" />
                   <path d="M2 12l10 5 10-5" />
                 </svg>
-              </div>
+              </div> */}
+              <div className="flex items-center gap-3 mb-4">
+  <div className="relative w-8 h-8">
+    <img 
+      src="/logo-glow.png" 
+      alt="Mytron Labs Logo"
+      className="w-8 h-8 object-contain"
+      style={{
+        filter: 'grayscale(1) brightness(2)',
+      }}
+    />
+    <div 
+      className="absolute inset-0 rounded"
+      style={{
+        background: 'linear-gradient(135deg, #ec4899, #8b5cf6, #06b6d4)',
+        mixBlendMode: 'multiply',
+        pointerEvents: 'none',
+      }}
+    />
+  </div>
+  
               <span className="font-display font-bold text-lg tracking-wider text-white">
                 MYTRON LABS
               </span>
+              </div>
             </div>
             <p className="text-tron-text text-sm leading-relaxed max-w-xs">
               Building the data backbone for Physical AI. Powering the next generation of intelligent machines with real-world egocentric data.
