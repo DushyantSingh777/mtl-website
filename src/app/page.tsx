@@ -121,7 +121,7 @@ export default function HomePage() {
       </section>
 
       {/* ═══ BENTO GRID ═══ */}
-      <section className="px-6 pb-16 -mt-8 relative z-10">
+      <section className="px-6 pb-16 mt-50 relative z-10">
         <div className="max-w-7xl mx-auto">
           <div className="bento-grid">
             <AnimatedSection className="col-span-2 md:col-span-1">
