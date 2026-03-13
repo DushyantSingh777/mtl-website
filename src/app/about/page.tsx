@@ -61,10 +61,10 @@ export default function AboutPage() {
               <div className="glass-card p-8">
                 <div className="grid grid-cols-2 gap-4">
                   {[
-                    { label: "Data Scale", value: "PB+" },
-                    { label: "Modalities", value: "6" },
-                    { label: "Team Focus", value: "AI" },
-                    { label: "Stage", value: "Early" },
+                    { label: "Total Frames", value: "10.8B+" },
+                    { label: "Factory Partners", value: "300+" },
+                    { label: "Total Workers", value: "1L+" },
+                    { label: "Legal Compliance", value: "100%" },
                   ].map((stat, i) => (
                     <div key={i} className="text-center p-4 bg-white/[0.02] rounded-lg">
                       <div className="font-display text-3xl font-bold text-white">{stat.value}</div>
