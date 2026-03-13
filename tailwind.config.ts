@@ -10,64 +10,65 @@ const config: Config = {
     extend: {
       colors: {
         tron: {
-          cyan: "#00f5ff",
-          blue: "#0080ff",
-          dark: "#050508",
-          darker: "#020204",
-          grid: "#0a0a1a",
-          accent: "#00c8ff",
-          muted: "#1a1a2e",
-          border: "#1e2a3a",
-          text: "#a8b8cc",
+          dark: "#0a0a0b",
+          darker: "#050506",
+          purple: "#8b5cf6",
+          cyan: "#06b6d4",
+          pink: "#ec4899",
+          blue: "#3b82f6",
+          text: "#9ca3af",
+          "text-light": "#d1d5db",
         },
       },
       fontFamily: {
-        display: ["'Exo 2'", "sans-serif"],
+        display: ["'Oswald'", "sans-serif"],
         body: ["'DM Sans'", "sans-serif"],
         mono: ["'JetBrains Mono'", "monospace"],
       },
       animation: {
-        "grid-flow": "gridFlow 8s linear infinite",
-        "pulse-glow": "pulseGlow 3s ease-in-out infinite",
-        "float": "float 6s ease-in-out infinite",
-        "scan-line": "scanLine 4s linear infinite",
-        "border-glow": "borderGlow 2s ease-in-out infinite",
         "fade-up": "fadeUp 0.8s ease forwards",
-        "typing": "typing 3s steps(30) forwards",
+        "fade-in": "fadeIn 0.6s ease forwards",
+        "slide-up": "slideUp 0.6s ease forwards",
+        "aurora": "aurora 15s ease infinite",
+        "float": "float 6s ease-in-out infinite",
+        "pulse-slow": "pulseSlow 3s ease-in-out infinite",
+        "spin-slow": "spinSlow 20s linear infinite",
+        "gradient-shift": "gradientShift 8s ease infinite",
       },
       keyframes: {
-        gridFlow: {
-          "0%": { backgroundPosition: "0 0" },
-          "100%": { backgroundPosition: "60px 60px" },
+        fadeUp: {
+          "0%": { opacity: "0", transform: "translateY(40px)" },
+          "100%": { opacity: "1", transform: "translateY(0)" },
         },
-        pulseGlow: {
-          "0%, 100%": { opacity: "0.5", transform: "scale(1)" },
-          "50%": { opacity: "1", transform: "scale(1.05)" },
+        fadeIn: {
+          "0%": { opacity: "0" },
+          "100%": { opacity: "1" },
+        },
+        slideUp: {
+          "0%": { opacity: "0", transform: "translateY(20px)" },
+          "100%": { opacity: "1", transform: "translateY(0)" },
+        },
+        aurora: {
+          "0%, 100%": { transform: "translate(0, 0) rotate(0deg) scale(1)" },
+          "33%": { transform: "translate(30px, -30px) rotate(5deg) scale(1.05)" },
+          "66%": { transform: "translate(-20px, 20px) rotate(-3deg) scale(0.95)" },
         },
         float: {
           "0%, 100%": { transform: "translateY(0px)" },
           "50%": { transform: "translateY(-20px)" },
         },
-        scanLine: {
-          "0%": { top: "0%" },
-          "100%": { top: "100%" },
+        pulseSlow: {
+          "0%, 100%": { opacity: "0.5" },
+          "50%": { opacity: "1" },
         },
-        borderGlow: {
-          "0%, 100%": { borderColor: "#00f5ff44" },
-          "50%": { borderColor: "#00f5ffaa" },
+        spinSlow: {
+          "0%": { transform: "rotate(0deg)" },
+          "100%": { transform: "rotate(360deg)" },
         },
-        fadeUp: {
-          "0%": { opacity: "0", transform: "translateY(30px)" },
-          "100%": { opacity: "1", transform: "translateY(0)" },
+        gradientShift: {
+          "0%, 100%": { backgroundPosition: "0% 50%" },
+          "50%": { backgroundPosition: "100% 50%" },
         },
-      },
-      backgroundImage: {
-        "cyber-grid":
-          "linear-gradient(rgba(0,245,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0,245,255,0.03) 1px, transparent 1px)",
-        "hero-glow":
-          "radial-gradient(ellipse 80% 60% at 50% -20%, rgba(0,245,255,0.15), transparent)",
-        "card-glow":
-          "linear-gradient(135deg, rgba(0,245,255,0.05), rgba(0,128,255,0.02))",
       },
     },
   },

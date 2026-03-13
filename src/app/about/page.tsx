@@ -1,55 +1,46 @@
+"use client";
 import AnimatedSection from "@/components/AnimatedSection";
-import GlobeVisual from "@/components/GlobeVisual";
 import Link from "next/link";
-
-// const team = [
-//   {
-//     name: "Priyank",
-//     role: "Co-Founder",
-//     bio: "Reach out directly to connect with the founding team.",
-//     contact: "priyank@mytronlabs.com",
-//     initials: "P",
-//   },
-// ];
 
 export default function AboutPage() {
   return (
     <>
-      {/* ─── HERO ─── */}
-      <section className="pt-40 pb-24 px-6 relative cyber-grid">
-        <div
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            background: "radial-gradient(ellipse 60% 50% at 50% 0%, rgba(0,245,255,0.08), transparent)",
-          }}
-        />
-        <div className="max-w-5xl mx-auto relative z-10">
+      {/* ═══ HERO with 3D Grid ═══ */}
+      <section className="relative pt-40 pb-20 px-6 overflow-hidden min-h-[80vh] flex items-center">
+        {/* 3D Tilted Grid Background */}
+        <div className="grid-3d">
+          {Array.from({ length: 80 }).map((_, i) => (
+            <div key={i} className="grid-3d-cell" />
+          ))}
+        </div>
+
+        <div className="max-w-6xl mx-auto relative z-10 text-center">
           <AnimatedSection>
-            <span className="terminal-text text-xs tracking-widest">// ABOUT_TRON_LABS</span>
-            <h1 className="font-display font-black text-5xl md:text-7xl mt-4 mb-6 text-white leading-tight">
-              Building the{" "}
-              <span className="text-tron-cyan glow-text">Data Backbone</span>
-              <br />
-              for Physical AI
+            <h1 className="section-heading text-6xl md:text-[8rem] lg:text-[10rem] leading-[0.85] mb-8">
+              <span className="text-white">WE ARE </span>
+              <span className="gradient-text">MYTRON LABS</span>
             </h1>
-            <p className="text-tron-text text-xl max-w-2xl leading-relaxed">
-              Tron Labs specializes in large-scale egocentric, multimodal datasets that power
-              robotics, wearable AI systems, and embodied intelligence models.
+            <p className="font-body text-tron-text-light text-lg md:text-xl max-w-2xl mx-auto leading-relaxed">
+              Here at MyTron Labs we engineer Physical AI data solutions. We are committed to{" "}
+              <span className="text-tron-purple font-mono font-medium">creating</span> innovative
+              and world-class data infrastructure. Come{" "}
+              <span className="text-tron-purple font-mono font-medium">transform</span> your ideas
+              into powerful realities.
             </p>
           </AnimatedSection>
         </div>
       </section>
 
-      {/* ─── STORY + GLOBE ─── */}
-      <section className="py-24 px-6">
-        <div className="max-w-7xl mx-auto">
+      {/* ═══ STORY ═══ */}
+      <section className="py-16 px-6">
+        <div className="max-w-5xl mx-auto">
           <div className="grid md:grid-cols-2 gap-16 items-center">
             <AnimatedSection>
-              <span className="terminal-text text-xs tracking-widest mb-4 block">// OUR_STORY</span>
-              <h2 className="font-display font-bold text-3xl md:text-4xl text-white mb-6">
-                Born from a Simple Observation
+              <h2 className="section-heading text-4xl md:text-5xl text-white mb-8">
+                BORN FROM A SIMPLE{" "}
+                <span className="gradient-text-purple">OBSERVATION</span>
               </h2>
-              <div className="space-y-4 text-tron-text leading-relaxed">
+              <div className="font-body space-y-4 text-tron-text leading-relaxed">
                 <p>
                   The most transformative AI breakthroughs of the past decade, from GPT-4 to
                   Claude, were made possible by one thing: massive, high-quality training data.
@@ -68,21 +59,35 @@ export default function AboutPage() {
               </div>
             </AnimatedSection>
 
-            <AnimatedSection delay={200} className="flex justify-center">
-              <GlobeVisual />
+            <AnimatedSection delay={200}>
+              <div className="glass-card p-8">
+                <div className="grid grid-cols-2 gap-4">
+                  {[
+                    { label: "Data Scale", value: "PB+" },
+                    { label: "Modalities", value: "6" },
+                    { label: "Team Focus", value: "AI" },
+                    { label: "Stage", value: "Early" },
+                  ].map((stat, i) => (
+                    <div key={i} className="text-center p-4 bg-white/[0.02] rounded-lg">
+                      <div className="font-display text-3xl font-bold text-white">{stat.value}</div>
+                      <div className="font-body text-tron-text text-xs mt-1 uppercase tracking-wider">{stat.label}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
             </AnimatedSection>
           </div>
         </div>
       </section>
 
-      {/* ─── VALUES ─── */}
-      <section className="py-24 px-6 border-t border-tron-cyan/10">
+      {/* ═══ VALUES ═══ */}
+      <section className="py-16 px-6">
+        <div className="divider-glow mb-12" />
         <div className="max-w-6xl mx-auto">
           <AnimatedSection>
-            <div className="text-center mb-16">
-              <span className="terminal-text text-xs tracking-widest">// CORE_VALUES</span>
-              <h2 className="font-display font-bold text-4xl mt-4 text-white">
-                What We Stand For
+            <div className="text-center mb-10">
+              <h2 className="section-heading text-4xl md:text-6xl text-white">
+                WHAT WE <span className="gradient-text-purple">STAND FOR</span>
               </h2>
             </div>
           </AnimatedSection>
@@ -90,41 +95,41 @@ export default function AboutPage() {
           <div className="grid md:grid-cols-3 gap-6">
             {[
               {
-                icon: "⟡",
+                n: "01",
                 title: "Research-First",
                 desc: "Every decision is grounded in rigorous research and collaboration with leading AI institutions worldwide.",
               },
               {
-                icon: "◎",
+                n: "02",
                 title: "Scale Without Compromise",
                 desc: "Petabyte-scale data pipelines with uncompromising quality standards and structured annotation at every level.",
               },
               {
-                icon: "⊞",
+                n: "03",
                 title: "Global Impact",
                 desc: "We work with research teams across continents to ensure our data infrastructure serves humanity's broadest intelligence ambitions.",
               },
               {
-                icon: "⌖",
+                n: "04",
                 title: "Precision & Structure",
                 desc: "Raw data is noise. Our task-level annotations and structured pipelines turn captures into genuine intelligence fuel.",
               },
               {
-                icon: "◈",
+                n: "05",
                 title: "Security by Design",
-                desc: "Secure storage, encrypted delivery, and compliant data infrastructure privacy and protection are non-negotiable.",
+                desc: "Secure storage, encrypted delivery, and compliant data infrastructure, privacy and protection are non-negotiable.",
               },
               {
-                icon: "⟴",
+                n: "06",
                 title: "Speed of Innovation",
-                desc: "The physical AI moment won't wait. We operate at startup speed with research-grade rigor.",
+                desc: "The physical AI moment won\u2019t wait. We operate at startup speed with research-grade rigor.",
               },
             ].map((item, i) => (
               <AnimatedSection key={i} delay={i * 80}>
-                <div className="glow-border p-6 rounded-sm h-full group hover:bg-tron-cyan/[0.02] transition-all duration-300">
-                  <div className="text-tron-cyan text-2xl mb-4">{item.icon}</div>
-                  <h3 className="font-display font-bold text-white text-lg mb-3">{item.title}</h3>
-                  <p className="text-tron-text text-sm leading-relaxed">{item.desc}</p>
+                <div className="glass-card p-6 h-full group">
+                  <div className="font-display text-2xl font-bold text-tron-purple/20 mb-3">{item.n}</div>
+                  <h3 className="font-display font-bold text-white text-lg mb-3 uppercase">{item.title}</h3>
+                  <p className="font-body text-tron-text text-sm leading-relaxed">{item.desc}</p>
                 </div>
               </AnimatedSection>
             ))}
@@ -132,64 +137,22 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* ─── TEAM ─── */}
-      {/* <section className="py-24 px-6 hex-pattern">
-        <div className="max-w-5xl mx-auto">
-          <AnimatedSection>
-            <div className="text-center mb-16">
-              <span className="terminal-text text-xs tracking-widest">// THE_TEAM</span>
-              <h2 className="font-display font-bold text-4xl mt-4 text-white">
-                The People Behind the Mission
-              </h2>
-            </div>
-          </AnimatedSection>
-
-          <div className="grid md:grid-cols-2 gap-8">
-            {team.map((member, i) => (
-              <AnimatedSection key={i} delay={i * 150}>
-                <div className="gradient-border p-8 rounded-sm">
-                  <div className="flex items-start gap-5">
-                    <div className="w-16 h-16 border border-tron-cyan/40 flex items-center justify-center text-tron-cyan font-display font-bold text-xl flex-shrink-0">
-                      {member.initials}
-                    </div>
-                    <div>
-                      <h3 className="font-display font-bold text-white text-xl">{member.name}</h3>
-                      <div className="terminal-text text-xs mb-3">{member.role}</div>
-                      <p className="text-tron-text text-sm leading-relaxed mb-3">{member.bio}</p>
-                      {member.contact && (
-                        <a
-                          href={`mailto:${member.contact}`}
-                          className="text-tron-cyan text-xs hover:underline"
-                        >
-                          {member.contact}
-                        </a>
-                      )}
-                    </div>
-                  </div>
-                </div>
-              </AnimatedSection>
-            ))}
-          </div>
-        </div>
-      </section> */}
-
-      {/* ─── CTA ─── */}
-      <section className="py-24 px-6">
+      {/* ═══ CTA ═══ */}
+      <section className="py-16 px-6">
         <div className="max-w-3xl mx-auto text-center">
           <AnimatedSection>
-            <h2 className="font-display font-bold text-3xl md:text-4xl text-white mb-6">
-              Want to Work With Us?
+            <h2 className="section-heading text-4xl md:text-5xl text-white mb-6">
+              WANT TO WORK <span className="gradient-text">WITH US?</span>
             </h2>
-            <p className="text-tron-text mb-8">
-              Whether you&apos;re a researcher, investor, or enterprise partner, WE WANT TO HEAR FROM YOU.
-              
+            <p className="font-body text-tron-text mb-8">
+              Whether you&apos;re a researcher, investor, or enterprise partner, we want to hear from you.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/contact" className="btn-solid px-8 py-4 font-display text-sm tracking-widest uppercase">
+              <Link href="/contact" className="btn-primary">
                 Contact Us
               </Link>
-              <Link href="/careers" className="btn-primary px-8 py-4 font-display text-sm tracking-widest uppercase">
-                Join the Team →
+              <Link href="/careers" className="btn-outline">
+                Join the Team &rarr;
               </Link>
             </div>
           </AnimatedSection>

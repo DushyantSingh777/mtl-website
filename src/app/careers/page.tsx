@@ -4,23 +4,17 @@ import Link from "next/link";
 export default function CareersPage() {
   return (
     <>
-      {/* ─── HERO ─── */}
-      <section className="pt-40 pb-24 px-6 relative cyber-grid">
-        <div
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            background: "radial-gradient(ellipse 60% 50% at 50% 0%, rgba(0,245,255,0.08), transparent)",
-          }}
-        />
-        <div className="max-w-5xl mx-auto relative z-10">
+      {/* ═══ HERO ═══ */}
+      <section className="relative pt-40 pb-20 px-6 overflow-hidden aurora-bg">
+        <div className="max-w-6xl mx-auto relative z-10">
           <AnimatedSection>
-            <span className="terminal-text text-xs tracking-widest">// CAREERS</span>
-            <h1 className="font-display font-black text-5xl md:text-7xl mt-4 mb-6 text-white leading-tight">
-              Build the Future
+            <h1 className="section-heading text-6xl md:text-[8rem] lg:text-[10rem] leading-[0.85] mb-6">
+              <span className="text-white">BUILD THE </span>
+              <span className="gradient-text">FUTURE</span>
               <br />
-              <span className="text-tron-cyan glow-text">With Us</span>
+              <span className="gradient-text-purple">WITH US</span>
             </h1>
-            <p className="text-tron-text text-xl max-w-2xl leading-relaxed">
+            <p className="font-body text-tron-text text-lg md:text-xl max-w-2xl leading-relaxed">
               We are a small, ambitious team on a mission to build the data infrastructure for
               the next intelligence revolution. If that excites you, we want to hear from you.
             </p>
@@ -28,55 +22,55 @@ export default function CareersPage() {
         </div>
       </section>
 
-      {/* ─── WHY TRON LABS ─── */}
-      <section className="py-24 px-6 border-t border-tron-cyan/10">
+      {/* ═══ WHY JOIN ═══ */}
+      <section className="py-16 px-6">
+        <div className="divider-glow mb-12" />
         <div className="max-w-6xl mx-auto">
           <AnimatedSection>
-            <div className="text-center mb-16">
-              <span className="terminal-text text-xs tracking-widest">// WHY_JOIN</span>
-              <h2 className="font-display font-bold text-4xl mt-4 text-white">
-                Why Tron Labs
+            <div className="text-center mb-10">
+              <h2 className="section-heading text-4xl md:text-6xl text-white">
+                WHY <span className="gradient-text-purple">MYTRON LABS</span>
               </h2>
             </div>
           </AnimatedSection>
           <div className="grid md:grid-cols-3 gap-6">
             {[
               {
-                icon: "⟡",
+                n: "01",
                 title: "Frontier Mission",
                 desc: "Work on one of the most important infrastructure challenges in AI. The physical AI moment will define the next decade.",
               },
               {
-                icon: "◈",
+                n: "02",
                 title: "Research Autonomy",
                 desc: "We give engineers and researchers the autonomy to explore, experiment, and push boundaries with access to our unique datasets.",
               },
               {
-                icon: "⊞",
+                n: "03",
                 title: "Equity & Ownership",
                 desc: "Early team members receive meaningful equity. We are building something that could matter enormously and you will own a piece of it.",
               },
               {
-                icon: "⌖",
+                n: "04",
                 title: "High Impact",
                 desc: "Every person on the team has direct impact. No layers, no bureaucracy, just meaningful work on hard problems.",
               },
               {
-                icon: "◎",
+                n: "05",
                 title: "Early Stage Advantage",
                 desc: "Join at the ground floor of a company building critical infrastructure for the next wave of AI. Shape the culture and direction.",
               },
               {
-                icon: "⟴",
+                n: "06",
                 title: "Move Fast",
                 desc: "Startup speed with research-grade rigor. We make decisions quickly and trust our team to execute.",
               },
             ].map((item, i) => (
               <AnimatedSection key={i} delay={i * 80}>
-                <div className="glow-border p-6 rounded-sm h-full group hover:bg-tron-cyan/[0.02] transition-all duration-300">
-                  <div className="text-tron-cyan text-2xl mb-4">{item.icon}</div>
-                  <h3 className="font-display font-bold text-white mb-2">{item.title}</h3>
-                  <p className="text-tron-text text-sm leading-relaxed">{item.desc}</p>
+                <div className="glass-card p-6 h-full group">
+                  <div className="font-display text-2xl font-bold text-tron-purple/20 mb-3">{item.n}</div>
+                  <h3 className="font-display font-bold text-white mb-2 uppercase">{item.title}</h3>
+                  <p className="font-body text-tron-text text-sm leading-relaxed">{item.desc}</p>
                 </div>
               </AnimatedSection>
             ))}
@@ -84,37 +78,33 @@ export default function CareersPage() {
         </div>
       </section>
 
-      {/* ─── NO OPEN ROLES YET — GENERAL APPLICATION ─── */}
-      <section className="py-24 px-6 hex-pattern border-t border-tron-cyan/10">
+      {/* ═══ HIRING STATUS ═══ */}
+      <section className="py-16 px-6">
         <div className="max-w-4xl mx-auto">
           <AnimatedSection>
-            <div className="gradient-border p-10 rounded-sm text-center">
-              <div className="terminal-text text-xs mb-4">// HIRING_STATUS</div>
+            <div className="glass-card p-10 text-center">
               <div className="flex items-center justify-center gap-2 mb-6">
                 <span className="w-2 h-2 rounded-full bg-yellow-400 animate-pulse" />
-                <span className="terminal-text text-xs text-yellow-400">NO OPEN ROLES LISTED YET</span>
+                <span className="text-yellow-400 text-xs font-mono tracking-widest">NO OPEN ROLES LISTED YET</span>
               </div>
-              <h2 className="font-display font-bold text-3xl text-white mb-4">
-                We Are Building the Team
+              <h2 className="section-heading text-3xl md:text-4xl text-white mb-4">
+                WE ARE BUILDING THE TEAM
               </h2>
-              <p className="text-tron-text text-lg leading-relaxed max-w-2xl mx-auto mb-8">
+              <p className="font-body text-tron-text text-lg leading-relaxed max-w-2xl mx-auto mb-8">
                 We don&apos;t have formal job listings yet, but we are always interested in
                 exceptional people. If you are passionate about Physical AI, robotics data, or
                 embodied intelligence, tell us about yourself. The right person creates their
                 own opportunity here.
               </p>
-              <p className="text-tron-text text-sm mb-8">
+              <p className="font-body text-tron-text text-sm mb-8">
                 Areas we care deeply about:{" "}
-                <span className="text-white">machine learning</span>,{" "}
-                <span className="text-white">computer vision</span>,{" "}
-                <span className="text-white">data infrastructure</span>,{" "}
-                <span className="text-white">robotics</span>,{" "}
-                <span className="text-white">annotation systems</span>.
+                <span className="text-white font-medium">machine learning</span>,{" "}
+                <span className="text-white font-medium">computer vision</span>,{" "}
+                <span className="text-white font-medium">data infrastructure</span>,{" "}
+                <span className="text-white font-medium">robotics</span>,{" "}
+                <span className="text-white font-medium">annotation systems</span>.
               </p>
-              <Link
-                href="/contact"
-                className="btn-solid inline-block px-12 py-5 font-display text-sm tracking-widest uppercase"
-              >
+              <Link href="/contact" className="btn-primary inline-block px-12 py-4">
                 Introduce Yourself
               </Link>
             </div>
@@ -122,27 +112,27 @@ export default function CareersPage() {
         </div>
       </section>
 
-      {/* ─── BOTTOM CTA ─── */}
-      <section className="py-24 px-6 relative overflow-hidden">
-        <div
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            background: "radial-gradient(ellipse 60% 50% at 50% 50%, rgba(0,245,255,0.06), transparent)",
-          }}
-        />
+      {/* ═══ BOTTOM CTA ═══ */}
+      <section className="py-16 px-6 relative overflow-hidden">
+        <div className="absolute inset-0 pointer-events-none">
+          <div
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full"
+            style={{
+              background: "radial-gradient(circle, rgba(139,92,246,0.08), transparent 70%)",
+              filter: "blur(40px)",
+            }}
+          />
+        </div>
         <div className="max-w-3xl mx-auto text-center relative z-10">
           <AnimatedSection>
-            <h2 className="font-display font-bold text-4xl text-white mb-6">
-              Think You Belong Here?
+            <h2 className="section-heading text-4xl md:text-5xl text-white mb-6">
+              THINK YOU <span className="gradient-text">BELONG HERE?</span>
             </h2>
-            <p className="text-tron-text text-lg mb-10">
+            <p className="font-body text-tron-text text-lg mb-10">
               Drop us a message. Tell us what you are working on and why you care about
               physical AI. We read every message personally.
             </p>
-            <Link
-              href="/contact"
-              className="btn-solid inline-block px-12 py-5 font-display text-sm tracking-widest uppercase"
-            >
+            <Link href="/contact" className="btn-primary inline-block px-12 py-4">
               Get In Touch
             </Link>
           </AnimatedSection>
