@@ -5,16 +5,14 @@ import Link from "next/link";
 export default function AboutPage() {
   return (
     <>
-      {/* ═══ HERO with 3D Grid ═══ */}
-      <section className="relative pt-40 pb-20 px-6 overflow-hidden min-h-[80vh] flex items-center">
-        {/* 3D Tilted Grid Background */}
+      {/* ═══ HERO ═══ */}
+      <section className="relative pt-32 pb-20 px-6 overflow-hidden aurora-bg min-h-[70vh] flex items-center">
         <div className="grid-3d">
           {Array.from({ length: 80 }).map((_, i) => (
             <div key={i} className="grid-3d-cell" />
           ))}
         </div>
-
-        <div className="max-w-6xl mx-auto relative z-10 text-center">
+        <div className="max-w-6xl mx-auto relative z-10 text-center w-full">
           <AnimatedSection>
             <h1 className="section-heading text-6xl md:text-[8rem] lg:text-[10rem] leading-[0.85] mb-8">
               <span className="text-white">WE ARE </span>
@@ -33,7 +31,7 @@ export default function AboutPage() {
 
       {/* ═══ STORY ═══ */}
       <section className="py-16 px-6">
-        <div className="max-w-5xl mx-auto">
+        <div className="max-w-6xl mx-auto">
           <div className="grid md:grid-cols-2 gap-16 items-center">
             <AnimatedSection>
               <h2 className="section-heading text-4xl md:text-5xl text-white mb-8">
@@ -94,36 +92,12 @@ export default function AboutPage() {
 
           <div className="grid md:grid-cols-3 gap-6">
             {[
-              {
-                n: "01",
-                title: "Research-First",
-                desc: "Every decision is grounded in rigorous research and collaboration with leading AI institutions worldwide.",
-              },
-              {
-                n: "02",
-                title: "Scale Without Compromise",
-                desc: "Petabyte-scale data pipelines with uncompromising quality standards and structured annotation at every level.",
-              },
-              {
-                n: "03",
-                title: "Global Impact",
-                desc: "We work with research teams across continents to ensure our data infrastructure serves humanity's broadest intelligence ambitions.",
-              },
-              {
-                n: "04",
-                title: "Precision & Structure",
-                desc: "Raw data is noise. Our task-level annotations and structured pipelines turn captures into genuine intelligence fuel.",
-              },
-              {
-                n: "05",
-                title: "Security by Design",
-                desc: "Secure storage, encrypted delivery, and compliant data infrastructure, privacy and protection are non-negotiable.",
-              },
-              {
-                n: "06",
-                title: "Speed of Innovation",
-                desc: "The physical AI moment won\u2019t wait. We operate at startup speed with research-grade rigor.",
-              },
+              { n: "01", title: "Research-First", desc: "Every decision is grounded in rigorous research and collaboration with leading AI institutions worldwide." },
+              { n: "02", title: "Scale Without Compromise", desc: "Petabyte-scale data pipelines with uncompromising quality standards and structured annotation at every level." },
+              { n: "03", title: "Global Impact", desc: "We work with research teams across continents to ensure our data infrastructure serves humanity's broadest intelligence ambitions." },
+              { n: "04", title: "Precision & Structure", desc: "Raw data is noise. Our task-level annotations and structured pipelines turn captures into genuine intelligence fuel." },
+              { n: "05", title: "Security by Design", desc: "Secure storage, encrypted delivery, and compliant data infrastructure, privacy and protection are non-negotiable." },
+              { n: "06", title: "Speed of Innovation", desc: "The physical AI moment won't wait. We operate at startup speed with research-grade rigor." },
             ].map((item, i) => (
               <AnimatedSection key={i} delay={i * 80}>
                 <div className="glass-card p-6 h-full group">
@@ -148,12 +122,8 @@ export default function AboutPage() {
               Whether you&apos;re a researcher, investor, or enterprise partner, we want to hear from you.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/contact" className="btn-primary">
-                Contact Us
-              </Link>
-              <Link href="/careers" className="btn-outline">
-                Join the Team &rarr;
-              </Link>
+              <Link href="/contact" className="btn-primary">Contact Us</Link>
+              <Link href="/careers" className="btn-outline">Join the Team &rarr;</Link>
             </div>
           </AnimatedSection>
         </div>

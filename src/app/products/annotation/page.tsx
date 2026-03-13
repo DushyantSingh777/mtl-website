@@ -6,27 +6,28 @@ export default function AnnotationForRoboticsPage() {
   return (
     <>
       {/* ═══ HERO ═══ */}
-      <section className="relative pt-40 pb-24 px-6 overflow-hidden aurora-bg">
-        <div className="max-w-6xl mx-auto relative z-10">
+      <section className="relative pt-32 pb-20 px-6 overflow-hidden aurora-bg min-h-[70vh] flex items-center">
+        <div className="grid-3d">
+          {Array.from({ length: 80 }).map((_, i) => (
+            <div key={i} className="grid-3d-cell" />
+          ))}
+        </div>
+        <div className="max-w-6xl mx-auto relative z-10 text-center w-full">
           <AnimatedSection>
-            <h1 className="section-heading text-5xl md:text-[7rem] lg:text-[9rem] leading-[0.85] mb-6">
+            <h1 className="section-heading text-5xl md:text-[7rem] lg:text-[9rem] leading-[0.85] mb-8">
               <span className="text-white">HIGH-QUALITY </span>
               <span className="gradient-text">LABELS</span>
               <br />
               <span className="text-white">FOR </span>
               <span className="gradient-text-purple">PHYSICAL AI</span>
             </h1>
-            <p className="text-tron-text text-lg md:text-xl max-w-2xl leading-relaxed mb-10">
+            <p className="font-body text-tron-text text-lg md:text-xl max-w-2xl mx-auto leading-relaxed mb-10">
               Expert annotation for egocentric video, sensor data, and robotic
               training datasets at the scale and accuracy frontier AI teams actually need.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4">
-              <Link href="/contact" className="btn-primary">
-                Request Annotation Services
-              </Link>
-              <Link href="/solution" className="btn-outline">
-                View Our Pipeline &rarr;
-              </Link>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link href="/contact" className="btn-primary">Request Annotation Services</Link>
+              <Link href="/solution" className="btn-outline">View Our Pipeline &rarr;</Link>
             </div>
           </AnimatedSection>
         </div>
@@ -46,7 +47,7 @@ export default function AnnotationForRoboticsPage() {
               ].map((s, i) => (
                 <div key={i} className="text-center">
                   <p className="font-display font-bold text-4xl md:text-5xl text-white mb-2">{s.value}</p>
-                  <p className="text-tron-text text-sm">{s.label}</p>
+                  <p className="font-body text-tron-text text-sm">{s.label}</p>
                 </div>
               ))}
             </div>
@@ -55,10 +56,10 @@ export default function AnnotationForRoboticsPage() {
       </section>
 
       {/* ═══ ANNOTATION TYPES ═══ */}
-      <section className="py-24 px-6">
+      <section className="py-16 px-6">
         <div className="max-w-7xl mx-auto">
           <AnimatedSection>
-            <div className="text-center mb-16">
+            <div className="text-center mb-12">
               <h2 className="section-heading text-4xl md:text-6xl text-white">
                 EVERY DATA TYPE ROBOTS{" "}
                 <span className="gradient-text-purple">NEED TO LEARN FROM</span>
@@ -78,7 +79,7 @@ export default function AnnotationForRoboticsPage() {
                 <div className="glass-card p-8 h-full group">
                   <div className="font-display text-2xl font-bold text-tron-purple/20 mb-2">{s.n}</div>
                   <h3 className="font-display font-bold text-white text-xl mb-4 uppercase">{s.title}</h3>
-                  <p className="text-tron-text text-sm leading-relaxed">{s.body}</p>
+                  <p className="font-body text-tron-text text-sm leading-relaxed">{s.body}</p>
                 </div>
               </AnimatedSection>
             ))}
@@ -87,11 +88,11 @@ export default function AnnotationForRoboticsPage() {
       </section>
 
       {/* ═══ PROCESS ═══ */}
-      <section className="py-24 px-6">
-        <div className="divider-glow mb-24" />
+      <section className="py-16 px-6">
+        <div className="divider-glow mb-12" />
         <div className="max-w-5xl mx-auto">
           <AnimatedSection>
-            <div className="text-center mb-16">
+            <div className="text-center mb-12">
               <h2 className="section-heading text-4xl md:text-5xl text-white">
                 FROM RAW DATA TO{" "}
                 <span className="gradient-text-purple">TRAINING-READY LABELS</span>
@@ -116,10 +117,10 @@ export default function AnnotationForRoboticsPage() {
       </section>
 
       {/* ═══ WHY TRON LABS ═══ */}
-      <section className="py-24 px-6">
+      <section className="py-16 px-6">
         <div className="max-w-6xl mx-auto">
           <AnimatedSection>
-            <div className="text-center mb-16">
+            <div className="text-center mb-12">
               <h2 className="section-heading text-4xl md:text-5xl text-white">
                 BUILT FOR{" "}
                 <span className="gradient-text-purple">FRONTIER ROBOTICS</span>
@@ -130,16 +131,16 @@ export default function AnnotationForRoboticsPage() {
             {[
               { n: "01", label: "Robotics-Specific Expertise", body: "Our annotators are trained on egocentric and embodied AI datasets. We understand the difference between a grasp and a contact, a reach and a transport." },
               { n: "02", label: "AI-Assisted Labeling", body: "Model-assisted pre-labeling accelerates throughput without sacrificing accuracy. Human reviewers catch what the model misses." },
-              { n: "03", label: "Multi-Stage QA", body: "Every annotation passes through automated checks, peer review, and senior sign-off. We don\u2019t ship data we wouldn\u2019t train on ourselves." },
+              { n: "03", label: "Multi-Stage QA", body: "Every annotation passes through automated checks, peer review, and senior sign-off. We don't ship data we wouldn't train on ourselves." },
               { n: "04", label: "Flexible Volume", body: "From thousands of frames to petabyte-scale. No minimum commitment, no lock-in. We scale with your project." },
-              { n: "05", label: "Fast Turnaround", body: "Most projects see first batches back within 72 hours. Dedicated teams mean your project doesn\u2019t wait in a queue." },
+              { n: "05", label: "Fast Turnaround", body: "Most projects see first batches back within 72 hours. Dedicated teams mean your project doesn't wait in a queue." },
               { n: "06", label: "Secure & Confidential", body: "AES-256 encryption at rest and in transit. NDAs as standard. Your data never leaves our secure pipeline without your sign-off." },
             ].map((item, i) => (
               <AnimatedSection key={i} delay={i * 80}>
                 <div className="glass-card p-6 h-full group">
                   <div className="font-display text-2xl font-bold text-tron-purple/20 mb-3">{item.n}</div>
                   <h3 className="font-display font-bold text-white text-lg mb-3 uppercase">{item.label}</h3>
-                  <p className="text-tron-text text-sm leading-relaxed">{item.body}</p>
+                  <p className="font-body text-tron-text text-sm leading-relaxed">{item.body}</p>
                 </div>
               </AnimatedSection>
             ))}
@@ -148,10 +149,10 @@ export default function AnnotationForRoboticsPage() {
       </section>
 
       {/* ═══ USE CASES ═══ */}
-      <section className="py-24 px-6">
+      <section className="py-16 px-6">
         <div className="max-w-6xl mx-auto">
           <AnimatedSection>
-            <div className="text-center mb-16">
+            <div className="text-center mb-12">
               <h2 className="section-heading text-4xl md:text-5xl text-white">
                 WHAT TEAMS BUILD{" "}
                 <span className="gradient-text-purple">WITH OUR LABELED DATA</span>
@@ -167,11 +168,9 @@ export default function AnnotationForRoboticsPage() {
             ].map((uc, i) => (
               <AnimatedSection key={i} delay={i * 100}>
                 <div className="glass-card p-6 text-center group h-full">
-                  <div className="font-display text-2xl font-bold text-tron-purple/20 mb-3">
-                    {String(i + 1).padStart(2, "0")}
-                  </div>
+                  <div className="font-display text-2xl font-bold text-tron-purple/20 mb-3">{String(i + 1).padStart(2, "0")}</div>
                   <h3 className="font-display font-bold text-white mb-2 uppercase">{uc.label}</h3>
-                  <p className="text-tron-text text-xs leading-relaxed">{uc.body}</p>
+                  <p className="font-body text-tron-text text-xs leading-relaxed">{uc.body}</p>
                 </div>
               </AnimatedSection>
             ))}
@@ -180,15 +179,9 @@ export default function AnnotationForRoboticsPage() {
       </section>
 
       {/* ═══ CTA ═══ */}
-      <section className="py-32 px-6 relative overflow-hidden">
+      <section className="py-16 px-6 relative overflow-hidden">
         <div className="absolute inset-0 pointer-events-none">
-          <div
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full"
-            style={{
-              background: "radial-gradient(circle, rgba(139,92,246,0.1), transparent 70%)",
-              filter: "blur(40px)",
-            }}
-          />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full" style={{ background: "radial-gradient(circle, rgba(139,92,246,0.1), transparent 70%)", filter: "blur(40px)" }} />
         </div>
         <AnimatedSection>
           <div className="max-w-3xl mx-auto text-center relative z-10">
@@ -196,17 +189,13 @@ export default function AnnotationForRoboticsPage() {
               READY TO ANNOTATE{" "}
               <span className="gradient-text">AT SCALE?</span>
             </h2>
-            <p className="text-tron-text text-lg mb-10">
+            <p className="font-body text-tron-text text-lg mb-10">
               Tell us about your dataset and what you need labeled.
               We will get back to you within 24 hours.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/contact" className="btn-primary px-12 py-4">
-                Reach Out to Us
-              </Link>
-              <Link href="/solution" className="btn-outline px-12 py-4">
-                Explore Our Pipeline &rarr;
-              </Link>
+              <Link href="/contact" className="btn-primary px-12 py-4">Reach Out to Us</Link>
+              <Link href="/solution" className="btn-outline px-12 py-4">Explore Our Pipeline &rarr;</Link>
             </div>
           </div>
         </AnimatedSection>

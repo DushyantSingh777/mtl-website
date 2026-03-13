@@ -36,14 +36,19 @@ export default function ProductsPage() {
   return (
     <>
       {/* ═══ HERO ═══ */}
-      <section className="relative pt-40 pb-20 px-6 overflow-hidden aurora-bg">
-        <div className="max-w-6xl mx-auto relative z-10">
+      <section className="relative pt-32 pb-20 px-6 overflow-hidden aurora-bg min-h-[70vh] flex items-center">
+        <div className="grid-3d">
+          {Array.from({ length: 80 }).map((_, i) => (
+            <div key={i} className="grid-3d-cell" />
+          ))}
+        </div>
+        <div className="max-w-6xl mx-auto relative z-10 text-center w-full">
           <AnimatedSection>
-            <h1 className="section-heading text-6xl md:text-[8rem] lg:text-[10rem] leading-[0.85] mb-4">
+            <h1 className="section-heading text-6xl md:text-[8rem] lg:text-[10rem] leading-[0.85] mb-8">
               <span className="text-white">OUR </span>
               <span className="gradient-text-purple">PRODUCTS</span>
             </h1>
-            <p className="font-body text-tron-text text-lg md:text-xl max-w-2xl leading-relaxed">
+            <p className="font-body text-tron-text text-lg md:text-xl max-w-2xl mx-auto leading-relaxed">
               Everything a frontier AI team needs to collect, label, and deliver real-world training data.
             </p>
           </AnimatedSection>
@@ -57,43 +62,22 @@ export default function ProductsPage() {
             <AnimatedSection key={i} delay={i * 100}>
               <div className={`glass-card overflow-hidden ${!p.live ? "opacity-40" : ""}`}>
                 <div className="grid md:grid-cols-[1fr_1.2fr] gap-0">
-                  {/* Left: Visual area */}
                   <div className="relative min-h-[200px] md:min-h-[280px] bg-gradient-to-br from-tron-purple/10 via-tron-dark to-tron-cyan/5 flex items-center justify-center">
                     <div className="text-center">
                       <div className="font-display text-[6rem] font-bold text-white/[0.04]">{p.n}</div>
                     </div>
-                    {/* Status badge */}
                     <div className="absolute top-4 left-4 flex items-center gap-2">
-                      <span
-                        className={`w-2 h-2 rounded-full ${
-                          p.live ? "bg-green-400 animate-pulse" : "bg-tron-purple/30"
-                        }`}
-                      />
-                      <span
-                        className={`font-mono text-xs tracking-widest ${
-                          p.live ? "text-green-400" : "text-tron-text/40"
-                        }`}
-                      >
-                        {p.status}
-                      </span>
+                      <span className={`w-2 h-2 rounded-full ${p.live ? "bg-green-400 animate-pulse" : "bg-tron-purple/30"}`} />
+                      <span className={`font-mono text-xs tracking-widest ${p.live ? "text-green-400" : "text-tron-text/40"}`}>{p.status}</span>
                     </div>
                   </div>
-
-                  {/* Right: Content */}
                   <div className="p-8 md:p-10 flex flex-col justify-center">
-                    <div className="text-tron-purple font-mono text-xs tracking-widest uppercase mb-3">
-                      PRODUCT {p.n}
-                    </div>
-                    <h2 className="font-display font-bold text-2xl md:text-3xl text-white uppercase mb-2">
-                      {p.title}
-                    </h2>
+                    <div className="text-tron-purple font-mono text-xs tracking-widest uppercase mb-3">PRODUCT {p.n}</div>
+                    <h2 className="font-display font-bold text-2xl md:text-3xl text-white uppercase mb-2">{p.title}</h2>
                     <p className="font-body text-tron-text text-sm mb-4">{p.subtitle}</p>
                     <p className="font-body text-tron-text text-sm leading-relaxed">{p.body}</p>
                     {p.href && (
-                      <Link
-                        href={p.href}
-                        className="inline-flex items-center gap-2 text-tron-purple text-sm font-medium mt-6 hover:text-white transition-colors"
-                      >
+                      <Link href={p.href} className="inline-flex items-center gap-2 text-tron-purple text-sm font-medium mt-6 hover:text-white transition-colors">
                         Learn More &rarr;
                       </Link>
                     )}
@@ -116,9 +100,7 @@ export default function ProductsPage() {
             <p className="font-body text-tron-text text-lg mb-10">
               Tell us what you are working on. We build custom data pipelines for frontier AI research teams.
             </p>
-            <Link href="/contact" className="btn-primary inline-block px-12 py-4">
-              Reach Out to Us
-            </Link>
+            <Link href="/contact" className="btn-primary inline-block px-12 py-4">Reach Out to Us</Link>
           </AnimatedSection>
         </div>
       </section>

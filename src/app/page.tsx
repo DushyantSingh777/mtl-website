@@ -42,7 +42,7 @@ export default function HomePage() {
   return (
     <>
       {/* ═══ HERO with Aurora ═══ */}
-      <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden">
+      <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden pt-24">
         {/* Aurora gradient blobs */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
           <motion.div

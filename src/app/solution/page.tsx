@@ -7,7 +7,7 @@ const solutions = [
     title: "Egocentric Video Capture",
     subtitle: "First-Person Perspective at Scale",
     desc: "We capture high-fidelity, first-person video data from real-world environments such as homes, factories, labs, and beyond. This egocentric perspective is essential for training embodied AI systems that must understand the world from a human or robot point of view.",
-    specs: ["4K/60fps capture", "360\u00b0 field of view", "Multi-camera rigs", "Long-duration sessions"],
+    specs: ["4K/60fps capture", "360° field of view", "Multi-camera rigs", "Long-duration sessions"],
   },
   {
     title: "Multimodal Sensor Streams",
@@ -30,7 +30,7 @@ const solutions = [
   {
     title: "Petabyte-Scale Pipelines",
     subtitle: "Infrastructure Built for Frontier AI",
-    desc: "Data collection is worthless without the infrastructure to process and deliver it. Our distributed pipelines handle petabyte-scale ingestion, processing, and quality control \u2014 built on battle-tested cloud architecture.",
+    desc: "Data collection is worthless without the infrastructure to process and deliver it. Our distributed pipelines handle petabyte-scale ingestion, processing, and quality control — built on battle-tested cloud architecture.",
     specs: ["Petabyte-scale storage", "Distributed processing", "Automated QA pipelines", "Real-time monitoring"],
   },
   {
@@ -42,51 +42,25 @@ const solutions = [
 ];
 
 const processSteps = [
-  {
-    n: "01",
-    title: "Discovery & Requirements",
-    desc: "We start with an introductory call to understand your research context, define the objective, align on success metrics, and identify constraints (data, systems, compliance, timelines).",
-  },
-  {
-    n: "02",
-    title: "Architecture & Data Plan",
-    desc: "A senior data architect is assigned to your engagement end-to-end; responsible for pipeline design, technical decisions, delivery quality, and long-term maintainability.",
-  },
-  {
-    n: "03",
-    title: "Capture & Collection",
-    desc: "Our field teams deploy egocentric capture rigs across your target environments, collecting synchronized multi-modal data streams at the quality and scale your models demand.",
-  },
-  {
-    n: "04",
-    title: "Build & Integrate",
-    desc: "Development begins with rapid, iterative implementation covering core workflows, system integrations, and production-grade foundations (security, reliability, observability) from day one.",
-  },
-  {
-    n: "05",
-    title: "QA, Testing & Delivery",
-    desc: "We run structured QA and scenario testing, validate edge cases, and ensure the system is stable, monitored, and deployment-ready. Delivery plans include rollback and operational playbooks.",
-  },
-  {
-    n: "06",
-    title: "Release, Support & Measurement",
-    desc: "Post-release, we provide production support and continuous improvement. We track agreed outcomes and provide transparent reporting on what\u2019s working and what needs adjustment.",
-  },
+  { n: "01", title: "Discovery & Requirements", desc: "We start with an introductory call to understand your research context, define the objective, align on success metrics, and identify constraints (data, systems, compliance, timelines)." },
+  { n: "02", title: "Architecture & Data Plan", desc: "A senior data architect is assigned to your engagement end-to-end; responsible for pipeline design, technical decisions, delivery quality, and long-term maintainability." },
+  { n: "03", title: "Capture & Collection", desc: "Our field teams deploy egocentric capture rigs across your target environments, collecting synchronized multi-modal data streams at the quality and scale your models demand." },
+  { n: "04", title: "Build & Integrate", desc: "Development begins with rapid, iterative implementation covering core workflows, system integrations, and production-grade foundations (security, reliability, observability) from day one." },
+  { n: "05", title: "QA, Testing & Delivery", desc: "We run structured QA and scenario testing, validate edge cases, and ensure the system is stable, monitored, and deployment-ready. Delivery plans include rollback and operational playbooks." },
+  { n: "06", title: "Release, Support & Measurement", desc: "Post-release, we provide production support and continuous improvement. We track agreed outcomes and provide transparent reporting on what's working and what needs adjustment." },
 ];
 
 export default function SolutionPage() {
   return (
     <>
       {/* ═══ HERO ═══ */}
-      <section className="relative pt-40 pb-20 px-6 overflow-hidden min-h-[70vh] flex items-center">
-        {/* 3D Grid background */}
+      <section className="relative pt-32 pb-20 px-6 overflow-hidden aurora-bg min-h-[70vh] flex items-center">
         <div className="grid-3d">
           {Array.from({ length: 80 }).map((_, i) => (
             <div key={i} className="grid-3d-cell" />
           ))}
         </div>
-
-        <div className="max-w-6xl mx-auto relative z-10 text-center">
+        <div className="max-w-6xl mx-auto relative z-10 text-center w-full">
           <AnimatedSection>
             <h1 className="section-heading text-6xl md:text-[8rem] lg:text-[10rem] leading-[0.85] mb-8">
               <span className="text-white">SCIENTIFIC </span>
@@ -114,27 +88,18 @@ export default function SolutionPage() {
               </p>
             </div>
           </AnimatedSection>
-
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {solutions.map((sol, i) => (
               <AnimatedSection key={i} delay={i * 80}>
                 <div className="glass-card p-8 h-full group">
-                  <div className="font-display text-3xl font-bold text-tron-purple/20 mb-2">
-                    {String(i + 1).padStart(2, "0")}
-                  </div>
+                  <div className="font-display text-3xl font-bold text-tron-purple/20 mb-2">{String(i + 1).padStart(2, "0")}</div>
                   <div className="text-tron-purple font-mono text-xs mb-1 tracking-wider">{sol.subtitle}</div>
                   <h3 className="font-display font-bold text-white text-xl mb-4 uppercase">{sol.title}</h3>
                   <p className="font-body text-tron-text text-sm leading-relaxed mb-6">{sol.desc}</p>
-
                   <div className="border-t border-white/[0.06] pt-4">
                     <div className="flex flex-wrap gap-2">
                       {sol.specs.map((spec, j) => (
-                        <span
-                          key={j}
-                          className="text-xs px-2 py-1 rounded-md border border-white/[0.08] text-tron-text group-hover:border-tron-purple/30 transition-colors duration-300"
-                        >
-                          {spec}
-                        </span>
+                        <span key={j} className="text-xs px-2 py-1 rounded-md border border-white/[0.08] text-tron-text group-hover:border-tron-purple/30 transition-colors duration-300">{spec}</span>
                       ))}
                     </div>
                   </div>
@@ -151,42 +116,28 @@ export default function SolutionPage() {
         <div className="max-w-5xl mx-auto">
           <AnimatedSection>
             <div className="text-center mb-12">
-              <div className="text-tron-purple font-mono text-xs tracking-widest uppercase mb-4">
-                The Methodology
-              </div>
+              <div className="text-tron-purple font-mono text-xs tracking-widest uppercase mb-4">The Methodology</div>
               <h2 className="section-heading text-4xl md:text-6xl text-white">
                 AI-FIRST <span className="gradient-text-purple">DELIVERY</span>
               </h2>
               <p className="font-body text-tron-text text-lg mt-4 max-w-xl mx-auto">
-                A structured, outcome-driven journey &mdash; from first call to measurable impact.
+                A structured, outcome-driven journey — from first call to measurable impact.
               </p>
             </div>
           </AnimatedSection>
-
-          {/* Timeline */}
           <div className="relative">
             <div className="timeline-line" />
-
             <div className="space-y-16">
               {processSteps.map((step, i) => (
                 <AnimatedSection key={i} delay={i * 80}>
                   <div className="flex gap-8 md:gap-16 items-start">
-                    {/* Diamond + Number */}
                     <div className="flex flex-col items-center gap-3 flex-shrink-0">
                       <div className="timeline-diamond" />
-                      <span className="font-display text-3xl md:text-4xl font-bold text-white/20">
-                        {step.n}
-                      </span>
+                      <span className="font-display text-3xl md:text-4xl font-bold text-white/20">{step.n}</span>
                     </div>
-
-                    {/* Content */}
                     <div className="pt-0">
-                      <h3 className="font-display font-bold text-xl md:text-2xl text-white uppercase mb-3">
-                        {step.title}
-                      </h3>
-                      <p className="font-body text-tron-text text-sm md:text-base leading-relaxed max-w-xl">
-                        {step.desc}
-                      </p>
+                      <h3 className="font-display font-bold text-xl md:text-2xl text-white uppercase mb-3">{step.title}</h3>
+                      <p className="font-body text-tron-text text-sm md:text-base leading-relaxed max-w-xl">{step.desc}</p>
                     </div>
                   </div>
                 </AnimatedSection>
@@ -215,9 +166,7 @@ export default function SolutionPage() {
             ].map((uc, i) => (
               <AnimatedSection key={i} delay={i * 100}>
                 <div className="glass-card p-6 text-center group h-full">
-                  <div className="font-display text-2xl font-bold text-tron-purple/20 mb-3">
-                    {String(i + 1).padStart(2, "0")}
-                  </div>
+                  <div className="font-display text-2xl font-bold text-tron-purple/20 mb-3">{String(i + 1).padStart(2, "0")}</div>
                   <h3 className="font-display font-bold text-white mb-2 uppercase">{uc.title}</h3>
                   <p className="font-body text-tron-text text-xs leading-relaxed">{uc.desc}</p>
                 </div>
@@ -238,9 +187,7 @@ export default function SolutionPage() {
             <p className="font-body text-tron-text mb-8">
               Talk to our founders to learn how MyTron Labs data can accelerate your AI research.
             </p>
-            <Link href="/contact" className="btn-primary inline-block px-12 py-4">
-              Get In Touch &rarr;
-            </Link>
+            <Link href="/contact" className="btn-primary inline-block px-12 py-4">Get In Touch &rarr;</Link>
           </AnimatedSection>
         </div>
       </section>
