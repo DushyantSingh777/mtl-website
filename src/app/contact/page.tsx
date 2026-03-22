@@ -1,6 +1,10 @@
 "use client";
 import { useState } from "react";
 import AnimatedSection from "@/components/AnimatedSection";
+import TextReveal from "@/components/TextReveal";
+import GlowCard from "@/components/GlowCard";
+import StaggerContainer from "@/components/StaggerContainer";
+import MagneticButton from "@/components/MagneticButton";
 
 interface FormData {
   name: string;
@@ -80,7 +84,7 @@ export default function ContactPage() {
             {/* Form */}
             <div className="md:col-span-3">
               <AnimatedSection>
-                <div className="glass-card p-8">
+                <GlowCard className="p-8">
                   {status === "sent" ? (
                     <div className="text-center py-16">
                       <div className="w-16 h-16 rounded-full bg-green-500/20 flex items-center justify-center mx-auto mb-4">
@@ -156,20 +160,22 @@ export default function ContactPage() {
                         {errors.message && <p className="text-red-400 text-xs mt-1">{errors.message}</p>}
                       </div>
 
-                      <button
-                        type="submit"
-                        disabled={status === "sending"}
-                        className="btn-primary w-full py-4 disabled:opacity-50 disabled:cursor-not-allowed"
-                      >
-                        {status === "sending" ? (
-                          <span className="flex items-center justify-center gap-3">
-                            <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                            Transmitting...
-                          </span>
-                        ) : (
-                          "Send Message"
-                        )}
-                      </button>
+                      <MagneticButton>
+                        <button
+                          type="submit"
+                          disabled={status === "sending"}
+                          className="btn-primary w-full py-4 disabled:opacity-50 disabled:cursor-not-allowed"
+                        >
+                          {status === "sending" ? (
+                            <span className="flex items-center justify-center gap-3">
+                              <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                              Transmitting...
+                            </span>
+                          ) : (
+                            "Send Message"
+                          )}
+                        </button>
+                      </MagneticButton>
 
                       {status === "error" && (
                         <p className="text-red-400 text-sm text-center">
@@ -178,36 +184,69 @@ export default function ContactPage() {
                       )}
                     </form>
                   )}
-                </div>
+                </GlowCard>
               </AnimatedSection>
             </div>
 
             {/* Contact Info */}
             <div className="md:col-span-2 space-y-6">
               <AnimatedSection delay={200}>
-                <div className="glass-card p-6">
+                <GlowCard className="p-6">
                   <div className="text-tron-purple font-mono text-xs tracking-widest uppercase mb-4">
                     Direct Contact
                   </div>
-                  <h3 className="font-display font-bold text-white text-lg mb-2 uppercase">Priyank</h3>
-                  <div className="text-tron-purple text-xs font-mono mb-3">CO-FOUNDER & CEO</div>
+
+                  {/* Priyank Patel */}
+                  <h3 className="font-display font-bold text-white text-lg mb-1 uppercase">Priyank Patel</h3>
+                  <div className="text-tron-purple text-xs font-mono mb-2">CO-FOUNDER</div>
                   <a
-                    href="mailto:founders@mytronlabs.com"
-                    className="text-tron-text text-sm hover:text-white transition-colors block mb-1"
+                    href="tel:+919265200452"
+                    className="text-tron-text text-sm hover:text-white transition-colors block"
                   >
-                    founders@mytronlabs.com
+                    +91 92652 00452
                   </a>
                   <a
-                    href="https://mytronlabs.com"
-                    className="text-tron-text text-sm hover:text-white transition-colors"
+                    href="mailto:priyank@mytronlabs.com"
+                    className="text-tron-text text-sm hover:text-white transition-colors block mb-3"
                   >
-                    mytronlabs.com
+                    priyank@mytronlabs.com
                   </a>
-                </div>
+
+                  {/* Aditya Gupta */}
+                  <h3 className="font-display font-bold text-white text-lg mb-1 uppercase mt-5">Aditya Gupta</h3>
+                  <div className="text-tron-purple text-xs font-mono mb-2">CO-FOUNDER</div>
+                  <a
+                    href="tel:+919945365283"
+                    className="text-tron-text text-sm hover:text-white transition-colors block"
+                  >
+                    +91 99453 65283
+                  </a>
+                  <a
+                    href="mailto:aditya@mytronlabs.com"
+                    className="text-tron-text text-sm hover:text-white transition-colors block mb-4"
+                  >
+                    aditya@mytronlabs.com
+                  </a>
+
+                  <div className="border-t border-white/10 pt-3 mt-3">
+                    <a
+                      href="mailto:founders@mytronlabs.com"
+                      className="text-tron-text text-sm hover:text-white transition-colors block mb-1"
+                    >
+                      founders@mytronlabs.com
+                    </a>
+                    <a
+                      href="https://mytronlabs.com"
+                      className="text-tron-text text-sm hover:text-white transition-colors"
+                    >
+                      mytronlabs.com
+                    </a>
+                  </div>
+                </GlowCard>
               </AnimatedSection>
 
               <AnimatedSection delay={300}>
-                <div className="glass-card p-6">
+                <GlowCard className="p-6">
                   <div className="flex items-center gap-2 mb-3">
                     <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
                     <span className="text-green-400 text-xs font-mono tracking-widest">FOUNDERS ACTIVE</span>
@@ -216,11 +255,11 @@ export default function ContactPage() {
                     We typically respond within <span className="text-white font-medium">24 hours</span>.
                     For urgent matters, email directly.
                   </p>
-                </div>
+                </GlowCard>
               </AnimatedSection>
 
               <AnimatedSection delay={400}>
-                <div className="glass-card p-6">
+                <GlowCard className="p-6">
                   <div className="text-tron-purple font-mono text-xs tracking-widest uppercase mb-3">
                     Inquiry Types
                   </div>
@@ -232,11 +271,11 @@ export default function ContactPage() {
                       </div>
                     ))}
                   </div>
-                </div>
+                </GlowCard>
               </AnimatedSection>
 
               <AnimatedSection delay={500}>
-                <div className="glass-card p-6">
+                <GlowCard className="p-6">
                   <div className="text-tron-purple font-mono text-xs tracking-widest uppercase mb-3">
                     Stage
                   </div>
@@ -245,7 +284,7 @@ export default function ContactPage() {
                     fast. We are hands-on, founder-led, and responsive. Expect a real conversation,
                     not a sales funnel.
                   </p>
-                </div>
+                </GlowCard>
               </AnimatedSection>
             </div>
           </div>

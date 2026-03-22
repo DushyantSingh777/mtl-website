@@ -1,6 +1,10 @@
 "use client";
 import AnimatedSection from "@/components/AnimatedSection";
 import Link from "next/link";
+import TextReveal from "@/components/TextReveal";
+import GlowCard from "@/components/GlowCard";
+import StaggerContainer from "@/components/StaggerContainer";
+import MagneticButton from "@/components/MagneticButton";
 
 export default function AnnotationForRoboticsPage() {
   return (
@@ -26,8 +30,12 @@ export default function AnnotationForRoboticsPage() {
               training datasets at the scale and accuracy frontier AI teams actually need.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/contact" className="btn-primary">Request Annotation Services</Link>
-              <Link href="/solution" className="btn-outline">View Our Pipeline &rarr;</Link>
+              <MagneticButton>
+                <Link href="/contact" className="btn-primary">Request Annotation Services</Link>
+              </MagneticButton>
+              <MagneticButton>
+                <Link href="/solution" className="btn-outline">View Our Pipeline &rarr;</Link>
+              </MagneticButton>
             </div>
           </AnimatedSection>
         </div>
@@ -66,7 +74,7 @@ export default function AnnotationForRoboticsPage() {
               </h2>
             </div>
           </AnimatedSection>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <StaggerContainer className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
               { n: "01", title: "Egocentric Video Annotation", body: "Frame-by-frame labeling of first-person video, the exact perspective robots need. We annotate actions, objects, and scene context across long-horizon sequences." },
               { n: "02", title: "Hand-Object Interaction Labels", body: "Precise keypoint tracking of hand pose, grasp type, contact points, and object state changes. Critical for training manipulation and dexterous robotic systems." },
@@ -75,15 +83,13 @@ export default function AnnotationForRoboticsPage() {
               { n: "05", title: "Multimodal Sensor Fusion Labels", body: "Synchronized annotation across video, audio, IMU, and environmental sensors. Every modality labeled and aligned to a unified timeline." },
               { n: "06", title: "Scene & Object Segmentation", body: "Pixel-level semantic and instance segmentation for objects, surfaces, and regions. Supports polygon, brush, and SAM-assisted workflows at scale." },
             ].map((s, i) => (
-              <AnimatedSection key={i} delay={i * 80}>
-                <div className="glass-card p-8 h-full group">
-                  <div className="font-display text-2xl font-bold text-tron-purple/20 mb-2">{s.n}</div>
-                  <h3 className="font-display font-bold text-white text-xl mb-4 uppercase">{s.title}</h3>
-                  <p className="font-body text-tron-text text-sm leading-relaxed">{s.body}</p>
-                </div>
-              </AnimatedSection>
+              <GlowCard key={i} className="p-8 h-full">
+                <div className="font-display text-2xl font-bold text-tron-purple/20 mb-2">{s.n}</div>
+                <h3 className="font-display font-bold text-white text-xl mb-4 uppercase">{s.title}</h3>
+                <p className="font-body text-tron-text text-sm leading-relaxed">{s.body}</p>
+              </GlowCard>
             ))}
-          </div>
+          </StaggerContainer>
         </div>
       </section>
 
@@ -100,18 +106,20 @@ export default function AnnotationForRoboticsPage() {
             </div>
           </AnimatedSection>
           <AnimatedSection delay={200}>
-            <div className="glass-card p-8 font-mono text-sm" style={{ lineHeight: 1.8 }}>
-              <div className="text-tron-purple/60 mb-4">// TRON LABS ANNOTATION PIPELINE</div>
-              <div className="space-y-1 text-tron-text">
-                <div><span className="text-tron-purple">STEP_01</span> &mdash; ingest: <span className="text-green-400">AWS &middot; GCP &middot; Azure &middot; direct_upload</span></div>
-                <div><span className="text-tron-purple">STEP_02</span> &mdash; curate: <span className="text-green-400">automated_quality_screening</span></div>
-                <div><span className="text-tron-purple">STEP_03</span> &mdash; label: <span className="text-green-400">AI_assisted + expert_human_review</span></div>
-                <div><span className="text-tron-purple">STEP_04</span> &mdash; QA: <span className="text-green-400">multi_stage_sign_off_pipeline</span></div>
-                <div><span className="text-tron-purple">STEP_05</span> &mdash; export: <span className="text-green-400">JSON &middot; COCO &middot; CSV &middot; Pascal_VOC &middot; custom</span></div>
-                <div><span className="text-tron-purple">STEP_06</span> &mdash; deliver: <span className="text-green-400">AES_256 &middot; access_controlled</span></div>
-                <div className="mt-4 text-tron-purple/60">// first_batch_turnaround: ~72hrs</div>
+            <GlowCard className="p-8">
+              <div className="font-mono text-sm" style={{ lineHeight: 1.8 }}>
+                <div className="text-tron-purple/60 mb-4">// TRON LABS ANNOTATION PIPELINE</div>
+                <div className="space-y-1 text-tron-text">
+                  <div><span className="text-tron-purple">STEP_01</span> &mdash; ingest: <span className="text-green-400">AWS &middot; GCP &middot; Azure &middot; direct_upload</span></div>
+                  <div><span className="text-tron-purple">STEP_02</span> &mdash; curate: <span className="text-green-400">automated_quality_screening</span></div>
+                  <div><span className="text-tron-purple">STEP_03</span> &mdash; label: <span className="text-green-400">AI_assisted + expert_human_review</span></div>
+                  <div><span className="text-tron-purple">STEP_04</span> &mdash; QA: <span className="text-green-400">multi_stage_sign_off_pipeline</span></div>
+                  <div><span className="text-tron-purple">STEP_05</span> &mdash; export: <span className="text-green-400">JSON &middot; COCO &middot; CSV &middot; Pascal_VOC &middot; custom</span></div>
+                  <div><span className="text-tron-purple">STEP_06</span> &mdash; deliver: <span className="text-green-400">AES_256 &middot; access_controlled</span></div>
+                  <div className="mt-4 text-tron-purple/60">// first_batch_turnaround: ~72hrs</div>
+                </div>
               </div>
-            </div>
+            </GlowCard>
           </AnimatedSection>
         </div>
       </section>
@@ -127,7 +135,7 @@ export default function AnnotationForRoboticsPage() {
               </h2>
             </div>
           </AnimatedSection>
-          <div className="grid md:grid-cols-3 gap-6">
+          <StaggerContainer className="grid md:grid-cols-3 gap-6">
             {[
               { n: "01", label: "Robotics-Specific Expertise", body: "Our annotators are trained on egocentric and embodied AI datasets. We understand the difference between a grasp and a contact, a reach and a transport." },
               { n: "02", label: "AI-Assisted Labeling", body: "Model-assisted pre-labeling accelerates throughput without sacrificing accuracy. Human reviewers catch what the model misses." },
@@ -136,15 +144,13 @@ export default function AnnotationForRoboticsPage() {
               { n: "05", label: "Fast Turnaround", body: "Most projects see first batches back within 72 hours. Dedicated teams mean your project doesn't wait in a queue." },
               { n: "06", label: "Secure & Confidential", body: "AES-256 encryption at rest and in transit. NDAs as standard. Your data never leaves our secure pipeline without your sign-off." },
             ].map((item, i) => (
-              <AnimatedSection key={i} delay={i * 80}>
-                <div className="glass-card p-6 h-full group">
-                  <div className="font-display text-2xl font-bold text-tron-purple/20 mb-3">{item.n}</div>
-                  <h3 className="font-display font-bold text-white text-lg mb-3 uppercase">{item.label}</h3>
-                  <p className="font-body text-tron-text text-sm leading-relaxed">{item.body}</p>
-                </div>
-              </AnimatedSection>
+              <GlowCard key={i} className="p-6 h-full">
+                <div className="font-display text-2xl font-bold text-tron-purple/20 mb-3">{item.n}</div>
+                <h3 className="font-display font-bold text-white text-lg mb-3 uppercase">{item.label}</h3>
+                <p className="font-body text-tron-text text-sm leading-relaxed">{item.body}</p>
+              </GlowCard>
             ))}
-          </div>
+          </StaggerContainer>
         </div>
       </section>
 
@@ -159,29 +165,27 @@ export default function AnnotationForRoboticsPage() {
               </h2>
             </div>
           </AnimatedSection>
-          <div className="grid md:grid-cols-4 gap-6">
+          <StaggerContainer className="grid md:grid-cols-4 gap-6">
             {[
               { label: "Manipulation & Dexterity", body: "Training robot hands to grasp, place, and manipulate objects with human-like precision." },
               { label: "Navigation & Locomotion", body: "Scene understanding and obstacle labeling for mobile robots in unstructured environments." },
               { label: "Wearable & AR Systems", body: "Egocentric activity recognition for smart glasses, AR headsets, and body-worn AI devices." },
               { label: "Human-Robot Interaction", body: "Labeling proximity, intent, gesture, and gaze data for collaborative robot systems." },
             ].map((uc, i) => (
-              <AnimatedSection key={i} delay={i * 100}>
-                <div className="glass-card p-6 text-center group h-full">
-                  <div className="font-display text-2xl font-bold text-tron-purple/20 mb-3">{String(i + 1).padStart(2, "0")}</div>
-                  <h3 className="font-display font-bold text-white mb-2 uppercase">{uc.label}</h3>
-                  <p className="font-body text-tron-text text-xs leading-relaxed">{uc.body}</p>
-                </div>
-              </AnimatedSection>
+              <GlowCard key={i} className="p-6 text-center h-full">
+                <div className="font-display text-2xl font-bold text-tron-purple/20 mb-3">{String(i + 1).padStart(2, "0")}</div>
+                <h3 className="font-display font-bold text-white mb-2 uppercase">{uc.label}</h3>
+                <p className="font-body text-tron-text text-xs leading-relaxed">{uc.body}</p>
+              </GlowCard>
             ))}
-          </div>
+          </StaggerContainer>
         </div>
       </section>
 
       {/* ═══ CTA ═══ */}
       <section className="py-16 px-6 relative overflow-hidden">
         <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full" style={{ background: "radial-gradient(circle, rgba(139,92,246,0.1), transparent 70%)", filter: "blur(40px)" }} />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full" style={{ background: "radial-gradient(circle, rgba(255,255,255,0.04), transparent 70%)", filter: "blur(40px)" }} />
         </div>
         <AnimatedSection>
           <div className="max-w-3xl mx-auto text-center relative z-10">
@@ -194,8 +198,12 @@ export default function AnnotationForRoboticsPage() {
               We will get back to you within 24 hours.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/contact" className="btn-primary px-12 py-4">Reach Out to Us</Link>
-              <Link href="/solution" className="btn-outline px-12 py-4">Explore Our Pipeline &rarr;</Link>
+              <MagneticButton>
+                <Link href="/contact" className="btn-primary px-12 py-4">Reach Out to Us</Link>
+              </MagneticButton>
+              <MagneticButton>
+                <Link href="/solution" className="btn-outline px-12 py-4">Explore Our Pipeline &rarr;</Link>
+              </MagneticButton>
             </div>
           </div>
         </AnimatedSection>

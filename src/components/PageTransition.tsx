@@ -39,8 +39,8 @@ export default function PageTransition() {
       className="fixed top-0 left-0 z-[9999] h-[2px] transition-all duration-300 ease-out"
       style={{
         width: `${progress}%`,
-        background: "linear-gradient(90deg, #00f5ff, #0080ff)",
-        boxShadow: "0 0 10px #00f5ff, 0 0 20px #00f5ff44",
+        background: "linear-gradient(90deg, #ffffff, #a0a0a0)",
+        boxShadow: "0 0 10px rgba(255,255,255,0.3), 0 0 20px rgba(255,255,255,0.1)",
       }}
     />
   );

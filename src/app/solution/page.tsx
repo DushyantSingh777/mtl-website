@@ -1,5 +1,10 @@
 "use client";
+import { motion } from "framer-motion";
 import AnimatedSection from "@/components/AnimatedSection";
+import TextReveal from "@/components/TextReveal";
+import GlowCard from "@/components/GlowCard";
+import StaggerContainer from "@/components/StaggerContainer";
+import MagneticButton from "@/components/MagneticButton";
 import Link from "next/link";
 
 const solutions = [
@@ -66,6 +71,8 @@ export default function SolutionPage() {
               <span className="text-white">SCIENTIFIC </span>
               <span className="gradient-text">DELIVERY</span>
             </h1>
+          </AnimatedSection>
+          <AnimatedSection>
             <p className="font-body text-tron-text-light text-lg md:text-xl max-w-2xl mx-auto leading-relaxed">
               We treat AI data infrastructure as an engineering discipline, not an experiment.
               Precision, scalability, and impact are built-in defaults.
@@ -88,25 +95,23 @@ export default function SolutionPage() {
               </p>
             </div>
           </AnimatedSection>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <StaggerContainer className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {solutions.map((sol, i) => (
-              <AnimatedSection key={i} delay={i * 80}>
-                <div className="glass-card p-8 h-full group">
-                  <div className="font-display text-3xl font-bold text-tron-purple/20 mb-2">{String(i + 1).padStart(2, "0")}</div>
-                  <div className="text-tron-purple font-mono text-xs mb-1 tracking-wider">{sol.subtitle}</div>
-                  <h3 className="font-display font-bold text-white text-xl mb-4 uppercase">{sol.title}</h3>
-                  <p className="font-body text-tron-text text-sm leading-relaxed mb-6">{sol.desc}</p>
-                  <div className="border-t border-white/[0.06] pt-4">
-                    <div className="flex flex-wrap gap-2">
-                      {sol.specs.map((spec, j) => (
-                        <span key={j} className="text-xs px-2 py-1 rounded-md border border-white/[0.08] text-tron-text group-hover:border-tron-purple/30 transition-colors duration-300">{spec}</span>
-                      ))}
-                    </div>
+              <GlowCard key={i} className="p-8 h-full">
+                <div className="font-display text-3xl font-bold text-tron-purple/20 mb-2">{String(i + 1).padStart(2, "0")}</div>
+                <div className="text-tron-purple font-mono text-xs mb-1 tracking-wider">{sol.subtitle}</div>
+                <h3 className="font-display font-bold text-white text-xl mb-4 uppercase">{sol.title}</h3>
+                <p className="font-body text-tron-text text-sm leading-relaxed mb-6">{sol.desc}</p>
+                <div className="border-t border-white/[0.06] pt-4">
+                  <div className="flex flex-wrap gap-2">
+                    {sol.specs.map((spec, j) => (
+                      <span key={j} className="text-xs px-2 py-1 rounded-md border border-white/[0.08] text-tron-text group-hover:border-tron-purple/30 transition-colors duration-300">{spec}</span>
+                    ))}
                   </div>
                 </div>
-              </AnimatedSection>
+              </GlowCard>
             ))}
-          </div>
+          </StaggerContainer>
         </div>
       </section>
 
@@ -132,13 +137,25 @@ export default function SolutionPage() {
                 <AnimatedSection key={i} delay={i * 80}>
                   <div className="flex gap-8 md:gap-16 items-start">
                     <div className="flex flex-col items-center gap-3 flex-shrink-0">
-                      <div className="timeline-diamond" />
+                      <motion.div
+                        className="timeline-diamond"
+                        initial={{ scale: 0, opacity: 0 }}
+                        whileInView={{ scale: 1, opacity: 1 }}
+                        viewport={{ once: true, amount: 0.5 }}
+                        transition={{ type: "spring", stiffness: 300, damping: 20, delay: 0.1 }}
+                      />
                       <span className="font-display text-3xl md:text-4xl font-bold text-white/20">{step.n}</span>
                     </div>
-                    <div className="pt-0">
+                    <motion.div
+                      className="pt-0"
+                      initial={{ opacity: 0, x: 20 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.5, delay: 0.2 }}
+                    >
                       <h3 className="font-display font-bold text-xl md:text-2xl text-white uppercase mb-3">{step.title}</h3>
                       <p className="font-body text-tron-text text-sm md:text-base leading-relaxed max-w-xl">{step.desc}</p>
-                    </div>
+                    </motion.div>
                   </div>
                 </AnimatedSection>
               ))}
@@ -157,22 +174,20 @@ export default function SolutionPage() {
               </h2>
             </div>
           </AnimatedSection>
-          <div className="grid md:grid-cols-4 gap-6">
+          <StaggerContainer className="grid md:grid-cols-4 gap-6">
             {[
               { title: "Robotics Research", desc: "Training general-purpose robot manipulation policies" },
               { title: "Wearable AI", desc: "Powering contextual AI for AR/VR and smart glasses" },
               { title: "Autonomous Systems", desc: "Real-world scene understanding for autonomous agents" },
               { title: "Embodied LLMs", desc: "Grounding language models in physical world understanding" },
             ].map((uc, i) => (
-              <AnimatedSection key={i} delay={i * 100}>
-                <div className="glass-card p-6 text-center group h-full">
-                  <div className="font-display text-2xl font-bold text-tron-purple/20 mb-3">{String(i + 1).padStart(2, "0")}</div>
-                  <h3 className="font-display font-bold text-white mb-2 uppercase">{uc.title}</h3>
-                  <p className="font-body text-tron-text text-xs leading-relaxed">{uc.desc}</p>
-                </div>
-              </AnimatedSection>
+              <GlowCard key={i} className="p-6 text-center h-full">
+                <div className="font-display text-2xl font-bold text-tron-purple/20 mb-3">{String(i + 1).padStart(2, "0")}</div>
+                <h3 className="font-display font-bold text-white mb-2 uppercase">{uc.title}</h3>
+                <p className="font-body text-tron-text text-xs leading-relaxed">{uc.desc}</p>
+              </GlowCard>
             ))}
-          </div>
+          </StaggerContainer>
         </div>
       </section>
 
@@ -187,7 +202,9 @@ export default function SolutionPage() {
             <p className="font-body text-tron-text mb-8">
               Talk to our founders to learn how MyTron Labs data can accelerate your AI research.
             </p>
-            <Link href="/contact" className="btn-primary inline-block px-12 py-4">Get In Touch &rarr;</Link>
+            <MagneticButton>
+              <Link href="/contact" className="btn-primary inline-block px-12 py-4">Get In Touch &rarr;</Link>
+            </MagneticButton>
           </AnimatedSection>
         </div>
       </section>

@@ -32,7 +32,7 @@ export default function Navbar() {
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         scrolled
-          ? "bg-[#0a0a0b]/90 backdrop-blur-xl border-b border-white/[0.04]"
+          ? "bg-[#0a0a0a]/90 backdrop-blur-xl border-b border-white/[0.04]"
           : "bg-transparent"
       }`}
     >
@@ -50,7 +50,7 @@ export default function Navbar() {
               <div
                 className="absolute inset-0 rounded"
                 style={{
-                  background: "linear-gradient(135deg, #ec4899, #8b5cf6, #06b6d4)",
+                  background: "linear-gradient(135deg, #ffffff, #d4d4d4, #a0a0a0)",
                   mixBlendMode: "multiply",
                   pointerEvents: "none",
                 }}
@@ -73,7 +73,7 @@ export default function Navbar() {
                 prefetch={true}
                 className={`nav-link-pill ${isActive ? "active" : ""}`}
               >
-                <span className="nav-dot" style={{ background: isActive ? "#4ade80" : "#8b5cf6" }} />
+                <span className="nav-dot" style={{ background: isActive ? "#e0e0e0" : "#707070" }} />
                 {link.label}
               </Link>
             );
@@ -85,7 +85,7 @@ export default function Navbar() {
           <Link
             href="/contact"
             prefetch={true}
-            className="flex items-center gap-2 bg-gradient-to-r from-tron-purple to-purple-700 text-white px-5 py-2.5 rounded-lg font-body text-sm font-medium tracking-wider uppercase hover:shadow-lg hover:shadow-purple-500/25 transition-all duration-300"
+            className="flex items-center gap-2 bg-white text-black px-5 py-2.5 rounded-lg font-body text-sm font-medium tracking-wider uppercase hover:shadow-lg hover:shadow-white/20 transition-all duration-300"
           >
             HELLO
             <span className="text-base">&raquo;</span>
@@ -109,7 +109,7 @@ export default function Navbar() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="lg:hidden overflow-hidden bg-[#0a0a0b]/98 backdrop-blur-xl border-t border-white/[0.04]"
+            className="lg:hidden overflow-hidden bg-[#0a0a0a]/98 backdrop-blur-xl border-t border-white/[0.04]"
           >
             <div className="px-6 py-6 flex flex-col gap-4">
               {navLinks.map((link) => {
@@ -125,7 +125,7 @@ export default function Navbar() {
                   >
                     <span
                       className="w-2 h-2 rounded-full"
-                      style={{ background: isActive ? "#4ade80" : "#8b5cf6" }}
+                      style={{ background: isActive ? "#e0e0e0" : "#707070" }}
                     />
                     {link.label}
                   </Link>
@@ -134,7 +134,7 @@ export default function Navbar() {
               <Link
                 href="/contact"
                 prefetch={true}
-                className="mt-2 flex items-center justify-center gap-2 bg-gradient-to-r from-tron-purple to-purple-700 text-white px-5 py-3 rounded-lg font-body text-sm font-medium tracking-wider uppercase"
+                className="mt-2 flex items-center justify-center gap-2 bg-white text-black px-5 py-3 rounded-lg font-body text-sm font-medium tracking-wider uppercase"
               >
                 HELLO &raquo;
               </Link>

@@ -1,5 +1,10 @@
+"use client";
 import AnimatedSection from "@/components/AnimatedSection";
 import Link from "next/link";
+import TextReveal from "@/components/TextReveal";
+import GlowCard from "@/components/GlowCard";
+import StaggerContainer from "@/components/StaggerContainer";
+import MagneticButton from "@/components/MagneticButton";
 
 const partnerTypes = [
   {
@@ -59,27 +64,25 @@ export default function PartnersPage() {
               </h2>
             </div>
           </AnimatedSection>
-          <div className="grid md:grid-cols-2 gap-6">
+          <StaggerContainer className="grid md:grid-cols-2 gap-6">
             {partnerTypes.map((pt, i) => (
-              <AnimatedSection key={i} delay={i * 100}>
-                <div className="glass-card p-8 h-full group">
-                  <div className="font-display text-2xl font-bold text-tron-purple/20 mb-2">{String(i + 1).padStart(2, "0")}</div>
-                  <h3 className="font-display font-bold text-white text-xl uppercase mb-2">{pt.type}</h3>
-                  <p className="font-body text-tron-text text-sm mt-2 leading-relaxed mb-6">{pt.desc}</p>
-                  <div className="border-t border-white/[0.06] pt-4">
-                    <div className="text-tron-purple font-mono text-xs tracking-widest mb-3">WHAT WE OFFER:</div>
-                    <ul className="space-y-2">
-                      {pt.benefits.map((b, j) => (
-                        <li key={j} className="flex gap-3 text-tron-text text-sm">
-                          <span className="w-1.5 h-1.5 rounded-full bg-tron-purple mt-1.5 flex-shrink-0" />{b}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
+              <GlowCard key={i} className="p-8 h-full">
+                <div className="font-display text-2xl font-bold text-tron-purple/20 mb-2">{String(i + 1).padStart(2, "0")}</div>
+                <h3 className="font-display font-bold text-white text-xl uppercase mb-2">{pt.type}</h3>
+                <p className="font-body text-tron-text text-sm mt-2 leading-relaxed mb-6">{pt.desc}</p>
+                <div className="border-t border-white/[0.06] pt-4">
+                  <div className="text-tron-purple font-mono text-xs tracking-widest mb-3">WHAT WE OFFER:</div>
+                  <ul className="space-y-2">
+                    {pt.benefits.map((b, j) => (
+                      <li key={j} className="flex gap-3 text-tron-text text-sm">
+                        <span className="w-1.5 h-1.5 rounded-full bg-tron-purple mt-1.5 flex-shrink-0" />{b}
+                      </li>
+                    ))}
+                  </ul>
                 </div>
-              </AnimatedSection>
+              </GlowCard>
             ))}
-          </div>
+          </StaggerContainer>
         </div>
       </section>
 
@@ -87,7 +90,7 @@ export default function PartnersPage() {
       <section className="py-16 px-6">
         <div className="max-w-4xl mx-auto">
           <AnimatedSection>
-            <div className="glass-card p-10 text-center">
+            <GlowCard className="p-10 text-center">
               <h2 className="section-heading text-3xl md:text-4xl text-white mb-4">WE ARE JUST GETTING STARTED</h2>
               <p className="font-body text-tron-text text-lg leading-relaxed max-w-2xl mx-auto">
                 MyTron Labs is in its early stages, which means right now is the best time to get involved.
@@ -98,7 +101,7 @@ export default function PartnersPage() {
                 <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
                 <span className="text-green-400 text-xs font-mono tracking-widest">PARTNERSHIPS NOW OPEN</span>
               </div>
-            </div>
+            </GlowCard>
           </AnimatedSection>
         </div>
       </section>
@@ -106,7 +109,7 @@ export default function PartnersPage() {
       {/* ═══ CTA ═══ */}
       <section className="py-16 px-6 relative overflow-hidden">
         <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full" style={{ background: "radial-gradient(circle, rgba(139,92,246,0.08), transparent 70%)", filter: "blur(40px)" }} />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full" style={{ background: "radial-gradient(circle, rgba(255,255,255,0.03), transparent 70%)", filter: "blur(40px)" }} />
         </div>
         <div className="max-w-3xl mx-auto text-center relative z-10">
           <AnimatedSection>
@@ -117,7 +120,9 @@ export default function PartnersPage() {
               If you are working on Physical AI, robotics, or embodied intelligence, reach out.
               We want to hear what you are building.
             </p>
-            <Link href="/contact" className="btn-primary inline-block px-12 py-4">Reach Out to Founders</Link>
+            <MagneticButton className="inline-block">
+              <Link href="/contact" className="btn-primary inline-block px-12 py-4">Reach Out to Founders</Link>
+            </MagneticButton>
           </AnimatedSection>
         </div>
       </section>

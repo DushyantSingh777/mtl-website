@@ -1,5 +1,10 @@
+"use client";
 import AnimatedSection from "@/components/AnimatedSection";
 import Link from "next/link";
+import TextReveal from "@/components/TextReveal";
+import GlowCard from "@/components/GlowCard";
+import StaggerContainer from "@/components/StaggerContainer";
+import MagneticButton from "@/components/MagneticButton";
 
 export default function CareersPage() {
   return (
@@ -38,7 +43,7 @@ export default function CareersPage() {
               </h2>
             </div>
           </AnimatedSection>
-          <div className="grid md:grid-cols-3 gap-6">
+          <StaggerContainer className="grid md:grid-cols-3 gap-6">
             {[
               { n: "01", title: "Frontier Mission", desc: "Work on one of the most important infrastructure challenges in AI. The physical AI moment will define the next decade." },
               { n: "02", title: "Research Autonomy", desc: "We give engineers and researchers the autonomy to explore, experiment, and push boundaries with access to our unique datasets." },
@@ -47,15 +52,13 @@ export default function CareersPage() {
               { n: "05", title: "Early Stage Advantage", desc: "Join at the ground floor of a company building critical infrastructure for the next wave of AI. Shape the culture and direction." },
               { n: "06", title: "Move Fast", desc: "Startup speed with research-grade rigor. We make decisions quickly and trust our team to execute." },
             ].map((item, i) => (
-              <AnimatedSection key={i} delay={i * 80}>
-                <div className="glass-card p-6 h-full group">
-                  <div className="font-display text-2xl font-bold text-tron-purple/20 mb-3">{item.n}</div>
-                  <h3 className="font-display font-bold text-white mb-2 uppercase">{item.title}</h3>
-                  <p className="font-body text-tron-text text-sm leading-relaxed">{item.desc}</p>
-                </div>
-              </AnimatedSection>
+              <GlowCard key={i} className="p-6 h-full">
+                <div className="font-display text-2xl font-bold text-tron-purple/20 mb-3">{item.n}</div>
+                <h3 className="font-display font-bold text-white mb-2 uppercase">{item.title}</h3>
+                <p className="font-body text-tron-text text-sm leading-relaxed">{item.desc}</p>
+              </GlowCard>
             ))}
-          </div>
+          </StaggerContainer>
         </div>
       </section>
 
@@ -63,7 +66,7 @@ export default function CareersPage() {
       <section className="py-16 px-6">
         <div className="max-w-4xl mx-auto">
           <AnimatedSection>
-            <div className="glass-card p-10 text-center">
+            <GlowCard className="p-10 text-center">
               <div className="flex items-center justify-center gap-2 mb-6">
                 <span className="w-2 h-2 rounded-full bg-yellow-400 animate-pulse" />
                 <span className="text-yellow-400 text-xs font-mono tracking-widest">NO OPEN ROLES LISTED YET</span>
@@ -82,8 +85,10 @@ export default function CareersPage() {
                 <span className="text-white font-medium">robotics</span>,{" "}
                 <span className="text-white font-medium">annotation systems</span>.
               </p>
-              <Link href="/contact" className="btn-primary inline-block px-12 py-4">Introduce Yourself</Link>
-            </div>
+              <MagneticButton className="inline-block">
+                <Link href="/contact" className="btn-primary inline-block px-12 py-4">Introduce Yourself</Link>
+              </MagneticButton>
+            </GlowCard>
           </AnimatedSection>
         </div>
       </section>
@@ -91,7 +96,7 @@ export default function CareersPage() {
       {/* ═══ CTA ═══ */}
       <section className="py-16 px-6 relative overflow-hidden">
         <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full" style={{ background: "radial-gradient(circle, rgba(139,92,246,0.08), transparent 70%)", filter: "blur(40px)" }} />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full" style={{ background: "radial-gradient(circle, rgba(255,255,255,0.03), transparent 70%)", filter: "blur(40px)" }} />
         </div>
         <div className="max-w-3xl mx-auto text-center relative z-10">
           <AnimatedSection>
@@ -102,7 +107,9 @@ export default function CareersPage() {
               Drop us a message. Tell us what you are working on and why you care about physical AI.
               We read every message personally.
             </p>
-            <Link href="/contact" className="btn-primary inline-block px-12 py-4">Get In Touch</Link>
+            <MagneticButton className="inline-block">
+              <Link href="/contact" className="btn-primary inline-block px-12 py-4">Get In Touch</Link>
+            </MagneticButton>
           </AnimatedSection>
         </div>
       </section>

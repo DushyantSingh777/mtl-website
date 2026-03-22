@@ -10,20 +10,34 @@ const config: Config = {
     extend: {
       colors: {
         tron: {
-          dark: "#0a0a0b",
-          darker: "#050506",
-          purple: "#8b5cf6",
-          cyan: "#06b6d4",
-          pink: "#ec4899",
-          blue: "#3b82f6",
-          text: "#9ca3af",
-          "text-light": "#d1d5db",
+          dark: "#0a0a0a",
+          darker: "#050505",
+          purple: "#a0a0a0",
+          cyan: "#d4d4d4",
+          pink: "#c0c0c0",
+          blue: "#b0b0b0",
+          accent: "#ffffff",
+          emerald: "#e0e0e0",
+          text: "#888888",
+          "text-light": "#d4d4d4",
+        },
+        surface: {
+          0: "#0a0a0a",
+          1: "#111111",
+          2: "#1a1a1a",
+          3: "#222222",
         },
       },
       fontFamily: {
         display: ["'Oswald'", "sans-serif"],
         body: ["'DM Sans'", "sans-serif"],
         mono: ["'JetBrains Mono'", "monospace"],
+      },
+      letterSpacing: {
+        tighter: "-0.03em",
+      },
+      transitionTimingFunction: {
+        premium: "cubic-bezier(0.21, 0.47, 0.32, 0.98)",
       },
       animation: {
         "fade-up": "fadeUp 0.8s ease forwards",
@@ -34,6 +48,10 @@ const config: Config = {
         "pulse-slow": "pulseSlow 3s ease-in-out infinite",
         "spin-slow": "spinSlow 20s linear infinite",
         "gradient-shift": "gradientShift 8s ease infinite",
+        "marquee": "marquee 30s linear infinite",
+        "shimmer": "shimmer 2s ease infinite",
+        "glow-pulse": "glowPulse 4s ease-in-out infinite",
+        "border-flow": "borderFlow 3s linear infinite",
       },
       keyframes: {
         fadeUp: {
@@ -68,6 +86,23 @@ const config: Config = {
         gradientShift: {
           "0%, 100%": { backgroundPosition: "0% 50%" },
           "50%": { backgroundPosition: "100% 50%" },
+        },
+        marquee: {
+          "0%": { transform: "translateX(0%)" },
+          "100%": { transform: "translateX(-50%)" },
+        },
+        shimmer: {
+          "0%": { transform: "translateX(-100%)" },
+          "100%": { transform: "translateX(100%)" },
+        },
+        glowPulse: {
+          "0%, 100%": { boxShadow: "0 0 20px rgba(255,255,255,0.05)" },
+          "50%": { boxShadow: "0 0 40px rgba(255,255,255,0.1), 0 0 80px rgba(255,255,255,0.03)" },
+        },
+        borderFlow: {
+          "0%": { backgroundPosition: "0% 50%" },
+          "50%": { backgroundPosition: "100% 50%" },
+          "100%": { backgroundPosition: "0% 50%" },
         },
       },
     },

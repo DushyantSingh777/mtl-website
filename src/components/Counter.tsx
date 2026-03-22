@@ -4,11 +4,13 @@ import { useEffect, useRef, useState } from "react";
 interface Props {
   end: number;
   suffix?: string;
+  prefix?: string;
+  decimals?: number;
   duration?: number;
 }
 
-export default function Counter({ end, suffix = "", duration = 2000 }: Props) {
-  const [count, setCount] = useState(0);
+export default function Counter({ end, suffix = "", prefix = "", decimals = 0, duration = 2000 }: Props) {
+  const [display, setDisplay] = useState("0");
   const ref = useRef<HTMLSpanElement>(null);
   const started = useRef(false);
 
@@ -25,7 +27,8 @@ export default function Counter({ end, suffix = "", duration = 2000 }: Props) {
             const elapsed = Date.now() - start;
             const progress = Math.min(elapsed / duration, 1);
             const eased = 1 - Math.pow(1 - progress, 3);
-            setCount(Math.round(eased * end));
+            const current = eased * end;
+            setDisplay(decimals > 0 ? current.toFixed(decimals) : Math.round(current).toString());
             if (progress < 1) requestAnimationFrame(step);
           };
           requestAnimationFrame(step);
@@ -37,11 +40,11 @@ export default function Counter({ end, suffix = "", duration = 2000 }: Props) {
 
     observer.observe(el);
     return () => observer.disconnect();
-  }, [end, duration]);
+  }, [end, duration, decimals]);
 
   return (
     <span ref={ref} className="counter">
-      {count}
+      {prefix}{display}
       {suffix}
     </span>
   );

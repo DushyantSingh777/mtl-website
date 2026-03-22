@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function Footer() {
   return (
-    <footer className="border-t border-white/[0.06] bg-[#050506] py-16 px-6">
+    <footer className="relative bg-[#020203] py-16 px-6">
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-5 gap-12 mb-12">
           {/* Brand */}
@@ -28,7 +28,7 @@ export default function Footer() {
     <div 
       className="absolute inset-0 rounded"
       style={{
-        background: 'linear-gradient(135deg, #ec4899, #8b5cf6, #06b6d4)',
+        background: 'linear-gradient(135deg, #ffffff, #d4d4d4, #a0a0a0)',
         mixBlendMode: 'multiply',
         pointerEvents: 'none',
       }}
@@ -48,7 +48,7 @@ export default function Footer() {
                 href="https://www.linkedin.com/company/my-tron-labs"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 rounded-lg bg-white/[0.04] border border-white/[0.08] flex items-center justify-center text-tron-text hover:text-white hover:border-tron-purple/40 hover:bg-tron-purple/10 transition-all duration-300"
+                className="w-10 h-10 rounded-lg bg-white/[0.04] border border-white/[0.08] flex items-center justify-center text-tron-text hover:text-white hover:border-tron-purple/30 hover:bg-tron-purple/10 hover:shadow-[0_0_15px_rgba(255,255,255,0.08)] transition-all duration-300"
               >
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
                   <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
@@ -56,7 +56,7 @@ export default function Footer() {
               </a>
               <a
                 href="mailto:founders@mytronlabs.com"
-                className="w-10 h-10 rounded-lg bg-white/[0.04] border border-white/[0.08] flex items-center justify-center text-tron-text hover:text-white hover:border-tron-purple/40 hover:bg-tron-purple/10 transition-all duration-300"
+                className="w-10 h-10 rounded-lg bg-white/[0.04] border border-white/[0.08] flex items-center justify-center text-tron-text hover:text-white hover:border-tron-purple/30 hover:bg-tron-purple/10 hover:shadow-[0_0_15px_rgba(255,255,255,0.08)] transition-all duration-300"
               >
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <rect x="2" y="4" width="20" height="16" rx="2" />
