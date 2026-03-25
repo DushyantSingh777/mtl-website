@@ -1,101 +1,145 @@
 "use client";
-import AnimatedSection from "@/components/AnimatedSection";
-import TextReveal from "@/components/TextReveal";
-import GlowCard from "@/components/GlowCard";
-import StaggerContainer from "@/components/StaggerContainer";
-import MagneticButton from "@/components/MagneticButton";
-import Counter from "@/components/Counter";
 import Link from "next/link";
+import { motion } from "framer-motion";
+import FadeUp from "@/components/FadeUp";
+import MotionCard from "@/components/MotionCard";
+import Counter from "@/components/Counter";
 
 export default function AboutPage() {
   return (
     <>
-      {/* ═══ HERO ═══ */}
-      <section className="relative pt-32 pb-20 px-6 overflow-hidden aurora-bg min-h-[70vh] flex items-center">
-        <div className="grid-3d">
-          {Array.from({ length: 80 }).map((_, i) => (
-            <div key={i} className="grid-3d-cell" />
-          ))}
-        </div>
-        <div className="max-w-6xl mx-auto relative z-10 text-center w-full">
-          <AnimatedSection>
-            <h1 className="section-heading text-6xl md:text-[8rem] lg:text-[10rem] leading-[0.85] mb-8">
-              <span className="text-white">WE ARE </span>
-              <span className="gradient-text">MYTRON LABS</span>
+      {/* Hero */}
+      <section className="relative pt-32 pb-28 px-6 bg-black grid-bg min-h-[70vh] flex items-center">
+        <div className="max-w-6xl mx-auto text-center w-full">
+          <FadeUp>
+            <p className="eyebrow mb-4">ABOUT US</p>
+          </FadeUp>
+          <FadeUp delay={100}>
+            <h1 className="text-display text-5xl md:text-7xl lg:text-8xl mb-8">
+              We Are <span className="text-display-secondary">MyTron Labs.</span>
             </h1>
-          </AnimatedSection>
-          <AnimatedSection>
-            <p className="font-body text-tron-text-light text-lg md:text-xl max-w-2xl mx-auto leading-relaxed">
-              Here at MyTron Labs we engineer Physical AI data solutions. We are committed to{" "}
-              <span className="text-tron-purple font-mono font-medium">creating</span> innovative
-              and world-class data infrastructure. Come{" "}
-              <span className="text-tron-purple font-mono font-medium">transform</span> your ideas
+          </FadeUp>
+          <FadeUp delay={200}>
+            <p className="text-[#9DA2B3] text-lg md:text-xl max-w-2xl mx-auto leading-relaxed">
+              Here at MyTron Labs we engineer Physical AI data solutions. We are committed to
+              creating innovative and world-class data infrastructure. Come transform your ideas
               into powerful realities.
             </p>
-          </AnimatedSection>
+          </FadeUp>
         </div>
       </section>
 
-      {/* ═══ STORY ═══ */}
-      <section className="py-16 px-6">
+      {/* Story */}
+      <section className="py-28 px-6 bg-[#1E1E24]">
         <div className="max-w-6xl mx-auto">
-          <div className="grid md:grid-cols-2 gap-16 items-center">
-            <AnimatedSection>
-              <h2 className="section-heading text-4xl md:text-5xl text-white mb-8">
-                BORN FROM A SIMPLE{" "}
-                <span className="gradient-text-purple">OBSERVATION</span>
-              </h2>
-              <div className="font-body space-y-4 text-tron-text leading-relaxed">
-                <p>
-                  The most transformative AI breakthroughs of the past decade, from GPT-4 to
-                  Claude, were made possible by one thing: massive, high-quality training data.
-                  But all of that data came from the digital world.
-                </p>
-                <p>
-                  The physical world is where robots work, where humans operate, where autonomous
-                  systems need to function. It has no equivalent data infrastructure. That&apos;s the
-                  gap we&apos;re here to close.
-                </p>
-                <p>
-                  We collaborate with global AI research teams to accelerate breakthroughs in
-                  real-world machine learning systems, providing the structured, annotated,
-                  egocentric datasets they need to build truly intelligent machines.
-                </p>
-              </div>
-            </AnimatedSection>
+          <div className="grid md:grid-cols-2 gap-16 items-start">
+            <div>
+              <FadeUp>
+                <p className="eyebrow mb-4">OUR STORY</p>
+              </FadeUp>
+              <FadeUp delay={100}>
+                <h2 className="text-display text-3xl md:text-5xl mb-8">
+                  Born From a Simple <span className="text-display-secondary">Observation.</span>
+                </h2>
+              </FadeUp>
+              <FadeUp delay={200}>
+                <div className="space-y-4 text-[#9DA2B3] leading-relaxed">
+                  <p>
+                    The most transformative AI breakthroughs of the past decade, from GPT-4 to
+                    Claude, were made possible by one thing: massive, high-quality training data.
+                    But all of that data came from the digital world.
+                  </p>
+                  <p>
+                    The physical world is where robots work, where humans operate, where autonomous
+                    systems need to function. It has no equivalent data infrastructure. That&apos;s the
+                    gap we&apos;re here to close.
+                  </p>
+                  <p>
+                    We collaborate with global AI research teams to accelerate breakthroughs in
+                    real-world machine learning systems, providing the structured, annotated,
+                    egocentric datasets they need to build truly intelligent machines.
+                  </p>
+                </div>
+              </FadeUp>
+            </div>
 
-            <GlowCard className="p-8">
-              <StaggerContainer className="grid grid-cols-2 gap-4">
-                {[
-                  { label: "Total Frames", end: 10.8, suffix: "B+", decimals: 1 },
-                  { label: "Factory Partners", end: 300, suffix: "+", decimals: 0 },
-                  { label: "Total Workers", end: 1, suffix: "L+", decimals: 0 },
-                  { label: "Legal Compliance", end: 100, suffix: "%", decimals: 0 },
-                ].map((stat, i) => (
-                  <div key={i} className="text-center p-4 bg-white/[0.02] rounded-lg">
-                    <div className="font-display text-3xl font-bold text-white"><Counter end={stat.end} suffix={stat.suffix} decimals={stat.decimals} /></div>
-                    <div className="font-body text-tron-text text-xs mt-1 uppercase tracking-wider">{stat.label}</div>
-                  </div>
-                ))}
-              </StaggerContainer>
-            </GlowCard>
+            <FadeUp delay={300}>
+              <div className="bg-[#1E1E24] rounded-xl border border-[#40424D] p-8">
+                <p className="eyebrow mb-6">KEY METRICS</p>
+                <div className="space-y-6 divide-y divide-[#40424D]">
+                  {[
+                    { label: "Total Frames Captured", end: 10.8, suffix: "B+", decimals: 1 },
+                    { label: "Factory Partners", end: 300, suffix: "+", decimals: 0 },
+                    { label: "Total Workers", end: 100, suffix: "K+", decimals: 0 },
+                    { label: "Legal Compliance", end: 100, suffix: "%", decimals: 0 },
+                  ].map((stat, i) => (
+                    <div key={i} className={i > 0 ? "pt-6" : ""}>
+                      <div className="text-3xl font-extrabold text-[#EDEFF7]">
+                        <Counter end={stat.end} suffix={stat.suffix} decimals={stat.decimals} />
+                      </div>
+                      <div className="text-[#6E7180] text-sm mt-1 uppercase tracking-wider">
+                        {stat.label}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </FadeUp>
           </div>
         </div>
       </section>
 
-      {/* ═══ VALUES ═══ */}
-      <section className="py-16 px-6">
-        <div className="divider-glow mb-12" />
+      {/* Stats */}
+      <section className="py-28 px-6 bg-black">
         <div className="max-w-6xl mx-auto">
-          <AnimatedSection>
-            <div className="text-center mb-10">
-              <h2 className="section-heading text-4xl md:text-6xl text-white">
-                WHAT WE <span className="gradient-text-purple">STAND FOR</span>
+          <FadeUp>
+            <div className="text-center mb-6">
+              <p className="eyebrow mb-4">BY THE NUMBERS</p>
+              <h2 className="text-display text-3xl md:text-5xl">
+                Scale That <span className="text-display-secondary">Speaks.</span>
               </h2>
             </div>
-          </AnimatedSection>
+          </FadeUp>
+          <FadeUp delay={100}>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-16">
+              {[
+                { number: "10.8B+", label: "Frames Captured" },
+                { number: "300+", label: "Factory Partners" },
+                { number: "100K+", label: "Workers Engaged" },
+                { number: "100%", label: "Compliance Rate" },
+              ].map((stat, i) => (
+                <div key={i} className="text-center">
+                  <motion.div
+                    className="text-4xl md:text-5xl font-extrabold text-[#EDEFF7] mb-2"
+                    whileInView={{ opacity: [0, 1], scale: [0.8, 1] }}
+                    viewport={{ once: true }}
+                    transition={{ delay: i * 0.1, duration: 0.5 }}
+                  >
+                    {stat.number}
+                  </motion.div>
+                  <div className="text-[#6E7180] text-sm uppercase tracking-wider">
+                    {stat.label}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </FadeUp>
+        </div>
+      </section>
 
-          <StaggerContainer className="grid md:grid-cols-3 gap-6">
+      {/* Values */}
+      <section className="py-28 px-6 bg-[#1E1E24]">
+        <div className="max-w-6xl mx-auto">
+          <FadeUp>
+            <div className="text-center mb-16">
+              <p className="eyebrow mb-4">OUR VALUES</p>
+              <h2 className="text-display text-3xl md:text-5xl">
+                What We <span className="text-display-secondary">Stand For.</span>
+              </h2>
+            </div>
+          </FadeUp>
+
+          <div className="grid md:grid-cols-2 gap-6">
             {[
               { n: "01", title: "Research-First", desc: "Every decision is grounded in rigorous research and collaboration with leading AI institutions worldwide." },
               { n: "02", title: "Scale Without Compromise", desc: "Petabyte-scale data pipelines with uncompromising quality standards and structured annotation at every level." },
@@ -104,35 +148,56 @@ export default function AboutPage() {
               { n: "05", title: "Security by Design", desc: "Secure storage, encrypted delivery, and compliant data infrastructure, privacy and protection are non-negotiable." },
               { n: "06", title: "Speed of Innovation", desc: "The physical AI moment won't wait. We operate at startup speed with research-grade rigor." },
             ].map((item, i) => (
-              <GlowCard key={i} className="p-6 h-full">
-                <div className="font-display text-2xl font-bold text-tron-purple/20 mb-3">{item.n}</div>
-                <h3 className="font-display font-bold text-white text-lg mb-3 uppercase">{item.title}</h3>
-                <p className="font-body text-tron-text text-sm leading-relaxed">{item.desc}</p>
-              </GlowCard>
+              <MotionCard key={i} delay={(i % 2) * 100 + 100}>
+                <div className="bg-[#1E1E24] hover:bg-[#252530] transition-colors duration-200 rounded-xl border border-[#40424D] p-6 h-full">
+                  <motion.span
+                    className="text-5xl font-extrabold text-[#40424D] mb-4 block"
+                    whileInView={{ opacity: [0, 1], scale: [0.8, 1] }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.1 }}
+                  >
+                    {item.n}
+                  </motion.span>
+                  <h3 className="text-[#EDEFF7] font-bold text-lg mb-3 uppercase">{item.title}</h3>
+                  <p className="text-[#9DA2B3] text-sm leading-relaxed">{item.desc}</p>
+                </div>
+              </MotionCard>
             ))}
-          </StaggerContainer>
+          </div>
         </div>
       </section>
 
-      {/* ═══ CTA ═══ */}
-      <section className="py-16 px-6">
+      {/* CTA */}
+      <section className="py-28 px-6 bg-black">
         <div className="max-w-3xl mx-auto text-center">
-          <AnimatedSection>
-            <h2 className="section-heading text-4xl md:text-5xl text-white mb-6">
-              WANT TO WORK <span className="gradient-text">WITH US?</span>
+          <FadeUp>
+            <p className="eyebrow mb-4">GET STARTED</p>
+          </FadeUp>
+          <FadeUp delay={100}>
+            <h2 className="text-display text-3xl md:text-5xl mb-6">
+              Want to Work <span className="text-display-secondary">With Us?</span>
             </h2>
-            <p className="font-body text-tron-text mb-8">
+          </FadeUp>
+          <FadeUp delay={200}>
+            <p className="text-[#9DA2B3] mb-8">
               Whether you&apos;re a researcher, investor, or enterprise partner, we want to hear from you.
             </p>
+          </FadeUp>
+          <FadeUp delay={300}>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <MagneticButton>
+              <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.98 }}>
                 <Link href="/contact" className="btn-primary">Contact Us</Link>
-              </MagneticButton>
-              <MagneticButton>
-                <Link href="/careers" className="btn-outline">Join the Team &rarr;</Link>
-              </MagneticButton>
+              </motion.div>
+              <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.98 }}>
+                <Link href="/careers" className="btn-outline">
+                  Join the Team
+                  <svg className="w-4 h-4 inline-block ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                  </svg>
+                </Link>
+              </motion.div>
             </div>
-          </AnimatedSection>
+          </FadeUp>
         </div>
       </section>
     </>

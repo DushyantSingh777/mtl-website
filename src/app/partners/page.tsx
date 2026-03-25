@@ -1,10 +1,9 @@
 "use client";
-import AnimatedSection from "@/components/AnimatedSection";
+
 import Link from "next/link";
-import TextReveal from "@/components/TextReveal";
-import GlowCard from "@/components/GlowCard";
-import StaggerContainer from "@/components/StaggerContainer";
-import MagneticButton from "@/components/MagneticButton";
+import { motion } from "framer-motion";
+import FadeUp from "@/components/FadeUp";
+import MotionCard from "@/components/MotionCard";
 
 const partnerTypes = [
   {
@@ -32,98 +31,123 @@ const partnerTypes = [
 export default function PartnersPage() {
   return (
     <>
-      {/* ═══ HERO ═══ */}
-      <section className="relative pt-32 pb-20 px-6 overflow-hidden aurora-bg min-h-[70vh] flex items-center">
-        <div className="grid-3d">
-          {Array.from({ length: 80 }).map((_, i) => (
-            <div key={i} className="grid-3d-cell" />
-          ))}
-        </div>
-        <div className="max-w-6xl mx-auto relative z-10 text-center w-full">
-          <AnimatedSection>
-            <h1 className="section-heading text-6xl md:text-[8rem] lg:text-[10rem] leading-[0.85] mb-8">
-              <span className="text-white">BUILD </span>
-              <span className="gradient-text">WITH US</span>
+      {/* HERO */}
+      <section className="py-28 px-6 bg-black min-h-[70vh] flex items-center">
+        <div className="max-w-6xl mx-auto text-center w-full pt-16">
+          <FadeUp>
+            <p className="eyebrow mb-4">PARTNERSHIPS</p>
+          </FadeUp>
+          <FadeUp delay={100}>
+            <h1 className="text-display text-5xl md:text-7xl lg:text-8xl mb-6">
+              BUILD <span className="text-display-secondary">WITH US.</span>
             </h1>
-            <p className="font-body text-tron-text text-lg md:text-xl max-w-2xl mx-auto leading-relaxed">
+          </FadeUp>
+          <FadeUp delay={200}>
+            <p className="text-[#9DA2B3] text-lg md:text-xl max-w-2xl mx-auto leading-relaxed">
               We are actively looking for early partners like researchers, builders, and investors
               who believe the physical AI revolution is near.
             </p>
-          </AnimatedSection>
+          </FadeUp>
         </div>
       </section>
 
-      {/* ═══ PARTNER TYPES ═══ */}
-      <section className="py-16 px-6">
-        <div className="max-w-7xl mx-auto">
-          <AnimatedSection>
-            <div className="text-center mb-10">
-              <h2 className="section-heading text-4xl md:text-6xl text-white">
-                WHO WE WANT TO{" "}
-                <span className="gradient-text-purple">WORK WITH</span>
+      {/* PARTNER TYPES */}
+      <section className="py-28 px-6 bg-[#1E1E24]">
+        <div className="max-w-6xl mx-auto">
+          <FadeUp>
+            <div className="text-center mb-16">
+              <p className="eyebrow mb-4">WHO WE WORK WITH</p>
+              <h2 className="text-display text-3xl md:text-5xl">
+                PARTNER <span className="text-display-secondary">TYPES.</span>
               </h2>
             </div>
-          </AnimatedSection>
-          <StaggerContainer className="grid md:grid-cols-2 gap-6">
+          </FadeUp>
+          <div className="grid md:grid-cols-2 gap-6">
             {partnerTypes.map((pt, i) => (
-              <GlowCard key={i} className="p-8 h-full">
-                <div className="font-display text-2xl font-bold text-tron-purple/20 mb-2">{String(i + 1).padStart(2, "0")}</div>
-                <h3 className="font-display font-bold text-white text-xl uppercase mb-2">{pt.type}</h3>
-                <p className="font-body text-tron-text text-sm mt-2 leading-relaxed mb-6">{pt.desc}</p>
-                <div className="border-t border-white/[0.06] pt-4">
-                  <div className="text-tron-purple font-mono text-xs tracking-widest mb-3">WHAT WE OFFER:</div>
-                  <ul className="space-y-2">
-                    {pt.benefits.map((b, j) => (
-                      <li key={j} className="flex gap-3 text-tron-text text-sm">
-                        <span className="w-1.5 h-1.5 rounded-full bg-tron-purple mt-1.5 flex-shrink-0" />{b}
-                      </li>
-                    ))}
-                  </ul>
+              <MotionCard key={i} delay={(i % 2) * 100}>
+                <div className="bg-[#1E1E24] hover:bg-[#252530] transition-colors duration-200 rounded-xl border border-[#40424D] p-8 h-full">
+                  <motion.span
+                    className="text-5xl font-extrabold text-[#40424D] mb-2 inline-block"
+                    whileInView={{ opacity: [0, 1], scale: [0.8, 1] }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.4, delay: (i % 2) * 0.1 }}
+                  >
+                    {String(i + 1).padStart(2, "0")}
+                  </motion.span>
+                  <h3 className="font-bold text-[#EDEFF7] text-xl uppercase mb-2">{pt.type}</h3>
+                  <p className="text-[#9DA2B3] text-sm mt-2 leading-relaxed mb-6">{pt.desc}</p>
+                  <div className="border-t border-[#40424D] pt-4">
+                    <div className="text-[#6E7180] font-mono text-xs tracking-widest mb-3">WHAT WE OFFER</div>
+                    <ul className="space-y-2">
+                      {pt.benefits.map((b, j) => (
+                        <FadeUp key={j} delay={j * 80}>
+                          <li className="flex gap-3 text-[#9DA2B3] text-sm">
+                            <span className="w-1.5 h-1.5 rounded-full bg-[#9DA2B3] mt-1.5 flex-shrink-0" />{b}
+                          </li>
+                        </FadeUp>
+                      ))}
+                    </ul>
+                  </div>
                 </div>
-              </GlowCard>
+              </MotionCard>
             ))}
-          </StaggerContainer>
+          </div>
         </div>
       </section>
 
-      {/* ═══ EARLY STAGE ═══ */}
-      <section className="py-16 px-6">
+      {/* EARLY STAGE */}
+      <section className="py-28 px-6 bg-black">
         <div className="max-w-4xl mx-auto">
-          <AnimatedSection>
-            <GlowCard className="p-10 text-center">
-              <h2 className="section-heading text-3xl md:text-4xl text-white mb-4">WE ARE JUST GETTING STARTED</h2>
-              <p className="font-body text-tron-text text-lg leading-relaxed max-w-2xl mx-auto">
-                MyTron Labs is in its early stages, which means right now is the best time to get involved.
+          <FadeUp>
+            <div className="bg-[#1E1E24] hover:bg-[#252530] transition-colors duration-200 rounded-xl border border-[#40424D] p-10 text-center">
+              <p className="eyebrow mb-4">EARLY ACCESS</p>
+              <h2 className="text-display text-3xl md:text-4xl mb-4">
+                WE ARE JUST <span className="text-display-secondary">GETTING STARTED.</span>
+              </h2>
+              <p className="text-[#9DA2B3] text-lg leading-relaxed max-w-2xl mx-auto">
+                TRON Labs is in its early stages, which means right now is the best time to get involved.
                 Early partners shape the direction of the platform, get priority access to datasets, and build
                 a relationship with the team from the ground up.
               </p>
-              <div className="mt-8 flex items-center justify-center gap-2">
+              <motion.div
+                className="mt-8 flex items-center justify-center gap-2"
+                whileInView={{ opacity: [0, 1], y: [20, 0] }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.3 }}
+              >
                 <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
                 <span className="text-green-400 text-xs font-mono tracking-widest">PARTNERSHIPS NOW OPEN</span>
-              </div>
-            </GlowCard>
-          </AnimatedSection>
+              </motion.div>
+            </div>
+          </FadeUp>
         </div>
       </section>
 
-      {/* ═══ CTA ═══ */}
-      <section className="py-16 px-6 relative overflow-hidden">
-        <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full" style={{ background: "radial-gradient(circle, rgba(255,255,255,0.03), transparent 70%)", filter: "blur(40px)" }} />
-        </div>
-        <div className="max-w-3xl mx-auto text-center relative z-10">
-          <AnimatedSection>
-            <h2 className="section-heading text-4xl md:text-5xl text-white mb-6">
-              BECOME AN <span className="gradient-text">EARLY PARTNER</span>
+      {/* CTA */}
+      <section className="py-28 px-6 bg-[#1E1E24]">
+        <div className="max-w-3xl mx-auto text-center">
+          <FadeUp>
+            <p className="eyebrow mb-4">JOIN US</p>
+          </FadeUp>
+          <FadeUp delay={100}>
+            <h2 className="text-display text-3xl md:text-5xl mb-6">
+              BECOME AN <span className="text-display-secondary">EARLY PARTNER.</span>
             </h2>
-            <p className="font-body text-tron-text text-lg mb-10">
+          </FadeUp>
+          <FadeUp delay={200}>
+            <p className="text-[#9DA2B3] text-lg mb-10">
               If you are working on Physical AI, robotics, or embodied intelligence, reach out.
               We want to hear what you are building.
             </p>
-            <MagneticButton className="inline-block">
-              <Link href="/contact" className="btn-primary inline-block px-12 py-4">Reach Out to Founders</Link>
-            </MagneticButton>
-          </AnimatedSection>
+          </FadeUp>
+          <FadeUp delay={300}>
+            <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.98 }} className="inline-block">
+              <Link href="/contact" className="btn-primary inline-block px-12 py-4">
+                Reach Out to Founders
+                <svg className="w-4 h-4 inline-block ml-2 transition-transform group-hover:translate-x-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" /></svg>
+              </Link>
+            </motion.div>
+          </FadeUp>
         </div>
       </section>
     </>

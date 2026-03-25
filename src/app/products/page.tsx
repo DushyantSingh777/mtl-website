@@ -1,10 +1,9 @@
 "use client";
-import AnimatedSection from "@/components/AnimatedSection";
+
 import Link from "next/link";
-import TextReveal from "@/components/TextReveal";
-import GlowCard from "@/components/GlowCard";
-import StaggerContainer from "@/components/StaggerContainer";
-import MagneticButton from "@/components/MagneticButton";
+import { motion } from "framer-motion";
+import FadeUp from "@/components/FadeUp";
+import MotionCard from "@/components/MotionCard";
 
 const products = [
   {
@@ -39,73 +38,92 @@ const products = [
 export default function ProductsPage() {
   return (
     <>
-      {/* ═══ HERO ═══ */}
-      <section className="relative pt-32 pb-20 px-6 overflow-hidden aurora-bg min-h-[70vh] flex items-center">
-        <div className="grid-3d">
-          {Array.from({ length: 80 }).map((_, i) => (
-            <div key={i} className="grid-3d-cell" />
-          ))}
-        </div>
-        <div className="max-w-6xl mx-auto relative z-10 text-center w-full">
-          <AnimatedSection>
-            <h1 className="section-heading text-6xl md:text-[8rem] lg:text-[10rem] leading-[0.85] mb-8">
-              <span className="text-white">OUR </span>
-              <span className="gradient-text-purple">PRODUCTS</span>
+      {/* HERO */}
+      <section className="py-28 px-6 bg-black min-h-[70vh] flex items-center">
+        <div className="max-w-6xl mx-auto text-center w-full pt-16">
+          <FadeUp>
+            <p className="eyebrow mb-4">WHAT WE BUILD</p>
+          </FadeUp>
+          <FadeUp delay={100}>
+            <h1 className="text-display text-5xl md:text-7xl lg:text-8xl mb-6">
+              OUR <span className="text-display-secondary">PRODUCTS.</span>
             </h1>
-            <p className="font-body text-tron-text text-lg md:text-xl max-w-2xl mx-auto leading-relaxed">
+          </FadeUp>
+          <FadeUp delay={200}>
+            <p className="text-[#9DA2B3] text-lg md:text-xl max-w-2xl mx-auto leading-relaxed">
               Everything a frontier AI team needs to collect, label, and deliver real-world training data.
             </p>
-          </AnimatedSection>
+          </FadeUp>
         </div>
       </section>
 
-      {/* ═══ PRODUCT CARDS ═══ */}
-      <section className="py-16 px-6">
-        <StaggerContainer className="max-w-7xl mx-auto space-y-6">
+      {/* PRODUCT LIST */}
+      <section className="py-28 px-6 bg-[#1E1E24]">
+        <div className="max-w-6xl mx-auto space-y-6">
           {products.map((p, i) => (
-            <GlowCard key={i} className={`overflow-hidden ${!p.live ? "opacity-40" : ""}`}>
-              <div className="grid md:grid-cols-[1fr_1.2fr] gap-0">
-                <div className="relative min-h-[200px] md:min-h-[280px] bg-gradient-to-br from-tron-purple/10 via-tron-dark to-tron-cyan/5 flex items-center justify-center">
-                  <div className="text-center">
-                    <div className="font-display text-[6rem] font-bold text-white/[0.04]">{p.n}</div>
+            <MotionCard key={i} delay={i * 100}>
+              <div className={`bg-[#1E1E24] hover:bg-[#252530] transition-colors duration-200 rounded-xl border border-[#40424D] overflow-hidden ${!p.live ? "opacity-40" : ""}`}>
+                <div className="grid md:grid-cols-[auto_1fr] gap-0">
+                  <div className="flex items-center justify-center p-8 md:p-12 md:w-48">
+                    <div className="text-center">
+                      <motion.span
+                        className="text-5xl font-extrabold text-[#40424D] inline-block"
+                        whileInView={{ opacity: [0, 1], scale: [0.8, 1] }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.4, delay: i * 0.1 }}
+                      >
+                        {p.n}
+                      </motion.span>
+                      <div className="flex items-center gap-2 mt-3 justify-center">
+                        <span className={`w-2 h-2 rounded-full ${p.live ? "bg-green-400 animate-pulse" : "bg-[#40424D]"}`} />
+                        <span className={`font-mono text-xs tracking-widest ${p.live ? "text-green-400" : "text-[#6E7180]"}`}>{p.status}</span>
+                      </div>
+                    </div>
                   </div>
-                  <div className="absolute top-4 left-4 flex items-center gap-2">
-                    <span className={`w-2 h-2 rounded-full ${p.live ? "bg-green-400 animate-pulse" : "bg-tron-purple/30"}`} />
-                    <span className={`font-mono text-xs tracking-widest ${p.live ? "text-green-400" : "text-tron-text/40"}`}>{p.status}</span>
+                  <div className="p-8 md:p-10 flex flex-col justify-center border-t md:border-t-0 md:border-l border-[#40424D]">
+                    <h2 className="font-bold text-2xl md:text-3xl text-[#EDEFF7] uppercase mb-2">{p.title}</h2>
+                    <p className="text-[#6E7180] text-sm mb-4">{p.subtitle}</p>
+                    <p className="text-[#9DA2B3] text-sm leading-relaxed max-w-xl">{p.body}</p>
+                    {p.href && (
+                      <motion.div whileHover={{ x: 4 }} className="inline-block">
+                        <Link href={p.href} className="group inline-flex items-center gap-2 text-[#9DA2B3] text-sm font-medium mt-6 hover:text-[#EDEFF7] transition-colors">
+                          Learn More
+                          <svg className="w-4 h-4 transition-transform group-hover:translate-x-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" /></svg>
+                        </Link>
+                      </motion.div>
+                    )}
                   </div>
-                </div>
-                <div className="p-8 md:p-10 flex flex-col justify-center">
-                  <div className="text-tron-purple font-mono text-xs tracking-widest uppercase mb-3">PRODUCT {p.n}</div>
-                  <h2 className="font-display font-bold text-2xl md:text-3xl text-white uppercase mb-2">{p.title}</h2>
-                  <p className="font-body text-tron-text text-sm mb-4">{p.subtitle}</p>
-                  <p className="font-body text-tron-text text-sm leading-relaxed">{p.body}</p>
-                  {p.href && (
-                    <Link href={p.href} className="inline-flex items-center gap-2 text-tron-purple text-sm font-medium mt-6 hover:text-white transition-colors">
-                      Learn More &rarr;
-                    </Link>
-                  )}
                 </div>
               </div>
-            </GlowCard>
+            </MotionCard>
           ))}
-        </StaggerContainer>
+        </div>
       </section>
 
-      {/* ═══ CTA ═══ */}
-      <section className="py-16 px-6">
+      {/* CTA */}
+      <section className="py-28 px-6 bg-black">
         <div className="max-w-3xl mx-auto text-center">
-          <AnimatedSection>
-            <h2 className="section-heading text-4xl md:text-5xl text-white mb-6">
-              NEED SOMETHING{" "}
-              <span className="gradient-text">CUSTOM BUILT?</span>
+          <FadeUp>
+            <p className="eyebrow mb-4">CUSTOM SOLUTIONS</p>
+          </FadeUp>
+          <FadeUp delay={100}>
+            <h2 className="text-display text-3xl md:text-5xl mb-6">
+              NEED SOMETHING <span className="text-display-secondary">CUSTOM BUILT?</span>
             </h2>
-            <p className="font-body text-tron-text text-lg mb-10">
+          </FadeUp>
+          <FadeUp delay={200}>
+            <p className="text-[#9DA2B3] text-lg mb-10">
               Tell us what you are working on. We build custom data pipelines for frontier AI research teams.
             </p>
-            <MagneticButton>
-              <Link href="/contact" className="btn-primary inline-block px-12 py-4">Reach Out to Us</Link>
-            </MagneticButton>
-          </AnimatedSection>
+          </FadeUp>
+          <FadeUp delay={300}>
+            <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.98 }} className="inline-block">
+              <Link href="/contact" className="btn-primary inline-block px-12 py-4">
+                Reach Out to Us
+                <svg className="w-4 h-4 inline-block ml-2 transition-transform group-hover:translate-x-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" /></svg>
+              </Link>
+            </motion.div>
+          </FadeUp>
         </div>
       </section>
     </>

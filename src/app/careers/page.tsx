@@ -1,116 +1,164 @@
 "use client";
-import AnimatedSection from "@/components/AnimatedSection";
 import Link from "next/link";
-import TextReveal from "@/components/TextReveal";
-import GlowCard from "@/components/GlowCard";
-import StaggerContainer from "@/components/StaggerContainer";
-import MagneticButton from "@/components/MagneticButton";
+import { motion } from "framer-motion";
+import FadeUp from "@/components/FadeUp";
+
+const JOBS = [
+  {
+    title: "Machine Learning Engineer",
+    category: "Engineering",
+    location: "Remote / India",
+    description:
+      "Design and optimize ML pipelines for processing petabyte-scale physical AI datasets. Work directly with research teams to build models that learn from real-world data.",
+  },
+  {
+    title: "Computer Vision Researcher",
+    category: "Research",
+    location: "Remote / India",
+    description:
+      "Develop novel approaches to egocentric video understanding, object detection, and activity recognition across industrial environments.",
+  },
+  {
+    title: "Data Infrastructure Engineer",
+    category: "Engineering",
+    location: "Remote / India",
+    description:
+      "Build and scale the data pipelines that power our annotation and delivery systems. Work with massive video datasets captured across hundreds of factory floors.",
+  },
+  {
+    title: "Annotation Systems Lead",
+    category: "Operations",
+    location: "India",
+    description:
+      "Design and manage task-level annotation workflows for structured physical AI data. Ensure quality, consistency, and speed at scale across our global workforce.",
+  },
+  {
+    title: "Robotics Data Scientist",
+    category: "Research",
+    location: "Remote / India",
+    description:
+      "Analyze and structure egocentric datasets for robotics training. Collaborate with partner labs to define data requirements for embodied intelligence research.",
+  },
+  {
+    title: "Full-Stack Developer",
+    category: "Engineering",
+    location: "Remote / India",
+    description:
+      "Build internal tools and client-facing dashboards for data pipeline management, annotation tracking, and partner collaboration.",
+  },
+];
 
 export default function CareersPage() {
   return (
     <>
-      {/* ═══ HERO ═══ */}
-      <section className="relative pt-32 pb-20 px-6 overflow-hidden aurora-bg min-h-[70vh] flex items-center">
-        <div className="grid-3d">
-          {Array.from({ length: 80 }).map((_, i) => (
-            <div key={i} className="grid-3d-cell" />
-          ))}
-        </div>
-        <div className="max-w-6xl mx-auto relative z-10 text-center w-full">
-          <AnimatedSection>
-            <h1 className="section-heading text-6xl md:text-[8rem] lg:text-[10rem] leading-[0.85] mb-8">
-              <span className="text-white">BUILD THE </span>
-              <span className="gradient-text">FUTURE</span>
-              <br />
-              <span className="gradient-text-purple">WITH US</span>
+      {/* Hero */}
+      <section className="relative pt-32 pb-28 px-6 bg-black grid-bg min-h-[60vh] flex items-center">
+        <div className="max-w-6xl mx-auto text-center w-full">
+          <FadeUp>
+            <p className="eyebrow mb-4">CAREERS</p>
+          </FadeUp>
+          <FadeUp delay={100}>
+            <h1 className="text-display text-5xl md:text-7xl lg:text-8xl mb-8">
+              Build the Future <span className="text-display-secondary">With Us.</span>
             </h1>
-            <p className="font-body text-tron-text text-lg md:text-xl max-w-2xl mx-auto leading-relaxed">
+          </FadeUp>
+          <FadeUp delay={200}>
+            <p className="text-[#9DA2B3] text-lg md:text-xl max-w-2xl mx-auto leading-relaxed">
               We are a small, ambitious team on a mission to build the data infrastructure for
               the next intelligence revolution. If that excites you, we want to hear from you.
             </p>
-          </AnimatedSection>
+          </FadeUp>
         </div>
       </section>
 
-      {/* ═══ WHY JOIN ═══ */}
-      <section className="py-16 px-6">
-        <div className="divider-glow mb-12" />
+      {/* Job Listings */}
+      <section className="py-28 px-6 bg-[#1E1E24]">
         <div className="max-w-6xl mx-auto">
-          <AnimatedSection>
-            <div className="text-center mb-10">
-              <h2 className="section-heading text-4xl md:text-6xl text-white">
-                WHY <span className="gradient-text-purple">MYTRON LABS</span>
-              </h2>
-            </div>
-          </AnimatedSection>
-          <StaggerContainer className="grid md:grid-cols-3 gap-6">
-            {[
-              { n: "01", title: "Frontier Mission", desc: "Work on one of the most important infrastructure challenges in AI. The physical AI moment will define the next decade." },
-              { n: "02", title: "Research Autonomy", desc: "We give engineers and researchers the autonomy to explore, experiment, and push boundaries with access to our unique datasets." },
-              { n: "03", title: "Equity & Ownership", desc: "Early team members receive meaningful equity. We are building something that could matter enormously and you will own a piece of it." },
-              { n: "04", title: "High Impact", desc: "Every person on the team has direct impact. No layers, no bureaucracy, just meaningful work on hard problems." },
-              { n: "05", title: "Early Stage Advantage", desc: "Join at the ground floor of a company building critical infrastructure for the next wave of AI. Shape the culture and direction." },
-              { n: "06", title: "Move Fast", desc: "Startup speed with research-grade rigor. We make decisions quickly and trust our team to execute." },
-            ].map((item, i) => (
-              <GlowCard key={i} className="p-6 h-full">
-                <div className="font-display text-2xl font-bold text-tron-purple/20 mb-3">{item.n}</div>
-                <h3 className="font-display font-bold text-white mb-2 uppercase">{item.title}</h3>
-                <p className="font-body text-tron-text text-sm leading-relaxed">{item.desc}</p>
-              </GlowCard>
-            ))}
-          </StaggerContainer>
-        </div>
-      </section>
-
-      {/* ═══ HIRING STATUS ═══ */}
-      <section className="py-16 px-6">
-        <div className="max-w-4xl mx-auto">
-          <AnimatedSection>
-            <GlowCard className="p-10 text-center">
-              <div className="flex items-center justify-center gap-2 mb-6">
-                <span className="w-2 h-2 rounded-full bg-yellow-400 animate-pulse" />
-                <span className="text-yellow-400 text-xs font-mono tracking-widest">NO OPEN ROLES LISTED YET</span>
-              </div>
-              <h2 className="section-heading text-3xl md:text-4xl text-white mb-4">WE ARE BUILDING THE TEAM</h2>
-              <p className="font-body text-tron-text text-lg leading-relaxed max-w-2xl mx-auto mb-8">
-                We don&apos;t have formal job listings yet, but we are always interested in exceptional people.
-                If you are passionate about Physical AI, robotics data, or embodied intelligence, tell us about
-                yourself. The right person creates their own opportunity here.
-              </p>
-              <p className="font-body text-tron-text text-sm mb-8">
-                Areas we care deeply about:{" "}
-                <span className="text-white font-medium">machine learning</span>,{" "}
-                <span className="text-white font-medium">computer vision</span>,{" "}
-                <span className="text-white font-medium">data infrastructure</span>,{" "}
-                <span className="text-white font-medium">robotics</span>,{" "}
-                <span className="text-white font-medium">annotation systems</span>.
-              </p>
-              <MagneticButton className="inline-block">
-                <Link href="/contact" className="btn-primary inline-block px-12 py-4">Introduce Yourself</Link>
-              </MagneticButton>
-            </GlowCard>
-          </AnimatedSection>
-        </div>
-      </section>
-
-      {/* ═══ CTA ═══ */}
-      <section className="py-16 px-6 relative overflow-hidden">
-        <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full" style={{ background: "radial-gradient(circle, rgba(255,255,255,0.03), transparent 70%)", filter: "blur(40px)" }} />
-        </div>
-        <div className="max-w-3xl mx-auto text-center relative z-10">
-          <AnimatedSection>
-            <h2 className="section-heading text-4xl md:text-5xl text-white mb-6">
-              THINK YOU <span className="gradient-text">BELONG HERE?</span>
+          <FadeUp>
+            <p className="eyebrow mb-4">OPEN POSITIONS</p>
+            <h2 className="text-display text-3xl md:text-5xl mb-16">
+              Current <span className="text-display-secondary">Openings.</span>
             </h2>
-            <p className="font-body text-tron-text text-lg mb-10">
-              Drop us a message. Tell us what you are working on and why you care about physical AI.
-              We read every message personally.
+          </FadeUp>
+
+          <div className="divide-y divide-[#40424D]">
+            {JOBS.map((job, i) => (
+              <FadeUp key={i} delay={i * 80}>
+                <motion.div
+                  className="py-8 group"
+                  whileHover={{ x: 6 }}
+                  transition={{ type: "spring", stiffness: 300, damping: 25 }}
+                >
+                  <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                    <div className="flex-1">
+                      <div className="flex items-center gap-3 mb-2">
+                        <h3 className="text-[#EDEFF7] font-bold text-lg">{job.title}</h3>
+                        <span className="text-xs text-[#9DA2B3] border border-[#40424D] rounded-full px-3 py-0.5">
+                          {job.category}
+                        </span>
+                      </div>
+                      <p className="text-[#6E7180] text-sm mb-2">{job.location}</p>
+                      <p className="text-[#9DA2B3] text-sm leading-relaxed max-w-2xl">
+                        {job.description}
+                      </p>
+                    </div>
+                    <div className="shrink-0">
+                      <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.98 }}>
+                        <Link
+                          href="/contact"
+                          className="btn-ghost inline-flex items-center gap-2 text-sm text-[#EDEFF7] group-hover:text-white transition-colors"
+                        >
+                          Apply
+                          <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                          </svg>
+                        </Link>
+                      </motion.div>
+                    </div>
+                  </div>
+                </motion.div>
+              </FadeUp>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Open Application CTA */}
+      <section className="py-28 px-6 bg-black">
+        <div className="max-w-3xl mx-auto text-center">
+          <FadeUp>
+            <p className="eyebrow mb-4">OPEN APPLICATION</p>
+          </FadeUp>
+          <FadeUp delay={100}>
+            <h2 className="text-display text-3xl md:text-5xl mb-6">
+              Don&apos;t See <span className="text-display-secondary">Your Role?</span>
+            </h2>
+          </FadeUp>
+          <FadeUp delay={200}>
+            <p className="text-[#9DA2B3] text-lg mb-4 max-w-2xl mx-auto">
+              We are always interested in exceptional people. If you are passionate about
+              Physical AI, robotics data, or embodied intelligence, tell us about yourself.
+              The right person creates their own opportunity here.
             </p>
-            <MagneticButton className="inline-block">
-              <Link href="/contact" className="btn-primary inline-block px-12 py-4">Get In Touch</Link>
-            </MagneticButton>
-          </AnimatedSection>
+            <p className="text-[#6E7180] text-sm mb-10">
+              Areas we care about:{" "}
+              <span className="text-[#EDEFF7]">machine learning</span>,{" "}
+              <span className="text-[#EDEFF7]">computer vision</span>,{" "}
+              <span className="text-[#EDEFF7]">data infrastructure</span>,{" "}
+              <span className="text-[#EDEFF7]">robotics</span>,{" "}
+              <span className="text-[#EDEFF7]">annotation systems</span>.
+            </p>
+          </FadeUp>
+          <FadeUp delay={300}>
+            <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.98 }} className="inline-block">
+              <Link href="/contact" className="btn-primary">
+                Introduce Yourself
+                <svg className="w-4 h-4 inline-block ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                </svg>
+              </Link>
+            </motion.div>
+          </FadeUp>
         </div>
       </section>
     </>

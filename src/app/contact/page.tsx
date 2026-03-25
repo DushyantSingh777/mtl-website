@@ -1,10 +1,9 @@
 "use client";
 import { useState } from "react";
-import AnimatedSection from "@/components/AnimatedSection";
-import TextReveal from "@/components/TextReveal";
-import GlowCard from "@/components/GlowCard";
-import StaggerContainer from "@/components/StaggerContainer";
-import MagneticButton from "@/components/MagneticButton";
+import Link from "next/link";
+import { motion } from "framer-motion";
+import FadeUp from "@/components/FadeUp";
+import MotionCard from "@/components/MotionCard";
 
 interface FormData {
   name: string;
@@ -59,32 +58,34 @@ export default function ContactPage() {
 
   return (
     <>
-      {/* ═══ HERO ═══ */}
-      <section className="relative pt-40 pb-20 px-6 overflow-hidden aurora-bg">
-        <div className="max-w-6xl mx-auto relative z-10">
-          <AnimatedSection>
-            <h1 className="section-heading text-6xl md:text-[8rem] lg:text-[10rem] leading-[0.85] mb-6">
-              <span className="text-white">LET&apos;S </span>
-              <span className="gradient-text">BUILD</span>
-              <br />
-              <span className="gradient-text-purple">TOGETHER</span>
+      {/* Hero */}
+      <section className="relative pt-40 pb-28 px-6 bg-black grid-bg">
+        <div className="max-w-6xl mx-auto">
+          <FadeUp>
+            <p className="eyebrow mb-4">CONTACT</p>
+          </FadeUp>
+          <FadeUp delay={100}>
+            <h1 className="text-display text-5xl md:text-7xl lg:text-8xl mb-6">
+              Let&apos;s Build <span className="text-display-secondary">Together.</span>
             </h1>
-            <p className="font-body text-tron-text text-lg md:text-xl max-w-2xl leading-relaxed">
+          </FadeUp>
+          <FadeUp delay={200}>
+            <p className="text-[#9DA2B3] text-lg md:text-xl max-w-2xl leading-relaxed">
               Whether you&apos;re a researcher, partner, investor, or potential team member, we
               want to hear from you. The physical AI moment is near.
             </p>
-          </AnimatedSection>
+          </FadeUp>
         </div>
       </section>
 
-      {/* ═══ FORM + INFO ═══ */}
-      <section className="py-16 px-6">
+      {/* Form + Sidebar */}
+      <section className="py-28 px-6 bg-[#1E1E24]">
         <div className="max-w-6xl mx-auto">
           <div className="grid md:grid-cols-5 gap-12">
             {/* Form */}
             <div className="md:col-span-3">
-              <AnimatedSection>
-                <GlowCard className="p-8">
+              <FadeUp>
+                <div className="bg-[#1E1E24] hover:bg-[#252530] transition-colors duration-200 rounded-xl border border-[#40424D] p-8">
                   {status === "sent" ? (
                     <div className="text-center py-16">
                       <div className="w-16 h-16 rounded-full bg-green-500/20 flex items-center justify-center mx-auto mb-4">
@@ -92,18 +93,20 @@ export default function ContactPage() {
                           <path d="M20 6L9 17l-5-5" />
                         </svg>
                       </div>
-                      <h3 className="font-display font-bold text-white text-2xl mb-3 uppercase">
+                      <h3 className="text-[#EDEFF7] font-bold text-2xl mb-3 uppercase">
                         Message Sent
                       </h3>
-                      <p className="font-body text-tron-text">
+                      <p className="text-[#9DA2B3]">
                         We&apos;ll get back to you shortly at the email you provided.
                       </p>
-                      <button
-                        onClick={() => setStatus("idle")}
-                        className="btn-outline mt-8"
-                      >
-                        Send Another
-                      </button>
+                      <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.98 }} className="inline-block">
+                        <button
+                          onClick={() => setStatus("idle")}
+                          className="btn-outline mt-8"
+                        >
+                          Send Another
+                        </button>
+                      </motion.div>
                     </div>
                   ) : (
                     <form onSubmit={handleSubmit} className="space-y-5">
@@ -145,7 +148,7 @@ export default function ContactPage() {
                       >
                         <option value="" disabled>Inquiry Type</option>
                         {INQUIRY_TYPES.map((t) => (
-                          <option key={t} value={t} className="bg-[#0a0a0b]">{t}</option>
+                          <option key={t} value={t} className="bg-black">{t}</option>
                         ))}
                       </select>
 
@@ -160,7 +163,7 @@ export default function ContactPage() {
                         {errors.message && <p className="text-red-400 text-xs mt-1">{errors.message}</p>}
                       </div>
 
-                      <MagneticButton>
+                      <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.98 }}>
                         <button
                           type="submit"
                           disabled={status === "sending"}
@@ -168,14 +171,14 @@ export default function ContactPage() {
                         >
                           {status === "sending" ? (
                             <span className="flex items-center justify-center gap-3">
-                              <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                              <span className="w-4 h-4 border-2 border-[#EDEFF7] border-t-transparent rounded-full animate-spin" />
                               Transmitting...
                             </span>
                           ) : (
                             "Send Message"
                           )}
                         </button>
-                      </MagneticButton>
+                      </motion.div>
 
                       {status === "error" && (
                         <p className="text-red-400 text-sm text-center">
@@ -184,124 +187,79 @@ export default function ContactPage() {
                       )}
                     </form>
                   )}
-                </GlowCard>
-              </AnimatedSection>
+                </div>
+              </FadeUp>
             </div>
 
-            {/* Contact Info */}
+            {/* Sidebar */}
             <div className="md:col-span-2 space-y-6">
-              <AnimatedSection delay={200}>
-                <GlowCard className="p-6">
-                  <div className="text-tron-purple font-mono text-xs tracking-widest uppercase mb-4">
-                    Direct Contact
-                  </div>
+              <MotionCard delay={200}>
+                <div className="bg-[#1E1E24] hover:bg-[#252530] transition-colors duration-200 rounded-xl border border-[#40424D] p-6">
+                  <p className="eyebrow mb-4">DIRECT CONTACT</p>
 
                   {/* Priyank Patel */}
-                  <h3 className="font-display font-bold text-white text-lg mb-1 uppercase">Priyank Patel</h3>
-                  <div className="text-tron-purple text-xs font-mono mb-2">CO-FOUNDER</div>
+                  <h3 className="text-[#EDEFF7] font-bold text-lg mb-1 uppercase">Priyank Patel</h3>
+                  <div className="text-[#6E7180] text-xs tracking-widest uppercase mb-2">CO-FOUNDER</div>
                   <a
                     href="tel:+919265200452"
-                    className="text-tron-text text-sm hover:text-white transition-colors block"
+                    className="text-[#9DA2B3] text-sm hover:text-[#EDEFF7] transition-colors block"
                   >
                     +91 92652 00452
                   </a>
                   <a
                     href="mailto:priyank@mytronlabs.com"
-                    className="text-tron-text text-sm hover:text-white transition-colors block mb-3"
+                    className="text-[#9DA2B3] text-sm hover:text-[#EDEFF7] transition-colors block mb-6"
                   >
                     priyank@mytronlabs.com
                   </a>
 
                   {/* Aditya Gupta */}
-                  <h3 className="font-display font-bold text-white text-lg mb-1 uppercase mt-5">Aditya Gupta</h3>
-                  <div className="text-tron-purple text-xs font-mono mb-2">CO-FOUNDER</div>
+                  <h3 className="text-[#EDEFF7] font-bold text-lg mb-1 uppercase">Aditya Gupta</h3>
+                  <div className="text-[#6E7180] text-xs tracking-widest uppercase mb-2">CO-FOUNDER</div>
                   <a
                     href="tel:+919945365283"
-                    className="text-tron-text text-sm hover:text-white transition-colors block"
+                    className="text-[#9DA2B3] text-sm hover:text-[#EDEFF7] transition-colors block"
                   >
                     +91 99453 65283
                   </a>
                   <a
                     href="mailto:aditya@mytronlabs.com"
-                    className="text-tron-text text-sm hover:text-white transition-colors block mb-4"
+                    className="text-[#9DA2B3] text-sm hover:text-[#EDEFF7] transition-colors block mb-6"
                   >
                     aditya@mytronlabs.com
                   </a>
 
-                  <div className="border-t border-white/10 pt-3 mt-3">
+                  <div className="border-t border-[#40424D] pt-4 mt-2">
                     <a
                       href="mailto:founders@mytronlabs.com"
-                      className="text-tron-text text-sm hover:text-white transition-colors block mb-1"
+                      className="text-[#9DA2B3] text-sm hover:text-[#EDEFF7] transition-colors block mb-1"
                     >
                       founders@mytronlabs.com
                     </a>
                     <a
                       href="https://mytronlabs.com"
-                      className="text-tron-text text-sm hover:text-white transition-colors"
+                      className="text-[#9DA2B3] text-sm hover:text-[#EDEFF7] transition-colors"
                     >
                       mytronlabs.com
                     </a>
                   </div>
-                </GlowCard>
-              </AnimatedSection>
+                </div>
+              </MotionCard>
 
-              <AnimatedSection delay={300}>
-                <GlowCard className="p-6">
+              <MotionCard delay={300}>
+                <div className="bg-[#1E1E24] hover:bg-[#252530] transition-colors duration-200 rounded-xl border border-[#40424D] p-6">
                   <div className="flex items-center gap-2 mb-3">
                     <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
-                    <span className="text-green-400 text-xs font-mono tracking-widest">FOUNDERS ACTIVE</span>
+                    <span className="text-green-400 text-xs tracking-widest uppercase">FOUNDERS ACTIVE</span>
                   </div>
-                  <p className="font-body text-tron-text text-sm">
-                    We typically respond within <span className="text-white font-medium">24 hours</span>.
+                  <p className="text-[#9DA2B3] text-sm">
+                    We typically respond within <span className="text-[#EDEFF7] font-medium">24 hours</span>.
                     For urgent matters, email directly.
                   </p>
-                </GlowCard>
-              </AnimatedSection>
-
-              <AnimatedSection delay={400}>
-                <GlowCard className="p-6">
-                  <div className="text-tron-purple font-mono text-xs tracking-widest uppercase mb-3">
-                    Inquiry Types
-                  </div>
-                  <div className="space-y-2">
-                    {INQUIRY_TYPES.map((type, i) => (
-                      <div key={i} className="flex items-center gap-3 text-tron-text text-sm">
-                        <span className="w-1.5 h-1.5 rounded-full bg-tron-purple" />
-                        {type}
-                      </div>
-                    ))}
-                  </div>
-                </GlowCard>
-              </AnimatedSection>
-
-              <AnimatedSection delay={500}>
-                <GlowCard className="p-6">
-                  <div className="text-tron-purple font-mono text-xs tracking-widest uppercase mb-3">
-                    Stage
-                  </div>
-                  <p className="font-body text-tron-text text-sm">
-                    MyTron Labs is an <span className="text-white font-medium">early-stage company</span> moving
-                    fast. We are hands-on, founder-led, and responsive. Expect a real conversation,
-                    not a sales funnel.
-                  </p>
-                </GlowCard>
-              </AnimatedSection>
+                </div>
+              </MotionCard>
             </div>
           </div>
-        </div>
-      </section>
-
-      {/* ═══ BOTTOM CTA ═══ */}
-      <section className="py-16 px-6">
-        <div className="max-w-3xl mx-auto text-center">
-          <AnimatedSection>
-            <h2 className="section-heading text-4xl md:text-5xl text-white">
-              ARE <span className="gradient-text">YOU</span> READY?
-            </h2>
-            <p className="font-body text-tron-text text-sm mt-4 font-mono">
-              THE CHATGPT MOMENT FOR ROBOTICS IS NEAR
-            </p>
-          </AnimatedSection>
         </div>
       </section>
     </>

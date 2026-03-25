@@ -30,40 +30,30 @@ export default function Navbar() {
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-[#0a0a0a]/90 backdrop-blur-xl border-b border-white/[0.04]"
+          ? "bg-black/90 backdrop-blur-xl border-b border-[#40424D]/50"
           : "bg-transparent"
       }`}
     >
-      <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+      <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-3 group" prefetch={true}>
-          <div className="flex items-center gap-3">
-            <div className="relative w-8 h-8">
-              <img
-                src="/logo-glow.png"
-                alt="Mytron Labs Logo"
-                className="w-8 h-8 object-contain"
-                style={{ filter: "grayscale(1) brightness(2)" }}
-              />
-              <div
-                className="absolute inset-0 rounded"
-                style={{
-                  background: "linear-gradient(135deg, #ffffff, #d4d4d4, #a0a0a0)",
-                  mixBlendMode: "multiply",
-                  pointerEvents: "none",
-                }}
-              />
-            </div>
-            <span className="font-display font-bold text-xl tracking-wider text-white group-hover:text-tron-purple transition-colors duration-300">
-              MYTRON LABS
-            </span>
+          <div className="relative w-8 h-8">
+            <img
+              src="/logo-glow.png"
+              alt="Mytron Labs Logo"
+              className="w-8 h-8 object-contain"
+              style={{ filter: "grayscale(1) brightness(2)" }}
+            />
           </div>
+          <span className="font-display font-bold text-lg tracking-wide text-[#EDEFF7] group-hover:text-white transition-colors duration-200">
+            MYTRON LABS
+          </span>
         </Link>
 
-        {/* Desktop nav */}
-        <div className="hidden lg:flex items-center gap-1 bg-white/[0.03] backdrop-blur-sm rounded-xl px-2 py-1 border border-white/[0.06]">
+        {/* Desktop nav — simple text links */}
+        <div className="hidden lg:flex items-center gap-1">
           {navLinks.map((link) => {
             const isActive = pathname === link.href;
             return (
@@ -71,9 +61,10 @@ export default function Navbar() {
                 key={link.href}
                 href={link.href}
                 prefetch={true}
-                className={`nav-link-pill ${isActive ? "active" : ""}`}
+                className={`px-4 py-2 text-sm font-medium transition-colors duration-200 ${
+                  isActive ? "text-[#EDEFF7]" : "text-[#9DA2B3] hover:text-[#EDEFF7]"
+                }`}
               >
-                <span className="nav-dot" style={{ background: isActive ? "#e0e0e0" : "#707070" }} />
                 {link.label}
               </Link>
             );
@@ -85,16 +76,15 @@ export default function Navbar() {
           <Link
             href="/contact"
             prefetch={true}
-            className="flex items-center gap-2 bg-white text-black px-5 py-2.5 rounded-lg font-body text-sm font-medium tracking-wider uppercase hover:shadow-lg hover:shadow-white/20 transition-all duration-300"
+            className="flex items-center gap-2 bg-[#EDEFF7] text-black px-5 py-2.5 rounded-lg text-sm font-semibold hover:bg-[#D3D6E0] transition-colors duration-200"
           >
-            HELLO
-            <span className="text-base">&raquo;</span>
+            Get in touch
           </Link>
         </div>
 
         {/* Mobile toggle */}
         <button
-          className="lg:hidden text-white p-1"
+          className="lg:hidden text-[#EDEFF7] p-1"
           onClick={() => setMobileOpen(!mobileOpen)}
           aria-label="Toggle menu"
         >
@@ -109,7 +99,7 @@ export default function Navbar() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="lg:hidden overflow-hidden bg-[#0a0a0a]/98 backdrop-blur-xl border-t border-white/[0.04]"
+            className="lg:hidden overflow-hidden bg-black/98 backdrop-blur-xl border-t border-[#40424D]/50"
           >
             <div className="px-6 py-6 flex flex-col gap-4">
               {navLinks.map((link) => {
@@ -119,14 +109,10 @@ export default function Navbar() {
                     key={link.href}
                     href={link.href}
                     prefetch={true}
-                    className={`flex items-center gap-3 text-base tracking-wider uppercase font-body ${
-                      isActive ? "text-white" : "text-white/60"
+                    className={`text-base font-medium ${
+                      isActive ? "text-[#EDEFF7]" : "text-[#9DA2B3]"
                     }`}
                   >
-                    <span
-                      className="w-2 h-2 rounded-full"
-                      style={{ background: isActive ? "#e0e0e0" : "#707070" }}
-                    />
                     {link.label}
                   </Link>
                 );
@@ -134,9 +120,9 @@ export default function Navbar() {
               <Link
                 href="/contact"
                 prefetch={true}
-                className="mt-2 flex items-center justify-center gap-2 bg-white text-black px-5 py-3 rounded-lg font-body text-sm font-medium tracking-wider uppercase"
+                className="mt-2 flex items-center justify-center bg-[#EDEFF7] text-black px-5 py-3 rounded-lg text-sm font-semibold"
               >
-                HELLO &raquo;
+                Get in touch
               </Link>
             </div>
           </motion.div>
