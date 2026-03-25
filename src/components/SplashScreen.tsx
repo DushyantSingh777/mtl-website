@@ -40,16 +40,8 @@ export default function SplashScreen({ onEnter }: Props) {
     >
       {/* Background video */}
       <video
-        className="absolute inset-0 w-full h-full object-cover opacity-20 z-0"
-        style={{
-          position: "fixed",
-          top: 0,
-          left: 0,
-          width: "100vw",
-          height: "100vh",
-          objectFit: "cover",
-          objectPosition: "center",
-        }}
+        className="absolute inset-0 w-full h-full object-cover z-0"
+        style={{ opacity: 0.35 }}
         src="/splash-bg.mp4"
         autoPlay
         loop
@@ -58,7 +50,7 @@ export default function SplashScreen({ onEnter }: Props) {
       />
 
       {/* Dark overlay */}
-      <div className="absolute inset-0 bg-black/70 pointer-events-none" />
+      <div className="absolute inset-0 bg-black/50 pointer-events-none z-0" />
 
       {/* Desktop layout */}
       <div className="relative z-10 hidden md:flex items-center gap-8 lg:gap-12">
