@@ -107,25 +107,6 @@ export default function HomePage() {
 
       {/* ═══ OUR APPROACH — 4 Cards ═══ */}
       <section className="bg-[#1E1E24] py-28 px-6 relative overflow-hidden">
-        {/* Decorative SVG */}
-        <motion.svg
-          className="decorative-svg left-0 top-0 w-[250px] h-[200px] hidden lg:block"
-          viewBox="0 0 200 140" fill="none" stroke="currentColor" strokeWidth="0.5"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 0.04 }}
-          viewport={{ once: true }}
-          transition={{ duration: 1 }}
-        >
-          <line x1="20" y1="20" x2="180" y2="20" />
-          <line x1="40" y1="50" x2="180" y2="50" />
-          <line x1="60" y1="80" x2="180" y2="80" />
-          <line x1="80" y1="110" x2="180" y2="110" />
-          <circle cx="180" cy="20" r="3" fill="currentColor" />
-          <circle cx="180" cy="50" r="3" fill="currentColor" />
-          <circle cx="180" cy="80" r="3" fill="currentColor" />
-          <circle cx="180" cy="110" r="3" fill="currentColor" />
-        </motion.svg>
-
         <div className="relative z-10 max-w-6xl mx-auto">
           <FadeUp>
             <p className="eyebrow mb-4">Our Approach</p>
@@ -174,12 +155,6 @@ export default function HomePage() {
                 <h3 className="text-lg font-bold text-[#EDEFF7] mb-1">{item.title}</h3>
                 <p className="text-sm text-[#6E7180] mb-3">{item.subtitle}</p>
                 <p className="text-[#9DA2B3] text-sm leading-relaxed">{item.desc}</p>
-                <div className="flex items-center gap-2 mt-4 text-sm text-[#9DA2B3] group-hover:text-[#EDEFF7] transition-colors">
-                  Learn more
-                  <svg className="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-                  </svg>
-                </div>
               </MotionCard>
             ))}
           </div>
@@ -192,26 +167,6 @@ export default function HomePage() {
         <div className="video-overlay-left" />
         <div className="video-overlay-top" />
         <div className="video-overlay-bottom" />
-
-        {/* Decorative SVG — network nodes */}
-        <motion.svg
-          className="decorative-svg right-6 top-20 w-[200px] h-[180px] hidden lg:block"
-          viewBox="0 0 180 160" fill="none" stroke="currentColor" strokeWidth="0.5"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 0.06 }}
-          viewport={{ once: true }}
-          transition={{ duration: 1.5 }}
-        >
-          <circle cx="90" cy="40" r="5" />
-          <circle cx="40" cy="100" r="5" />
-          <circle cx="140" cy="100" r="5" />
-          <circle cx="90" cy="140" r="4" />
-          <line x1="90" y1="45" x2="40" y2="95" />
-          <line x1="90" y1="45" x2="140" y2="95" />
-          <line x1="40" y1="105" x2="140" y2="105" />
-          <line x1="90" y1="135" x2="40" y2="105" />
-          <line x1="90" y1="135" x2="140" y2="105" />
-        </motion.svg>
 
         <div className="relative z-10 max-w-6xl mx-auto px-6 py-28">
           <FadeUp>
