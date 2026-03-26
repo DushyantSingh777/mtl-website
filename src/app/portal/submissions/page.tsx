@@ -1,7 +1,8 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { motion } from "framer-motion";
-import { useRouter } from "next/navigation";
+
+const ADMIN_PASSWORD = "TronAdmin@2024";
 
 interface Submission {
   id: string;
@@ -16,27 +17,37 @@ interface Submission {
 }
 
 export default function SubmissionsPage() {
-  const router = useRouter();
+  const [authenticated, setAuthenticated] = useState(false);
+  const [adminPass, setAdminPass] = useState("");
+  const [passError, setPassError] = useState("");
+
   const [submissions, setSubmissions] = useState<Submission[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [expandedId, setExpandedId] = useState<string | null>(null);
 
-  useEffect(() => {
-    const token = localStorage.getItem("portal_token");
-    if (!token) {
-      router.push("/portal/login");
-      return;
+  const handleAdminLogin = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (adminPass === ADMIN_PASSWORD) {
+      setAuthenticated(true);
+      setPassError("");
+      loadSubmissions();
+    } else {
+      setPassError("Incorrect admin password");
     }
+  };
+
+  const loadSubmissions = () => {
+    setLoading(true);
+    const token = localStorage.getItem("portal_token");
 
     fetch("/api/submissions", {
-      headers: { Authorization: `Bearer ${token}` },
+      headers: { Authorization: `Bearer ${token || "admin"}` },
     })
       .then((res) => res.json())
       .then((data) => {
         if (data.submissions) {
-          // Sort newest first
-          setSubmissions(data.submissions.reverse());
+          setSubmissions([...data.submissions].reverse());
         } else {
           setError("Failed to load submissions");
         }
@@ -46,7 +57,7 @@ export default function SubmissionsPage() {
         setError("Failed to load submissions");
         setLoading(false);
       });
-  }, [router]);
+  };
 
   const formatDate = (iso: string) => {
     const d = new Date(iso);
@@ -59,6 +70,65 @@ export default function SubmissionsPage() {
     });
   };
 
+  // Admin password gate
+  if (!authenticated) {
+    return (
+      <section className="min-h-screen bg-black flex items-center justify-center px-6">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="w-full max-w-sm"
+        >
+          <div className="bg-[#1E1E24] border border-[#40424D] rounded-2xl p-8">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="w-10 h-10 rounded-xl bg-[#252530] flex items-center justify-center">
+                <svg className="w-5 h-5 text-[#9DA2B3]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
+                </svg>
+              </div>
+              <div>
+                <h1 className="text-lg font-bold text-[#EDEFF7]">Admin Access</h1>
+                <p className="text-xs text-[#6E7180]">Enter admin password to view submissions</p>
+              </div>
+            </div>
+
+            <form onSubmit={handleAdminLogin} className="space-y-4">
+              <div>
+                <label className="block text-xs font-medium text-[#9DA2B3] mb-1.5 uppercase tracking-wider">
+                  Admin Password
+                </label>
+                <input
+                  type="password"
+                  value={adminPass}
+                  onChange={(e) => { setAdminPass(e.target.value); setPassError(""); }}
+                  placeholder="Enter admin password"
+                  required
+                  className="form-input"
+                  autoFocus
+                />
+              </div>
+
+              {passError && (
+                <p className="text-red-400 text-sm">{passError}</p>
+              )}
+
+              <motion.button
+                type="submit"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                className="w-full btn-primary justify-center"
+              >
+                View Submissions
+              </motion.button>
+            </form>
+          </div>
+        </motion.div>
+      </section>
+    );
+  }
+
+  // Loading state
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-black">
@@ -67,6 +137,7 @@ export default function SubmissionsPage() {
     );
   }
 
+  // Submissions view
   return (
     <section className="min-h-screen bg-black px-6 py-8">
       <div className="max-w-5xl mx-auto">
@@ -79,15 +150,12 @@ export default function SubmissionsPage() {
             </p>
           </div>
           <motion.button
-            onClick={() => router.push("/portal")}
+            onClick={() => setAuthenticated(false)}
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
-            className="text-sm text-[#9DA2B3] hover:text-[#EDEFF7] transition-colors border border-[#40424D] rounded-lg px-4 py-2 flex items-center gap-2"
+            className="text-sm text-[#6E7180] hover:text-[#EDEFF7] transition-colors border border-[#40424D] rounded-lg px-4 py-2"
           >
-            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
-            </svg>
-            Back to Form
+            Lock
           </motion.button>
         </div>
 
@@ -103,11 +171,9 @@ export default function SubmissionsPage() {
             animate={{ opacity: 1, y: 0 }}
             className="text-center py-20"
           >
-            <div className="text-[#40424D] text-5xl mb-4">
-              <svg className="w-16 h-16 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M20.25 7.5l-.625 10.632a2.25 2.25 0 01-2.247 2.118H6.622a2.25 2.25 0 01-2.247-2.118L3.75 7.5m8.25 3v6.75m0 0l-3-3m3 3l3-3M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z" />
-              </svg>
-            </div>
+            <svg className="w-16 h-16 mx-auto text-[#40424D] mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M20.25 7.5l-.625 10.632a2.25 2.25 0 01-2.247 2.118H6.622a2.25 2.25 0 01-2.247-2.118L3.75 7.5m8.25 3v6.75m0 0l-3-3m3 3l3-3M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z" />
+            </svg>
             <p className="text-[#6E7180] text-lg">No submissions yet</p>
             <p className="text-[#40424D] text-sm mt-1">Entries will appear here once submitted.</p>
           </motion.div>
@@ -121,7 +187,6 @@ export default function SubmissionsPage() {
                 transition={{ duration: 0.3, delay: i * 0.03 }}
                 className="bg-[#1E1E24] border border-[#40424D] rounded-xl overflow-hidden"
               >
-                {/* Row header — clickable */}
                 <button
                   onClick={() => setExpandedId(expandedId === sub.id ? null : sub.id)}
                   className="w-full text-left px-5 py-4 flex items-center justify-between hover:bg-[#252530] transition-colors"
@@ -144,7 +209,6 @@ export default function SubmissionsPage() {
                   </div>
                 </button>
 
-                {/* Expanded details */}
                 {expandedId === sub.id && (
                   <div className="px-5 pb-5 border-t border-[#40424D]">
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
