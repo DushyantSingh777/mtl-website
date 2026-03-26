@@ -88,3 +88,30 @@ export async function GET(req: NextRequest) {
   const submissions = getSubmissions();
   return NextResponse.json({ submissions });
 }
+
+// DELETE — remove a submission by id (admin only)
+export async function DELETE(req: NextRequest) {
+  try {
+    const token = req.headers.get("authorization")?.replace("Bearer ", "");
+    if (!token) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+
+    const { id } = await req.json();
+    if (!id) {
+      return NextResponse.json({ error: "Submission ID required" }, { status: 400 });
+    }
+
+    const submissions = getSubmissions();
+    const filtered = submissions.filter((s: { id: string }) => s.id !== id);
+
+    if (filtered.length === submissions.length) {
+      return NextResponse.json({ error: "Submission not found" }, { status: 404 });
+    }
+
+    saveSubmissions(filtered);
+    return NextResponse.json({ success: true });
+  } catch {
+    return NextResponse.json({ error: "Server error" }, { status: 500 });
+  }
+}
