@@ -2,10 +2,23 @@ import { NextRequest, NextResponse } from "next/server";
 import fs from "fs";
 import path from "path";
 
-const SUBMISSIONS_PATH = path.join(process.cwd(), "data", "submissions.json");
+// Use /tmp on Vercel (writable), fallback to data/ for local dev
+const isVercel = process.env.VERCEL === "1";
+const SUBMISSIONS_PATH = isVercel
+  ? path.join("/tmp", "submissions.json")
+  : path.join(process.cwd(), "data", "submissions.json");
+
+function ensureDir() {
+  const dir = path.dirname(SUBMISSIONS_PATH);
+  if (!fs.existsSync(dir)) {
+    fs.mkdirSync(dir, { recursive: true });
+  }
+}
 
 function getSubmissions() {
   try {
+    ensureDir();
+    if (!fs.existsSync(SUBMISSIONS_PATH)) return [];
     const data = fs.readFileSync(SUBMISSIONS_PATH, "utf-8");
     return JSON.parse(data);
   } catch {
@@ -14,6 +27,7 @@ function getSubmissions() {
 }
 
 function saveSubmissions(submissions: unknown[]) {
+  ensureDir();
   fs.writeFileSync(SUBMISSIONS_PATH, JSON.stringify(submissions, null, 2));
 }
 
@@ -58,7 +72,8 @@ export async function POST(req: NextRequest) {
     saveSubmissions(submissions);
 
     return NextResponse.json({ success: true, submission });
-  } catch {
+  } catch (err) {
+    console.error("Submission error:", err);
     return NextResponse.json({ error: "Server error" }, { status: 500 });
   }
 }
