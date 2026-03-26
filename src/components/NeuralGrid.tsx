@@ -1,187 +1,261 @@
 "use client";
-import { useEffect, useRef, useState, useCallback } from "react";
+import { useEffect, useRef } from "react";
 
-const COLS = 10;
-const ROWS = 8;
-
-// Deterministic skip pattern
-function shouldSkip(r: number, c: number) {
-  const s = Math.sin(r * 7.31 + c * 13.17 + 3.14) * 10000;
-  return (s - Math.floor(s)) < 0.08;
-}
-
-// Deterministic highlight
-function isHighlight(r: number, c: number) {
-  const s = Math.sin(r * 11.3 + c * 5.7 + 1.1) * 10000;
-  return (s - Math.floor(s)) > 0.91;
-}
+const DOT_SPACING = 50;
+const DOT_RADIUS = 1.5;
+const CONNECTION_DIST = 70; // max distance to draw lines between dots
+const MOUSE_RADIUS = 200; // cursor influence radius
 
 export default function NeuralGrid() {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
-  const [glowPos, setGlowPos] = useState({ x: -1000, y: -1000 });
+  const targetMouse = useRef({ x: -9999, y: -9999 });
+  const currentMouse = useRef({ x: -9999, y: -9999 });
+  const rafRef = useRef<number>(0);
 
-  const handleMouse = useCallback((e: MouseEvent) => {
-    const container = containerRef.current;
-    if (!container) return;
-    const rect = container.getBoundingClientRect();
-    setGlowPos({
-      x: e.clientX - rect.left,
-      y: e.clientY - rect.top,
-    });
+  useEffect(() => {
+    const onMouseMove = (e: MouseEvent) => {
+      const container = containerRef.current;
+      if (!container) return;
+      const rect = container.getBoundingClientRect();
+      targetMouse.current = {
+        x: e.clientX - rect.left,
+        y: e.clientY - rect.top,
+      };
+    };
+    window.addEventListener("mousemove", onMouseMove);
+    return () => window.removeEventListener("mousemove", onMouseMove);
   }, []);
 
   useEffect(() => {
-    window.addEventListener("mousemove", handleMouse);
-    return () => window.removeEventListener("mousemove", handleMouse);
-  }, [handleMouse]);
+    const canvas = canvasRef.current;
+    const container = containerRef.current;
+    if (!canvas || !container) return;
 
-  // Build grid
-  const blocks = [];
-  for (let r = 0; r < ROWS; r++) {
-    for (let c = 0; c < COLS; c++) {
-      if (shouldSkip(r, c)) continue;
-      const highlight = isHighlight(r, c);
-      blocks.push({ r, c, highlight });
-    }
-  }
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+
+    let dpr = 1;
+
+    const resize = () => {
+      dpr = window.devicePixelRatio || 1;
+      const rect = container.getBoundingClientRect();
+      canvas.width = rect.width * dpr;
+      canvas.height = rect.height * dpr;
+      canvas.style.width = rect.width + "px";
+      canvas.style.height = rect.height + "px";
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    };
+    resize();
+
+    const computeDots = () => {
+      const rect = container.getBoundingClientRect();
+      const cols = Math.ceil(rect.width / DOT_SPACING) + 1;
+      const rows = Math.ceil(rect.height / DOT_SPACING) + 1;
+      const dots: { x: number; y: number }[] = [];
+      for (let row = 0; row < rows; row++) {
+        for (let col = 0; col < cols; col++) {
+          dots.push({
+            x: col * DOT_SPACING,
+            y: row * DOT_SPACING,
+          });
+        }
+      }
+      return { dots, cols };
+    };
+
+    let { dots, cols } = computeDots();
+
+    const resizeHandler = () => {
+      resize();
+      const result = computeDots();
+      dots = result.dots;
+      cols = result.cols;
+    };
+    window.addEventListener("resize", resizeHandler);
+
+    const cur = currentMouse.current;
+
+    const animate = () => {
+      cur.x += (targetMouse.current.x - cur.x) * 0.12;
+      cur.y += (targetMouse.current.y - cur.y) * 0.12;
+
+      const rect = container.getBoundingClientRect();
+      const w = rect.width;
+      const h = rect.height;
+
+      ctx.clearRect(0, 0, w, h);
+
+      const mouseActive = cur.x > -2000 && cur.y > -2000;
+
+      // Pre-compute influence for each dot
+      const influences: number[] = new Array(dots.length);
+      for (let i = 0; i < dots.length; i++) {
+        if (!mouseActive) {
+          influences[i] = 0;
+          continue;
+        }
+        const dx = cur.x - dots[i].x;
+        const dy = cur.y - dots[i].y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist > MOUSE_RADIUS) {
+          influences[i] = 0;
+        } else {
+          // Smooth cubic falloff
+          const t = 1 - dist / MOUSE_RADIUS;
+          influences[i] = t * t * t;
+        }
+      }
+
+      // === Draw connections between nearby dots ===
+      for (let i = 0; i < dots.length; i++) {
+        const d1 = dots[i];
+        const inf1 = influences[i];
+
+        // Only check right neighbor and bottom neighbor (avoid double-drawing)
+        const row = Math.floor(i / cols);
+        const col = i % cols;
+
+        // Right neighbor
+        if (col + 1 < cols) {
+          const j = i + 1;
+          const d2 = dots[j];
+          const inf2 = influences[j];
+          const maxInf = Math.max(inf1, inf2);
+
+          // Base: very faint lines always visible
+          const baseAlpha = 0.04;
+          const glowAlpha = maxInf * 0.5;
+          const alpha = baseAlpha + glowAlpha;
+
+          if (alpha > 0.01) {
+            const bright = 80 + maxInf * 175;
+            ctx.beginPath();
+            ctx.moveTo(d1.x, d1.y);
+            ctx.lineTo(d2.x, d2.y);
+            ctx.strokeStyle = `rgba(${bright}, ${bright + 10}, ${bright + 25}, ${alpha})`;
+            ctx.lineWidth = 0.5 + maxInf * 1;
+            ctx.stroke();
+          }
+        }
+
+        // Bottom neighbor
+        if (row + 1 < Math.ceil(h / DOT_SPACING) + 1) {
+          const j = i + cols;
+          if (j < dots.length) {
+            const d2 = dots[j];
+            const inf2 = influences[j];
+            const maxInf = Math.max(inf1, inf2);
+
+            const baseAlpha = 0.04;
+            const glowAlpha = maxInf * 0.5;
+            const alpha = baseAlpha + glowAlpha;
+
+            if (alpha > 0.01) {
+              const bright = 80 + maxInf * 175;
+              ctx.beginPath();
+              ctx.moveTo(d1.x, d1.y);
+              ctx.lineTo(d2.x, d2.y);
+              ctx.strokeStyle = `rgba(${bright}, ${bright + 10}, ${bright + 25}, ${alpha})`;
+              ctx.lineWidth = 0.5 + maxInf * 1;
+              ctx.stroke();
+            }
+          }
+        }
+
+        // Diagonal connections near cursor for extra density
+        if (inf1 > 0.15) {
+          // Bottom-right diagonal
+          if (col + 1 < cols) {
+            const j = i + cols + 1;
+            if (j < dots.length) {
+              const d2 = dots[j];
+              const inf2 = influences[j];
+              const avgInf = (inf1 + inf2) / 2;
+              if (avgInf > 0.1) {
+                ctx.beginPath();
+                ctx.moveTo(d1.x, d1.y);
+                ctx.lineTo(d2.x, d2.y);
+                ctx.strokeStyle = `rgba(${160 + avgInf * 80}, ${170 + avgInf * 80}, ${195 + avgInf * 50}, ${avgInf * 0.25})`;
+                ctx.lineWidth = 0.3 + avgInf * 0.7;
+                ctx.stroke();
+              }
+            }
+          }
+        }
+      }
+
+      // === Draw dots ===
+      for (let i = 0; i < dots.length; i++) {
+        const d = dots[i];
+        const inf = influences[i];
+
+        const baseAlpha = 0.15;
+        const glowAlpha = inf * 0.85;
+        const alpha = baseAlpha + glowAlpha;
+        const radius = DOT_RADIUS + inf * 2.5;
+        const bright = 100 + inf * 155;
+
+        // Outer glow halo
+        if (inf > 0.05) {
+          const glowR = radius + inf * 8;
+          const gradient = ctx.createRadialGradient(d.x, d.y, 0, d.x, d.y, glowR);
+          gradient.addColorStop(0, `rgba(${bright}, ${bright + 10}, ${bright + 20}, ${inf * 0.2})`);
+          gradient.addColorStop(0.5, `rgba(${bright}, ${bright + 10}, ${bright + 20}, ${inf * 0.05})`);
+          gradient.addColorStop(1, "rgba(150, 160, 180, 0)");
+          ctx.fillStyle = gradient;
+          ctx.beginPath();
+          ctx.arc(d.x, d.y, glowR, 0, Math.PI * 2);
+          ctx.fill();
+        }
+
+        // Core dot
+        ctx.fillStyle = `rgba(${bright}, ${bright + 8}, ${bright + 18}, ${alpha})`;
+        ctx.beginPath();
+        ctx.arc(d.x, d.y, radius, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
+      rafRef.current = requestAnimationFrame(animate);
+    };
+
+    rafRef.current = requestAnimationFrame(animate);
+
+    return () => {
+      cancelAnimationFrame(rafRef.current);
+      window.removeEventListener("resize", resizeHandler);
+    };
+  }, []);
 
   return (
-    <div
-      className="absolute inset-0 w-full h-full overflow-hidden pointer-events-none"
-      style={{ opacity: 0.55, zIndex: 1 }}
-    >
-      {/* 3D perspective container */}
+    <div className="absolute inset-0 overflow-hidden pointer-events-none" style={{ zIndex: 1 }}>
       <div
         ref={containerRef}
-        className="absolute pointer-events-auto"
-        style={{
-          right: "-2%",
-          top: "50%",
-          transform: "translateY(-50%)",
-          width: COLS * 72 + 30,
-          height: ROWS * 62 + 30,
-          perspective: "800px",
-          perspectiveOrigin: "30% 40%",
-        }}
+        className="absolute inset-0 pointer-events-auto"
       >
-        {/* The 3D-rotated grid plane */}
-        <div
-          style={{
-            width: "100%",
-            height: "100%",
-            transformStyle: "preserve-3d",
-            transform: "rotateX(12deg) rotateY(-18deg) rotateZ(1deg)",
-          }}
-        >
-          {blocks.map(({ r, c, highlight }) => {
-            const x = c * 72;
-            const y = r * 62;
-
-            // Distance from mouse for glow
-            const bx = x + 28;
-            const by = y + 24;
-            const dx = glowPos.x - bx;
-            const dy = glowPos.y - by;
-            const dist = Math.sqrt(dx * dx + dy * dy);
-            const glowIntensity = dist < 140 ? Math.pow(1 - dist / 140, 2) : 0;
-
-            const baseLight = highlight ? 38 : 16;
-            const light = baseLight + glowIntensity * 45;
-            const frontColor = `hsl(225, 4%, ${light}%)`;
-            const topColor = `hsl(225, 4%, ${Math.max(light * 0.55, 5)}%)`;
-            const sideColor = `hsl(225, 4%, ${Math.max(light * 0.38, 4)}%)`;
-            const borderColor = `hsl(225, 3%, ${Math.min(light + 4, 28)}%)`;
-
-            return (
-              <div
-                key={`${r}-${c}`}
-                style={{
-                  position: "absolute",
-                  left: x,
-                  top: y,
-                  width: 56,
-                  height: 48,
-                  transformStyle: "preserve-3d",
-                  transform: "translateZ(0px)",
-                  transition: "transform 0.3s ease",
-                }}
-              >
-                {/* Front face */}
-                <div
-                  style={{
-                    position: "absolute",
-                    inset: 0,
-                    borderRadius: 4,
-                    background: frontColor,
-                    border: `1px solid ${borderColor}`,
-                    transform: "translateZ(20px)",
-                    boxShadow: glowIntensity > 0.1
-                      ? `0 0 ${20 * glowIntensity}px rgba(130,150,210,${glowIntensity * 0.3}), inset 0 1px 0 rgba(255,255,255,${glowIntensity * 0.05})`
-                      : "none",
-                    transition: "background 0.15s, border-color 0.15s, box-shadow 0.15s",
-                  }}
-                />
-                {/* Top face */}
-                <div
-                  style={{
-                    position: "absolute",
-                    left: 0,
-                    top: 0,
-                    width: 56,
-                    height: 20,
-                    background: topColor,
-                    border: `1px solid ${borderColor}`,
-                    borderRadius: "4px 4px 0 0",
-                    transform: "rotateX(90deg)",
-                    transformOrigin: "bottom center",
-                    transition: "background 0.15s, border-color 0.15s",
-                  }}
-                />
-                {/* Right face */}
-                <div
-                  style={{
-                    position: "absolute",
-                    right: 0,
-                    top: 0,
-                    width: 20,
-                    height: 48,
-                    background: sideColor,
-                    border: `1px solid ${borderColor}`,
-                    borderRadius: "0 4px 4px 0",
-                    transform: "rotateY(90deg)",
-                    transformOrigin: "left center",
-                    transition: "background 0.15s, border-color 0.15s",
-                  }}
-                />
-              </div>
-            );
-          })}
-        </div>
+        <canvas
+          ref={canvasRef}
+          className="absolute inset-0"
+          style={{ width: "100%", height: "100%" }}
+        />
       </div>
 
-      {/* Left fade gradient */}
+      {/* Left fade */}
       <div
-        className="absolute inset-0"
+        className="absolute inset-0 pointer-events-none"
         style={{
-          background: "linear-gradient(to right, rgba(0,0,0,1) 0%, rgba(0,0,0,0.95) 25%, rgba(0,0,0,0.5) 45%, transparent 60%)",
-          pointerEvents: "none",
+          background: "linear-gradient(to right, rgba(0,0,0,1) 0%, rgba(0,0,0,0.97) 18%, rgba(0,0,0,0.6) 35%, rgba(0,0,0,0.08) 50%, transparent 60%)",
         }}
       />
       {/* Top fade */}
       <div
-        className="absolute top-0 left-0 right-0 h-12"
-        style={{
-          background: "linear-gradient(to bottom, rgba(0,0,0,0.4), transparent)",
-          pointerEvents: "none",
-        }}
+        className="absolute top-0 left-0 right-0 h-20 pointer-events-none"
+        style={{ background: "linear-gradient(to bottom, rgba(0,0,0,0.5), transparent)" }}
       />
       {/* Bottom fade */}
       <div
-        className="absolute bottom-0 left-0 right-0 h-12"
-        style={{
-          background: "linear-gradient(to top, rgba(0,0,0,0.4), transparent)",
-          pointerEvents: "none",
-        }}
+        className="absolute bottom-0 left-0 right-0 h-20 pointer-events-none"
+        style={{ background: "linear-gradient(to top, rgba(0,0,0,0.6), transparent)" }}
       />
     </div>
   );

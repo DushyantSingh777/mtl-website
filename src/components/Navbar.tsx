@@ -30,10 +30,10 @@ export default function Navbar() {
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b border-[#40424D] ${
         scrolled
-          ? "bg-black/90 backdrop-blur-xl border-b border-[#40424D]/50"
-          : "bg-transparent"
+          ? "bg-black/90 backdrop-blur-xl"
+          : "bg-black/80 backdrop-blur-md"
       }`}
     >
       <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
@@ -72,7 +72,17 @@ export default function Navbar() {
         </div>
 
         {/* CTA */}
-        <div className="hidden lg:flex">
+        <div className="hidden lg:flex items-center gap-3">
+          <Link
+            href="/portal/login"
+            prefetch={true}
+            className="flex items-center gap-2 text-sm font-medium text-[#9DA2B3] hover:text-[#EDEFF7] transition-colors duration-200 border border-[#40424D] px-4 py-2.5 rounded-lg hover:border-[#6E7180]"
+          >
+            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+            </svg>
+            Login
+          </Link>
           <Link
             href="/contact"
             prefetch={true}
@@ -118,9 +128,19 @@ export default function Navbar() {
                 );
               })}
               <Link
+                href="/portal/login"
+                prefetch={true}
+                className="mt-2 flex items-center justify-center gap-2 text-[#9DA2B3] border border-[#40424D] px-5 py-3 rounded-lg text-sm font-semibold"
+              >
+                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                </svg>
+                Login
+              </Link>
+              <Link
                 href="/contact"
                 prefetch={true}
-                className="mt-2 flex items-center justify-center bg-[#EDEFF7] text-black px-5 py-3 rounded-lg text-sm font-semibold"
+                className="flex items-center justify-center bg-[#EDEFF7] text-black px-5 py-3 rounded-lg text-sm font-semibold"
               >
                 Get in touch
               </Link>
