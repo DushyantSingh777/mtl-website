@@ -118,14 +118,27 @@ export default function PortalPage() {
               Logged in as <span className="text-[#9DA2B3]">{user?.name}</span>
             </p>
           </div>
-          <motion.button
-            onClick={handleLogout}
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-            className="text-sm text-[#6E7180] hover:text-[#EDEFF7] transition-colors border border-[#40424D] rounded-lg px-4 py-2"
-          >
-            Sign out
-          </motion.button>
+          <div className="flex items-center gap-3">
+            <motion.button
+              onClick={() => router.push("/portal/submissions")}
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              className="text-sm text-[#9DA2B3] hover:text-[#EDEFF7] transition-colors border border-[#40424D] rounded-lg px-4 py-2 flex items-center gap-2"
+            >
+              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 12h16.5m-16.5 3.75h16.5M3.75 19.5h16.5M5.625 4.5h12.75a1.875 1.875 0 010 3.75H5.625a1.875 1.875 0 010-3.75z" />
+              </svg>
+              View Submissions
+            </motion.button>
+            <motion.button
+              onClick={handleLogout}
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              className="text-sm text-[#6E7180] hover:text-[#EDEFF7] transition-colors border border-[#40424D] rounded-lg px-4 py-2"
+            >
+              Sign out
+            </motion.button>
+          </div>
         </div>
 
         {/* Success Toast */}
