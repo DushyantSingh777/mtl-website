@@ -58,7 +58,7 @@ export default function CareersPage() {
             <p className="eyebrow mb-4">CAREERS</p>
           </FadeUp>
           <FadeUp delay={100}>
-            <h1 className="text-display text-5xl md:text-7xl lg:text-8xl mb-8">
+            <h1 className="text-display text-3xl sm:text-5xl md:text-7xl lg:text-8xl mb-8">
               Build the Future <span className="text-display-secondary">With Us.</span>
             </h1>
           </FadeUp>
@@ -72,7 +72,7 @@ export default function CareersPage() {
       </section>
 
       {/* Job Listings */}
-      <section className="py-28 px-6 bg-[#1E1E24]">
+      <section className="py-16 md:py-28 px-4 sm:px-6 bg-[#1E1E24]">
         <div className="max-w-6xl mx-auto">
           <FadeUp>
             <p className="eyebrow mb-4">OPEN POSITIONS</p>
@@ -124,7 +124,7 @@ export default function CareersPage() {
       </section>
 
       {/* Open Application CTA */}
-      <section className="py-28 px-6 bg-black">
+      <section className="py-16 md:py-28 px-4 sm:px-6 bg-black">
         <div className="max-w-3xl mx-auto text-center">
           <FadeUp>
             <p className="eyebrow mb-4">OPEN APPLICATION</p>

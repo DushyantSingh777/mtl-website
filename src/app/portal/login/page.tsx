@@ -114,9 +114,17 @@ export default function LoginPage() {
           </form>
         </div>
 
-        <p className="text-center text-[#6E7180] text-xs mt-6">
-          Contact your administrator for access.
-        </p>
+        <div className="text-center mt-6 space-y-2">
+          <p className="text-[#6E7180] text-xs">
+            Contact your administrator for access.
+          </p>
+          <a href="/" className="text-[#9DA2B3] hover:text-[#EDEFF7] text-xs transition-colors inline-flex items-center gap-1">
+            <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
+            </svg>
+            Back to website
+          </a>
+        </div>
       </motion.div>
     </section>
   );

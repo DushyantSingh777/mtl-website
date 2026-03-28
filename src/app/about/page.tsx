@@ -9,13 +9,13 @@ export default function AboutPage() {
   return (
     <>
       {/* Hero */}
-      <section className="relative pt-32 pb-28 px-6 bg-black grid-bg min-h-[70vh] flex items-center">
+      <section className="relative pt-28 md:pt-32 pb-16 md:pb-28 px-4 sm:px-6 bg-black grid-bg min-h-[60vh] md:min-h-[70vh] flex items-center">
         <div className="max-w-6xl mx-auto text-center w-full">
           <FadeUp>
             <p className="eyebrow mb-4">ABOUT US</p>
           </FadeUp>
           <FadeUp delay={100}>
-            <h1 className="text-display text-5xl md:text-7xl lg:text-8xl mb-8">
+            <h1 className="text-display text-3xl sm:text-5xl md:text-7xl lg:text-8xl mb-8">
               We Are <span className="text-display-secondary">MyTron Labs.</span>
             </h1>
           </FadeUp>
@@ -30,7 +30,7 @@ export default function AboutPage() {
       </section>
 
       {/* Story */}
-      <section className="py-28 px-6 bg-[#1E1E24]">
+      <section className="py-16 md:py-28 px-4 sm:px-6 bg-[#1E1E24]">
         <div className="max-w-6xl mx-auto">
           <div className="grid md:grid-cols-2 gap-16 items-start">
             <div>
@@ -90,7 +90,7 @@ export default function AboutPage() {
       </section>
 
       {/* Stats */}
-      <section className="py-28 px-6 bg-black">
+      <section className="py-16 md:py-28 px-4 sm:px-6 bg-black">
         <div className="max-w-6xl mx-auto">
           <FadeUp>
             <div className="text-center mb-6">
@@ -128,7 +128,7 @@ export default function AboutPage() {
       </section>
 
       {/* Values */}
-      <section className="py-28 px-6 bg-[#1E1E24]">
+      <section className="py-16 md:py-28 px-4 sm:px-6 bg-[#1E1E24]">
         <div className="max-w-6xl mx-auto">
           <FadeUp>
             <div className="text-center mb-16">
@@ -168,7 +168,7 @@ export default function AboutPage() {
       </section>
 
       {/* CTA */}
-      <section className="py-28 px-6 bg-black">
+      <section className="py-16 md:py-28 px-4 sm:px-6 bg-black">
         <div className="max-w-3xl mx-auto text-center">
           <FadeUp>
             <p className="eyebrow mb-4">GET STARTED</p>

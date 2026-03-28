@@ -82,7 +82,7 @@ export default function SolutionPage() {
             <p className="eyebrow mb-4">THE METHODOLOGY</p>
           </FadeUp>
           <FadeUp delay={100}>
-            <h1 className="text-display text-5xl md:text-7xl lg:text-8xl mb-6">
+            <h1 className="text-display text-3xl sm:text-5xl md:text-7xl lg:text-8xl mb-6">
               SCIENTIFIC <span className="text-display-secondary">DELIVERY.</span>
             </h1>
           </FadeUp>
@@ -96,7 +96,7 @@ export default function SolutionPage() {
       </section>
 
       {/* SOLUTIONS GRID */}
-      <section className="py-28 px-6 bg-[#1E1E24]">
+      <section className="py-16 md:py-28 px-4 sm:px-6 bg-[#1E1E24]">
         <div className="max-w-6xl mx-auto">
           <FadeUp>
             <div className="text-center mb-16">
@@ -140,7 +140,7 @@ export default function SolutionPage() {
       </section>
 
       {/* PROCESS */}
-      <section className="py-28 px-6 bg-black">
+      <section className="py-16 md:py-28 px-4 sm:px-6 bg-black">
         <div className="max-w-5xl mx-auto">
           <FadeUp>
             <div className="text-center mb-16">
@@ -158,7 +158,7 @@ export default function SolutionPage() {
               <FadeUp key={i} delay={i * 80}>
                 <div className="py-8 flex gap-8 md:gap-12 items-start">
                   <motion.div
-                    className="text-5xl font-extrabold text-[#40424D] flex-shrink-0 w-16"
+                    className="text-3xl md:text-5xl font-extrabold text-[#40424D] flex-shrink-0 w-10 md:w-16"
                     whileInView={{ opacity: [0, 1], scale: [0.8, 1] }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.4, delay: i * 0.08 }}
@@ -177,7 +177,7 @@ export default function SolutionPage() {
       </section>
 
       {/* USE CASES */}
-      <section className="py-28 px-6 bg-[#1E1E24]">
+      <section className="py-16 md:py-28 px-4 sm:px-6 bg-[#1E1E24]">
         <div className="max-w-6xl mx-auto">
           <FadeUp>
             <div className="text-center mb-16">
@@ -187,7 +187,7 @@ export default function SolutionPage() {
               </h2>
             </div>
           </FadeUp>
-          <div className="grid md:grid-cols-4 gap-6">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             {useCases.map((uc, i) => (
               <MotionCard key={i} delay={i * 100}>
                 <div className="bg-[#1E1E24] hover:bg-[#252530] transition-colors duration-200 rounded-xl border border-[#40424D] p-6 text-center h-full">
@@ -209,7 +209,7 @@ export default function SolutionPage() {
       </section>
 
       {/* CTA */}
-      <section className="py-28 px-6 bg-black">
+      <section className="py-16 md:py-28 px-4 sm:px-6 bg-black">
         <div className="max-w-3xl mx-auto text-center">
           <FadeUp>
             <p className="eyebrow mb-4">GET STARTED</p>

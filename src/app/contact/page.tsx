@@ -59,13 +59,13 @@ export default function ContactPage() {
   return (
     <>
       {/* Hero */}
-      <section className="relative pt-40 pb-28 px-6 bg-black grid-bg">
+      <section className="relative pt-28 md:pt-40 pb-16 md:pb-28 px-4 sm:px-6 bg-black grid-bg">
         <div className="max-w-6xl mx-auto">
           <FadeUp>
             <p className="eyebrow mb-4">CONTACT</p>
           </FadeUp>
           <FadeUp delay={100}>
-            <h1 className="text-display text-5xl md:text-7xl lg:text-8xl mb-6">
+            <h1 className="text-display text-3xl sm:text-5xl md:text-7xl lg:text-8xl mb-6">
               Let&apos;s Build <span className="text-display-secondary">Together.</span>
             </h1>
           </FadeUp>
@@ -79,9 +79,9 @@ export default function ContactPage() {
       </section>
 
       {/* Form + Sidebar */}
-      <section className="py-28 px-6 bg-[#1E1E24]">
+      <section className="py-16 md:py-28 px-4 sm:px-6 bg-[#1E1E24]">
         <div className="max-w-6xl mx-auto">
-          <div className="grid md:grid-cols-5 gap-12">
+          <div className="grid md:grid-cols-5 gap-8 md:gap-12">
             {/* Form */}
             <div className="md:col-span-3">
               <FadeUp>

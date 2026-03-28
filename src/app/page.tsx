@@ -10,7 +10,7 @@ export default function HomePage() {
   return (
     <>
       {/* ═══ HERO ═══ */}
-      <section className="relative min-h-screen flex flex-col justify-center px-6 pt-14 pb-16 overflow-hidden bg-black grid-bg">
+      <section className="relative min-h-screen flex flex-col justify-center px-4 sm:px-6 pt-14 pb-16 overflow-hidden bg-black grid-bg">
         {/* 3D Floating Blocks Background */}
         <NeuralGrid />
 
@@ -61,12 +61,12 @@ export default function HomePage() {
         <div className="video-overlay-bottom" />
         <div className="video-overlay-right" />
 
-        <div className="relative z-10 max-w-6xl mx-auto px-6 py-28">
+        <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 py-16 md:py-28">
           <FadeUp>
             <p className="eyebrow mb-6">The Problem</p>
           </FadeUp>
 
-          <StaggerGroup className="space-y-16 max-w-2xl" staggerDelay={0.15}>
+          <StaggerGroup className="space-y-10 md:space-y-16 max-w-2xl" staggerDelay={0.15}>
             {[
               {
                 num: "01",
@@ -106,7 +106,7 @@ export default function HomePage() {
       </section>
 
       {/* ═══ OUR APPROACH — 4 Cards ═══ */}
-      <section className="bg-[#1E1E24] py-28 px-6 relative overflow-hidden">
+      <section className="bg-[#1E1E24] py-16 md:py-28 px-4 sm:px-6 relative overflow-hidden">
         <div className="relative z-10 max-w-6xl mx-auto">
           <FadeUp>
             <p className="eyebrow mb-4">Our Approach</p>
@@ -116,7 +116,7 @@ export default function HomePage() {
             </h2>
           </FadeUp>
 
-          <div className="grid md:grid-cols-2 gap-px rounded-xl overflow-hidden">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-px rounded-xl overflow-hidden">
             {[
               {
                 num: "01",
@@ -168,7 +168,7 @@ export default function HomePage() {
         <div className="video-overlay-top" />
         <div className="video-overlay-bottom" />
 
-        <div className="relative z-10 max-w-6xl mx-auto px-6 py-28">
+        <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 py-16 md:py-28">
           <FadeUp>
             <p className="eyebrow mb-4">Our Solutions</p>
             <h2 className="text-display text-3xl md:text-5xl max-w-3xl mb-12">
@@ -177,7 +177,7 @@ export default function HomePage() {
             </h2>
           </FadeUp>
 
-          <div className="grid md:grid-cols-3 gap-px">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-px">
             {[
               {
                 num: "01",
@@ -213,7 +213,7 @@ export default function HomePage() {
       </section>
 
       {/* ═══ CAREERS — List Layout ═══ */}
-      <section className="bg-black py-28 px-6 border-t border-[#40424D]">
+      <section className="bg-black py-16 md:py-28 px-4 sm:px-6 border-t border-[#40424D]">
         <div className="max-w-6xl mx-auto">
           <FadeUp>
             <p className="eyebrow mb-4">Careers</p>
@@ -292,7 +292,7 @@ export default function HomePage() {
       </section>
 
       {/* ═══ CTA / PARTNERSHIPS ═══ */}
-      <section className="bg-[#1E1E24] py-24 px-6">
+      <section className="bg-[#1E1E24] py-16 md:py-24 px-4 sm:px-6">
         <div className="max-w-6xl mx-auto">
           <FadeUp>
             <motion.div

@@ -39,13 +39,13 @@ export default function ProductsPage() {
   return (
     <>
       {/* HERO */}
-      <section className="py-28 px-6 bg-black min-h-[70vh] flex items-center">
+      <section className="py-16 md:py-28 px-4 sm:px-6 bg-black min-h-[70vh] flex items-center">
         <div className="max-w-6xl mx-auto text-center w-full pt-16">
           <FadeUp>
             <p className="eyebrow mb-4">WHAT WE BUILD</p>
           </FadeUp>
           <FadeUp delay={100}>
-            <h1 className="text-display text-5xl md:text-7xl lg:text-8xl mb-6">
+            <h1 className="text-display text-3xl sm:text-5xl md:text-7xl lg:text-8xl mb-6">
               OUR <span className="text-display-secondary">PRODUCTS.</span>
             </h1>
           </FadeUp>
@@ -58,7 +58,7 @@ export default function ProductsPage() {
       </section>
 
       {/* PRODUCT LIST */}
-      <section className="py-28 px-6 bg-[#1E1E24]">
+      <section className="py-16 md:py-28 px-4 sm:px-6 bg-[#1E1E24]">
         <div className="max-w-6xl mx-auto space-y-6">
           {products.map((p, i) => (
             <MotionCard key={i} delay={i * 100}>
@@ -101,7 +101,7 @@ export default function ProductsPage() {
       </section>
 
       {/* CTA */}
-      <section className="py-28 px-6 bg-black">
+      <section className="py-16 md:py-28 px-4 sm:px-6 bg-black">
         <div className="max-w-3xl mx-auto text-center">
           <FadeUp>
             <p className="eyebrow mb-4">CUSTOM SOLUTIONS</p>
