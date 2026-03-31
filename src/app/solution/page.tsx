@@ -77,7 +77,7 @@ export default function SolutionPage() {
           playsInline
           className="absolute inset-0 w-full h-full object-cover"
         />
-        <div className="max-w-6xl mx-auto relative z-10 text-center w-full px-6 py-32">
+        <div className="max-w-6xl mx-auto relative z-10 text-center w-full px-6 py-16 md:py-32">
           <FadeUp>
             <p className="eyebrow mb-4">THE METHODOLOGY</p>
           </FadeUp>
@@ -115,7 +115,7 @@ export default function SolutionPage() {
               <MotionCard key={i} delay={(i % 3) * 100}>
                 <div className="bg-[#1E1E24] hover:bg-[#252530] transition-colors duration-200 rounded-xl border border-[#40424D] p-8 h-full">
                   <motion.span
-                    className="text-5xl font-extrabold text-[#40424D] mb-2 inline-block"
+                    className="text-3xl md:text-5xl font-extrabold text-[#40424D] mb-2 inline-block"
                     whileInView={{ opacity: [0, 1], scale: [0.8, 1] }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.4, delay: (i % 3) * 0.1 }}
@@ -192,7 +192,7 @@ export default function SolutionPage() {
               <MotionCard key={i} delay={i * 100}>
                 <div className="bg-[#1E1E24] hover:bg-[#252530] transition-colors duration-200 rounded-xl border border-[#40424D] p-6 text-center h-full">
                   <motion.span
-                    className="text-5xl font-extrabold text-[#40424D] mb-3 inline-block"
+                    className="text-3xl md:text-5xl font-extrabold text-[#40424D] mb-3 inline-block"
                     whileInView={{ opacity: [0, 1], scale: [0.8, 1] }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.4, delay: i * 0.1 }}

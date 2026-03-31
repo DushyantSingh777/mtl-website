@@ -94,7 +94,7 @@ export default function Navbar() {
 
         {/* Mobile toggle */}
         <button
-          className="lg:hidden text-[#EDEFF7] p-1"
+          className="lg:hidden text-[#EDEFF7] p-2"
           onClick={() => setMobileOpen(!mobileOpen)}
           aria-label="Toggle menu"
         >

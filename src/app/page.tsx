@@ -87,7 +87,7 @@ export default function HomePage() {
               <StaggerItem key={i}>
                 <div className="flex gap-6">
                   <motion.span
-                    className="text-4xl font-extrabold text-[#40424D] flex-shrink-0"
+                    className="text-2xl md:text-4xl font-extrabold text-[#40424D] flex-shrink-0"
                     whileInView={{ opacity: [0, 1], x: [-10, 0] }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.5, delay: 0.1 * i }}
@@ -145,7 +145,7 @@ export default function HomePage() {
             ].map((item, i) => (
               <MotionCard key={i} delay={80 + i * 100} className="group bg-[#1E1E24] hover:bg-[#252530] transition-colors duration-200 p-8 md:p-10 cursor-default border border-[#40424D]/30">
                 <motion.span
-                  className="text-5xl font-extrabold text-[#40424D] group-hover:text-[#6E7180] transition-colors duration-500 block mb-4"
+                  className="text-3xl md:text-5xl font-extrabold text-[#40424D] group-hover:text-[#6E7180] transition-colors duration-500 block mb-4"
                   whileInView={{ opacity: [0, 1], scale: [0.8, 1] }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.4, delay: 0.1 * i }}
@@ -197,7 +197,7 @@ export default function HomePage() {
             ].map((item, i) => (
               <MotionCard key={i} delay={100 + i * 120} className="group bg-black/60 backdrop-blur-sm hover:bg-[#1E1E24]/80 transition-colors duration-200 p-8 md:p-10 border border-[#40424D]/20">
                 <motion.span
-                  className="text-4xl font-extrabold text-[#40424D] block mb-4"
+                  className="text-2xl md:text-4xl font-extrabold text-[#40424D] block mb-4"
                   whileInView={{ opacity: [0, 1], y: [10, 0] }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.4, delay: 0.15 * i }}
@@ -300,7 +300,7 @@ export default function HomePage() {
               whileHover={{ borderColor: "#6E7180" }}
               transition={{ duration: 0.3 }}
             >
-              <div className="relative z-10 py-20 px-8 md:px-16 text-center">
+              <div className="relative z-10 py-12 md:py-20 px-6 md:px-16 text-center">
                 <motion.p
                   className="eyebrow mb-4"
                   initial={{ opacity: 0, y: 10 }}

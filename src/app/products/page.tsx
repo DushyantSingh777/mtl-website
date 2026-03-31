@@ -67,7 +67,7 @@ export default function ProductsPage() {
                   <div className="flex items-center justify-center p-8 md:p-12 md:w-48">
                     <div className="text-center">
                       <motion.span
-                        className="text-5xl font-extrabold text-[#40424D] inline-block"
+                        className="text-3xl md:text-5xl font-extrabold text-[#40424D] inline-block"
                         whileInView={{ opacity: [0, 1], scale: [0.8, 1] }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.4, delay: i * 0.1 }}

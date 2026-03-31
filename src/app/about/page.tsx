@@ -151,7 +151,7 @@ export default function AboutPage() {
               <MotionCard key={i} delay={(i % 2) * 100 + 100}>
                 <div className="bg-[#1E1E24] hover:bg-[#252530] transition-colors duration-200 rounded-xl border border-[#40424D] p-6 h-full">
                   <motion.span
-                    className="text-5xl font-extrabold text-[#40424D] mb-4 block"
+                    className="text-3xl md:text-5xl font-extrabold text-[#40424D] mb-4 block"
                     whileInView={{ opacity: [0, 1], scale: [0.8, 1] }}
                     viewport={{ once: true }}
                     transition={{ delay: 0.1 }}
