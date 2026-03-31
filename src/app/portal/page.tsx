@@ -43,6 +43,20 @@ export default function PortalPage() {
     }
 
     setLoading(false);
+
+    // Sync logout/login across tabs
+    const handleStorage = (e: StorageEvent) => {
+      if (e.key === "portal_token" && !e.newValue) {
+        router.push("/portal/login");
+      }
+      if (e.key === "portal_user" && e.newValue) {
+        try {
+          setUser(JSON.parse(e.newValue));
+        } catch { /* ignore */ }
+      }
+    };
+    window.addEventListener("storage", handleStorage);
+    return () => window.removeEventListener("storage", handleStorage);
   }, [router]);
 
   const handleLogout = () => {

@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
 
@@ -9,6 +9,22 @@ export default function LoginPage() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+
+  // If already logged in, redirect; also sync login from other tabs
+  useEffect(() => {
+    if (localStorage.getItem("portal_token")) {
+      router.push("/portal");
+      return;
+    }
+
+    const handleStorage = (e: StorageEvent) => {
+      if (e.key === "portal_token" && e.newValue) {
+        router.push("/portal");
+      }
+    };
+    window.addEventListener("storage", handleStorage);
+    return () => window.removeEventListener("storage", handleStorage);
+  }, [router]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
