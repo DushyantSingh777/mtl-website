@@ -1,5 +1,5 @@
 import NextAuth from "next-auth";
-import Credentials from "next-auth/providers/credentials";
+import Google from "next-auth/providers/google";
 
 const ADMIN_EMAILS = [
   "priyank@mytronlabs.com",
@@ -7,52 +7,31 @@ const ADMIN_EMAILS = [
   "founders@mytronlabs.com",
 ];
 
-const ADMIN_PASSWORD = "AdminTronLabs123@";
-const USER_PASSWORD = "TronLabsForm123@";
-
 export const { handlers, auth, signIn, signOut } = NextAuth({
   providers: [
-    Credentials({
-      credentials: {
-        email: { label: "Email", type: "email" },
-        password: { label: "Password", type: "password" },
-      },
-      async authorize(credentials) {
-        const email = (credentials?.email as string)?.toLowerCase()?.trim();
-        const password = credentials?.password as string;
-
-        if (!email || !password) return null;
-        if (!email.endsWith("@mytronlabs.com")) return null;
-
-        const isAdmin = ADMIN_EMAILS.includes(email);
-        const validPassword = isAdmin
-          ? password === ADMIN_PASSWORD
-          : password === USER_PASSWORD;
-
-        if (!validPassword) return null;
-
-        // Extract name from email
-        const namePart = email.split("@")[0];
-        const name = namePart
-          .split(".")
-          .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
-          .join(" ");
-
-        return {
-          id: email,
-          email,
-          name,
-          role: isAdmin ? "admin" : "user",
-        };
+    Google({
+      clientId: process.env.GOOGLE_CLIENT_ID!,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+      authorization: {
+        params: {
+          prompt: "select_account",
+          hd: "mytronlabs.com",
+        },
       },
     }),
   ],
   callbacks: {
-    async jwt({ token, user }) {
-      if (user) {
-        token.email = user.email;
-        token.name = user.name;
-        token.role = (user as { role?: string }).role;
+    async signIn({ profile }) {
+      // Only allow @mytronlabs.com emails
+      return profile?.email?.endsWith("@mytronlabs.com") ?? false;
+    },
+    async jwt({ token, profile }) {
+      if (profile) {
+        token.email = profile.email;
+        token.name = profile.name;
+        token.role = ADMIN_EMAILS.includes(profile.email ?? "")
+          ? "admin"
+          : "user";
       }
       return token;
     },
