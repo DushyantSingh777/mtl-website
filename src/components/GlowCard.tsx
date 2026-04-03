@@ -16,6 +16,7 @@ export default function GlowCard({
     <motion.div
       className={`glass-card ${className}`}
       whileHover={{ y: -2 }}
+      whileTap={{ y: -1 }}
       transition={{ duration: 0.2, ease: "easeOut" }}
     >
       {children}

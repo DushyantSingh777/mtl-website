@@ -64,7 +64,7 @@ export default function SolutionPage() {
   return (
     <>
       {/* HERO */}
-      <section className="video-section min-h-[70vh] flex items-center">
+      <section className="video-section md:min-h-[70vh] flex items-center">
         <div className="video-overlay-top" />
         <div className="video-overlay-bottom" />
         <div className="video-overlay-left" />
@@ -96,10 +96,10 @@ export default function SolutionPage() {
       </section>
 
       {/* SOLUTIONS GRID */}
-      <section className="py-16 md:py-28 px-4 sm:px-6 bg-[#1E1E24]">
+      <section className="py-10 md:py-28 px-4 sm:px-6 bg-[#1E1E24]">
         <div className="max-w-6xl mx-auto">
           <FadeUp>
-            <div className="text-center mb-16">
+            <div className="text-center mb-8 md:mb-16">
               <p className="eyebrow mb-4">CAPABILITIES</p>
               <h2 className="text-display text-3xl md:text-5xl">
                 OUR <span className="text-display-secondary">SOLUTION.</span>
@@ -110,10 +110,10 @@ export default function SolutionPage() {
               </p>
             </div>
           </FadeUp>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
             {solutions.map((sol, i) => (
               <MotionCard key={i} delay={(i % 3) * 100}>
-                <div className="bg-[#1E1E24] hover:bg-[#252530] transition-colors duration-200 rounded-xl border border-[#40424D] p-8 h-full">
+                <div className="bg-[#1E1E24] hover:bg-[#252530] transition-colors duration-200 rounded-xl border border-[#40424D] p-6 md:p-8 h-full">
                   <motion.span
                     className="text-3xl md:text-5xl font-extrabold text-[#40424D] mb-2 inline-block"
                     whileInView={{ opacity: [0, 1], scale: [0.8, 1] }}
@@ -140,10 +140,10 @@ export default function SolutionPage() {
       </section>
 
       {/* PROCESS */}
-      <section className="py-16 md:py-28 px-4 sm:px-6 bg-black">
+      <section className="py-10 md:py-28 px-4 sm:px-6 bg-black">
         <div className="max-w-5xl mx-auto">
           <FadeUp>
-            <div className="text-center mb-16">
+            <div className="text-center mb-8 md:mb-16">
               <p className="eyebrow mb-4">THE PROCESS</p>
               <h2 className="text-display text-3xl md:text-5xl">
                 AI-FIRST <span className="text-display-secondary">DELIVERY.</span>
@@ -177,17 +177,17 @@ export default function SolutionPage() {
       </section>
 
       {/* USE CASES */}
-      <section className="py-16 md:py-28 px-4 sm:px-6 bg-[#1E1E24]">
+      <section className="py-10 md:py-28 px-4 sm:px-6 bg-[#1E1E24]">
         <div className="max-w-6xl mx-auto">
           <FadeUp>
-            <div className="text-center mb-16">
+            <div className="text-center mb-8 md:mb-16">
               <p className="eyebrow mb-4">APPLICATIONS</p>
               <h2 className="text-display text-3xl md:text-5xl">
                 WHO USES <span className="text-display-secondary">OUR DATA.</span>
               </h2>
             </div>
           </FadeUp>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
             {useCases.map((uc, i) => (
               <MotionCard key={i} delay={i * 100}>
                 <div className="bg-[#1E1E24] hover:bg-[#252530] transition-colors duration-200 rounded-xl border border-[#40424D] p-6 text-center h-full">
@@ -209,7 +209,7 @@ export default function SolutionPage() {
       </section>
 
       {/* CTA */}
-      <section className="py-16 md:py-28 px-4 sm:px-6 bg-black">
+      <section className="py-10 md:py-28 px-4 sm:px-6 bg-black">
         <div className="max-w-3xl mx-auto text-center">
           <FadeUp>
             <p className="eyebrow mb-4">GET STARTED</p>

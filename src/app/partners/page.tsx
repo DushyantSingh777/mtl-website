@@ -32,7 +32,7 @@ export default function PartnersPage() {
   return (
     <>
       {/* HERO */}
-      <section className="py-16 md:py-28 px-4 sm:px-6 bg-black min-h-[70vh] flex items-center">
+      <section className="py-10 md:py-28 px-4 sm:px-6 bg-black md:min-h-[70vh] flex items-center">
         <div className="max-w-6xl mx-auto text-center w-full pt-16">
           <FadeUp>
             <p className="eyebrow mb-4">PARTNERSHIPS</p>
@@ -52,10 +52,10 @@ export default function PartnersPage() {
       </section>
 
       {/* PARTNER TYPES */}
-      <section className="py-16 md:py-28 px-4 sm:px-6 bg-[#1E1E24]">
+      <section className="py-10 md:py-28 px-4 sm:px-6 bg-[#1E1E24]">
         <div className="max-w-6xl mx-auto">
           <FadeUp>
-            <div className="text-center mb-16">
+            <div className="text-center mb-8 md:mb-16">
               <p className="eyebrow mb-4">WHO WE WORK WITH</p>
               <h2 className="text-display text-3xl md:text-5xl">
                 PARTNER <span className="text-display-secondary">TYPES.</span>
@@ -65,7 +65,7 @@ export default function PartnersPage() {
           <div className="grid md:grid-cols-2 gap-6">
             {partnerTypes.map((pt, i) => (
               <MotionCard key={i} delay={(i % 2) * 100}>
-                <div className="bg-[#1E1E24] hover:bg-[#252530] transition-colors duration-200 rounded-xl border border-[#40424D] p-8 h-full">
+                <div className="bg-[#1E1E24] hover:bg-[#252530] transition-colors duration-200 rounded-xl border border-[#40424D] p-6 md:p-8 h-full">
                   <motion.span
                     className="text-3xl md:text-5xl font-extrabold text-[#40424D] mb-2 inline-block"
                     whileInView={{ opacity: [0, 1], scale: [0.8, 1] }}
@@ -96,7 +96,7 @@ export default function PartnersPage() {
       </section>
 
       {/* EARLY STAGE */}
-      <section className="py-16 md:py-28 px-4 sm:px-6 bg-black">
+      <section className="py-10 md:py-28 px-4 sm:px-6 bg-black">
         <div className="max-w-4xl mx-auto">
           <FadeUp>
             <div className="bg-[#1E1E24] hover:bg-[#252530] transition-colors duration-200 rounded-xl border border-[#40424D] p-10 text-center">
@@ -124,7 +124,7 @@ export default function PartnersPage() {
       </section>
 
       {/* CTA */}
-      <section className="py-16 md:py-28 px-4 sm:px-6 bg-[#1E1E24]">
+      <section className="py-10 md:py-28 px-4 sm:px-6 bg-[#1E1E24]">
         <div className="max-w-3xl mx-auto text-center">
           <FadeUp>
             <p className="eyebrow mb-4">JOIN US</p>

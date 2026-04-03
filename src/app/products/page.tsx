@@ -39,7 +39,7 @@ export default function ProductsPage() {
   return (
     <>
       {/* HERO */}
-      <section className="py-16 md:py-28 px-4 sm:px-6 bg-black min-h-[70vh] flex items-center">
+      <section className="py-10 md:py-28 px-4 sm:px-6 bg-black md:min-h-[70vh] flex items-center">
         <div className="max-w-6xl mx-auto text-center w-full pt-16">
           <FadeUp>
             <p className="eyebrow mb-4">WHAT WE BUILD</p>
@@ -58,13 +58,13 @@ export default function ProductsPage() {
       </section>
 
       {/* PRODUCT LIST */}
-      <section className="py-16 md:py-28 px-4 sm:px-6 bg-[#1E1E24]">
+      <section className="py-10 md:py-28 px-4 sm:px-6 bg-[#1E1E24]">
         <div className="max-w-6xl mx-auto space-y-6">
           {products.map((p, i) => (
             <MotionCard key={i} delay={i * 100}>
               <div className={`bg-[#1E1E24] hover:bg-[#252530] transition-colors duration-200 rounded-xl border border-[#40424D] overflow-hidden ${!p.live ? "opacity-40" : ""}`}>
                 <div className="grid md:grid-cols-[auto_1fr] gap-0">
-                  <div className="flex items-center justify-center p-8 md:p-12 md:w-48">
+                  <div className="flex items-center justify-center p-6 md:p-12 md:w-48">
                     <div className="text-center">
                       <motion.span
                         className="text-3xl md:text-5xl font-extrabold text-[#40424D] inline-block"
@@ -80,7 +80,7 @@ export default function ProductsPage() {
                       </div>
                     </div>
                   </div>
-                  <div className="p-8 md:p-10 flex flex-col justify-center border-t md:border-t-0 md:border-l border-[#40424D]">
+                  <div className="p-6 md:p-10 flex flex-col justify-center border-t md:border-t-0 md:border-l border-[#40424D]">
                     <h2 className="font-bold text-2xl md:text-3xl text-[#EDEFF7] uppercase mb-2">{p.title}</h2>
                     <p className="text-[#6E7180] text-sm mb-4">{p.subtitle}</p>
                     <p className="text-[#9DA2B3] text-sm leading-relaxed max-w-xl">{p.body}</p>
@@ -101,7 +101,7 @@ export default function ProductsPage() {
       </section>
 
       {/* CTA */}
-      <section className="py-16 md:py-28 px-4 sm:px-6 bg-black">
+      <section className="py-10 md:py-28 px-4 sm:px-6 bg-black">
         <div className="max-w-3xl mx-auto text-center">
           <FadeUp>
             <p className="eyebrow mb-4">CUSTOM SOLUTIONS</p>

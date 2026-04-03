@@ -52,7 +52,7 @@ export default function CareersPage() {
   return (
     <>
       {/* Hero */}
-      <section className="relative pt-32 pb-28 px-6 bg-black grid-bg min-h-[60vh] flex items-center">
+      <section className="relative pt-24 md:pt-32 pb-10 md:pb-28 px-4 sm:px-6 bg-black grid-bg md:min-h-[60vh] flex items-center">
         <div className="max-w-6xl mx-auto text-center w-full">
           <FadeUp>
             <p className="eyebrow mb-4">CAREERS</p>
@@ -72,11 +72,11 @@ export default function CareersPage() {
       </section>
 
       {/* Job Listings */}
-      <section className="py-16 md:py-28 px-4 sm:px-6 bg-[#1E1E24]">
+      <section className="py-10 md:py-28 px-4 sm:px-6 bg-[#1E1E24]">
         <div className="max-w-6xl mx-auto">
           <FadeUp>
             <p className="eyebrow mb-4">OPEN POSITIONS</p>
-            <h2 className="text-display text-3xl md:text-5xl mb-16">
+            <h2 className="text-display text-3xl md:text-5xl mb-8 md:mb-16">
               Current <span className="text-display-secondary">Openings.</span>
             </h2>
           </FadeUp>
@@ -85,8 +85,9 @@ export default function CareersPage() {
             {JOBS.map((job, i) => (
               <FadeUp key={i} delay={i * 80}>
                 <motion.div
-                  className="py-8 group"
+                  className="py-6 md:py-8 group"
                   whileHover={{ x: 6 }}
+                  whileTap={{ x: 3 }}
                   transition={{ type: "spring", stiffness: 300, damping: 25 }}
                 >
                   <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
@@ -124,7 +125,7 @@ export default function CareersPage() {
       </section>
 
       {/* Open Application CTA */}
-      <section className="py-16 md:py-28 px-4 sm:px-6 bg-black">
+      <section className="py-10 md:py-28 px-4 sm:px-6 bg-black">
         <div className="max-w-3xl mx-auto text-center">
           <FadeUp>
             <p className="eyebrow mb-4">OPEN APPLICATION</p>

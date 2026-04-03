@@ -10,7 +10,7 @@ export default function HomePage() {
   return (
     <>
       {/* ═══ HERO ═══ */}
-      <section className="relative min-h-screen flex flex-col justify-center px-4 sm:px-6 pt-14 pb-16 overflow-hidden bg-black grid-bg">
+      <section className="relative md:min-h-screen flex flex-col justify-center px-4 sm:px-6 pt-24 md:pt-14 pb-8 md:pb-16 overflow-hidden bg-black grid-bg">
         {/* 3D Floating Blocks Background */}
         <NeuralGrid />
 
@@ -61,12 +61,12 @@ export default function HomePage() {
         <div className="video-overlay-bottom" />
         <div className="video-overlay-right" />
 
-        <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 py-16 md:py-28">
+        <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 py-10 md:py-28">
           <FadeUp>
-            <p className="eyebrow mb-6">The Problem</p>
+            <p className="eyebrow mb-4">The Problem</p>
           </FadeUp>
 
-          <StaggerGroup className="space-y-10 md:space-y-16 max-w-2xl" staggerDelay={0.15}>
+          <StaggerGroup className="space-y-8 md:space-y-16 max-w-2xl" staggerDelay={0.15}>
             {[
               {
                 num: "01",
@@ -106,17 +106,17 @@ export default function HomePage() {
       </section>
 
       {/* ═══ OUR APPROACH — 4 Cards ═══ */}
-      <section className="bg-[#1E1E24] py-16 md:py-28 px-4 sm:px-6 relative overflow-hidden">
+      <section className="bg-[#1E1E24] py-10 md:py-28 px-4 sm:px-6 relative overflow-hidden">
         <div className="relative z-10 max-w-6xl mx-auto">
           <FadeUp>
             <p className="eyebrow mb-4">Our Approach</p>
-            <h2 className="text-display text-3xl md:text-5xl max-w-3xl mb-12">
+            <h2 className="text-display text-3xl md:text-5xl max-w-3xl mb-6 md:mb-12">
               From real world{" "}
               <span className="text-display-secondary">to AI-ready data.</span>
             </h2>
           </FadeUp>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-px rounded-xl overflow-hidden">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-px rounded-xl overflow-hidden">
             {[
               {
                 num: "01",
@@ -143,7 +143,7 @@ export default function HomePage() {
                 desc: "End-to-end encryption, GDPR compliance, granular access controls, and audit logging. Petabyte-scale storage with distributed processing.",
               },
             ].map((item, i) => (
-              <MotionCard key={i} delay={80 + i * 100} className="group bg-[#1E1E24] hover:bg-[#252530] transition-colors duration-200 p-8 md:p-10 cursor-default border border-[#40424D]/30">
+              <MotionCard key={i} delay={80 + i * 100} className="group bg-[#1E1E24] hover:bg-[#252530] transition-colors duration-200 p-6 md:p-10 cursor-default border border-[#40424D]/30">
                 <motion.span
                   className="text-3xl md:text-5xl font-extrabold text-[#40424D] group-hover:text-[#6E7180] transition-colors duration-500 block mb-4"
                   whileInView={{ opacity: [0, 1], scale: [0.8, 1] }}
@@ -168,16 +168,16 @@ export default function HomePage() {
         <div className="video-overlay-top" />
         <div className="video-overlay-bottom" />
 
-        <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 py-16 md:py-28">
+        <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 py-10 md:py-28">
           <FadeUp>
             <p className="eyebrow mb-4">Our Solutions</p>
-            <h2 className="text-display text-3xl md:text-5xl max-w-3xl mb-12">
+            <h2 className="text-display text-3xl md:text-5xl max-w-3xl mb-6 md:mb-12">
               Data infrastructure{" "}
               <span className="text-display-secondary">for the physical world.</span>
             </h2>
           </FadeUp>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-px">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-px">
             {[
               {
                 num: "01",
@@ -195,7 +195,7 @@ export default function HomePage() {
                 desc: "Structured task-level annotations for hand-object interactions, action recognition, scene segmentation, and spatial understanding.",
               },
             ].map((item, i) => (
-              <MotionCard key={i} delay={100 + i * 120} className="group bg-black/60 backdrop-blur-sm hover:bg-[#1E1E24]/80 transition-colors duration-200 p-8 md:p-10 border border-[#40424D]/20">
+              <MotionCard key={i} delay={100 + i * 120} className="group bg-black/60 backdrop-blur-sm hover:bg-[#1E1E24]/80 transition-colors duration-200 p-6 md:p-10 border border-[#40424D]/20">
                 <motion.span
                   className="text-2xl md:text-4xl font-extrabold text-[#40424D] block mb-4"
                   whileInView={{ opacity: [0, 1], y: [10, 0] }}
@@ -213,11 +213,11 @@ export default function HomePage() {
       </section>
 
       {/* ═══ CAREERS — List Layout ═══ */}
-      <section className="bg-black py-16 md:py-28 px-4 sm:px-6 border-t border-[#40424D]">
+      <section className="bg-black py-10 md:py-28 px-4 sm:px-6 border-t border-[#40424D]">
         <div className="max-w-6xl mx-auto">
           <FadeUp>
             <p className="eyebrow mb-4">Careers</p>
-            <h2 className="text-display text-3xl md:text-5xl max-w-3xl mb-12">
+            <h2 className="text-display text-3xl md:text-5xl max-w-3xl mb-6 md:mb-12">
               Build the future{" "}
               <span className="text-display-secondary">with us.</span>
             </h2>
@@ -292,7 +292,7 @@ export default function HomePage() {
       </section>
 
       {/* ═══ CTA / PARTNERSHIPS ═══ */}
-      <section className="bg-[#1E1E24] py-16 md:py-24 px-4 sm:px-6">
+      <section className="bg-[#1E1E24] py-10 md:py-24 px-4 sm:px-6">
         <div className="max-w-6xl mx-auto">
           <FadeUp>
             <motion.div

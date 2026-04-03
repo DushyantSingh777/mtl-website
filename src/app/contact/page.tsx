@@ -59,7 +59,7 @@ export default function ContactPage() {
   return (
     <>
       {/* Hero */}
-      <section className="relative pt-28 md:pt-40 pb-16 md:pb-28 px-4 sm:px-6 bg-black grid-bg">
+      <section className="relative pt-16 md:pt-40 pb-10 md:pb-28 px-4 sm:px-6 bg-black grid-bg">
         <div className="max-w-6xl mx-auto">
           <FadeUp>
             <p className="eyebrow mb-4">CONTACT</p>
@@ -79,13 +79,13 @@ export default function ContactPage() {
       </section>
 
       {/* Form + Sidebar */}
-      <section className="py-16 md:py-28 px-4 sm:px-6 bg-[#1E1E24]">
+      <section className="py-10 md:py-28 px-4 sm:px-6 bg-[#1E1E24]">
         <div className="max-w-6xl mx-auto">
           <div className="grid md:grid-cols-5 gap-8 md:gap-12">
             {/* Form */}
             <div className="md:col-span-3">
               <FadeUp>
-                <div className="bg-[#1E1E24] hover:bg-[#252530] transition-colors duration-200 rounded-xl border border-[#40424D] p-8">
+                <div className="bg-[#1E1E24] hover:bg-[#252530] transition-colors duration-200 rounded-xl border border-[#40424D] p-6 md:p-8">
                   {status === "sent" ? (
                     <div className="text-center py-16">
                       <div className="w-16 h-16 rounded-full bg-green-500/20 flex items-center justify-center mx-auto mb-4">

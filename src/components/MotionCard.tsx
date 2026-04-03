@@ -15,6 +15,7 @@ export default function MotionCard({ children, className = "", delay = 0 }: Prop
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-30px" }}
       whileHover={{ y: -4, transition: { duration: 0.2 } }}
+      whileTap={{ y: -2, transition: { duration: 0.15 } }}
       transition={{
         duration: 0.5,
         delay: delay / 1000,

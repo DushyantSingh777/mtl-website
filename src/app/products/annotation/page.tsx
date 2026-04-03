@@ -43,7 +43,7 @@ export default function AnnotationForRoboticsPage() {
   return (
     <>
       {/* HERO */}
-      <section className="py-16 md:py-28 px-4 sm:px-6 bg-black min-h-[70vh] flex items-center">
+      <section className="py-10 md:py-28 px-4 sm:px-6 bg-black md:min-h-[70vh] flex items-center">
         <div className="max-w-6xl mx-auto text-center w-full pt-16">
           <FadeUp>
             <p className="eyebrow mb-4">ANNOTATION SERVICES</p>
@@ -76,7 +76,7 @@ export default function AnnotationForRoboticsPage() {
       </section>
 
       {/* STATS */}
-      <section className="py-16 md:py-28 px-4 sm:px-6 bg-[#1E1E24]">
+      <section className="py-10 md:py-28 px-4 sm:px-6 bg-[#1E1E24]">
         <div className="max-w-6xl mx-auto">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {stats.map((s, i) => (
@@ -96,20 +96,20 @@ export default function AnnotationForRoboticsPage() {
       </section>
 
       {/* ANNOTATION TYPES */}
-      <section className="py-16 md:py-28 px-4 sm:px-6 bg-black">
+      <section className="py-10 md:py-28 px-4 sm:px-6 bg-black">
         <div className="max-w-6xl mx-auto">
           <FadeUp>
-            <div className="text-center mb-16">
+            <div className="text-center mb-8 md:mb-16">
               <p className="eyebrow mb-4">DATA TYPES</p>
               <h2 className="text-display text-3xl md:text-5xl">
                 EVERY DATA TYPE ROBOTS <span className="text-display-secondary">NEED TO LEARN FROM.</span>
               </h2>
             </div>
           </FadeUp>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
             {annotationTypes.map((s, i) => (
               <MotionCard key={i} delay={(i % 3) * 100}>
-                <div className="bg-[#1E1E24] hover:bg-[#252530] transition-colors duration-200 rounded-xl border border-[#40424D] p-8 h-full">
+                <div className="bg-[#1E1E24] hover:bg-[#252530] transition-colors duration-200 rounded-xl border border-[#40424D] p-6 md:p-8 h-full">
                   <motion.span
                     className="text-3xl md:text-5xl font-extrabold text-[#40424D] mb-2 inline-block"
                     whileInView={{ opacity: [0, 1], scale: [0.8, 1] }}
@@ -128,10 +128,10 @@ export default function AnnotationForRoboticsPage() {
       </section>
 
       {/* PROCESS */}
-      <section className="py-16 md:py-28 px-4 sm:px-6 bg-[#1E1E24]">
+      <section className="py-10 md:py-28 px-4 sm:px-6 bg-[#1E1E24]">
         <div className="max-w-5xl mx-auto">
           <FadeUp>
-            <div className="text-center mb-16">
+            <div className="text-center mb-8 md:mb-16">
               <p className="eyebrow mb-4">THE PIPELINE</p>
               <h2 className="text-display text-3xl md:text-5xl">
                 FROM RAW DATA TO <span className="text-display-secondary">TRAINING-READY LABELS.</span>
@@ -163,17 +163,17 @@ export default function AnnotationForRoboticsPage() {
       </section>
 
       {/* WHY TRON LABS */}
-      <section className="py-16 md:py-28 px-4 sm:px-6 bg-black">
+      <section className="py-10 md:py-28 px-4 sm:px-6 bg-black">
         <div className="max-w-6xl mx-auto">
           <FadeUp>
-            <div className="text-center mb-16">
+            <div className="text-center mb-8 md:mb-16">
               <p className="eyebrow mb-4">WHY US</p>
               <h2 className="text-display text-3xl md:text-5xl">
                 BUILT FOR <span className="text-display-secondary">FRONTIER ROBOTICS.</span>
               </h2>
             </div>
           </FadeUp>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
             {whyUs.map((item, i) => (
               <MotionCard key={i} delay={(i % 3) * 100}>
                 <div className="bg-[#1E1E24] hover:bg-[#252530] transition-colors duration-200 rounded-xl border border-[#40424D] p-6 h-full">
@@ -195,7 +195,7 @@ export default function AnnotationForRoboticsPage() {
       </section>
 
       {/* CTA */}
-      <section className="py-16 md:py-28 px-4 sm:px-6 bg-[#1E1E24]">
+      <section className="py-10 md:py-28 px-4 sm:px-6 bg-[#1E1E24]">
         <div className="max-w-3xl mx-auto text-center">
           <FadeUp>
             <p className="eyebrow mb-4">START NOW</p>
