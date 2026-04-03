@@ -64,7 +64,7 @@ export default function SolutionPage() {
   return (
     <>
       {/* HERO */}
-      <section className="video-section md:min-h-[70vh] flex items-center">
+      <section className="video-section md:min-h-[70vh] flex items-center pt-16 md:pt-20">
         <div className="video-overlay-top" />
         <div className="video-overlay-bottom" />
         <div className="video-overlay-left" />

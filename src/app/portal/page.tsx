@@ -2,12 +2,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useRouter } from "next/navigation";
-
-interface UserInfo {
-  email: string;
-  name: string;
-  role: "admin" | "user";
-}
+import { useSession, signOut } from "next-auth/react";
 
 interface Submission {
   id: string;
@@ -23,55 +18,28 @@ interface Submission {
 
 export default function PortalPage() {
   const router = useRouter();
-  const [user, setUser] = useState<UserInfo | null>(null);
-  const [loading, setLoading] = useState(true);
+  const { data: session, status } = useSession();
 
   useEffect(() => {
-    const token = localStorage.getItem("portal_token");
-    const userData = localStorage.getItem("portal_user");
-
-    if (!token || !userData) {
+    if (status === "unauthenticated") {
       router.push("/portal/login");
-      return;
     }
-
-    try {
-      setUser(JSON.parse(userData));
-    } catch {
-      router.push("/portal/login");
-      return;
-    }
-
-    setLoading(false);
-
-    // Sync logout/login across tabs
-    const handleStorage = (e: StorageEvent) => {
-      if (e.key === "portal_token" && !e.newValue) {
-        router.push("/portal/login");
-      }
-      if (e.key === "portal_user" && e.newValue) {
-        try {
-          setUser(JSON.parse(e.newValue));
-        } catch { /* ignore */ }
-      }
-    };
-    window.addEventListener("storage", handleStorage);
-    return () => window.removeEventListener("storage", handleStorage);
-  }, [router]);
+  }, [status, router]);
 
   const handleLogout = () => {
-    localStorage.removeItem("portal_token");
-    localStorage.removeItem("portal_user");
-    router.push("/portal/login");
+    signOut({ callbackUrl: "/portal/login" });
   };
 
-  if (loading) {
+  if (status === "loading" || !session?.user) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-black">
         <div className="text-[#6E7180]">Loading...</div>
       </div>
     );
   }
+
+  const user = session.user;
+  const role = user.role;
 
   return (
     <section className="min-h-screen bg-black px-6 py-8">
@@ -80,11 +48,11 @@ export default function PortalPage() {
         <div className="flex items-center justify-between mb-8">
           <div>
             <h1 className="text-xl font-bold text-[#EDEFF7]">
-              {user?.role === "admin" ? "Admin Dashboard" : "Data Entry Portal"}
+              {role === "admin" ? "Admin Dashboard" : "Data Entry Portal"}
             </h1>
             <p className="text-sm text-[#6E7180]">
-              Logged in as <span className="text-[#9DA2B3]">{user?.name}</span>
-              {user?.role === "admin" && (
+              Logged in as <span className="text-[#9DA2B3]">{user.name}</span>
+              {role === "admin" && (
                 <span className="ml-2 text-xs bg-[#252530] text-[#9DA2B3] px-2 py-0.5 rounded-full">Admin</span>
               )}
             </p>
@@ -111,7 +79,7 @@ export default function PortalPage() {
         </div>
 
         {/* Role-based content */}
-        {user?.role === "admin" ? <AdminView /> : <UserFormView user={user} />}
+        {role === "admin" ? <AdminView /> : <UserFormView userName={user.name || ""} />}
       </div>
     </section>
   );
@@ -123,12 +91,10 @@ function AdminView() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [expandedId, setExpandedId] = useState<string | null>(null);
+  const [deletingId, setDeletingId] = useState<string | null>(null);
 
   useEffect(() => {
-    const token = localStorage.getItem("portal_token");
-    fetch("/api/submissions", {
-      headers: { Authorization: `Bearer ${token}` },
-    })
+    fetch("/api/submissions")
       .then((res) => res.json())
       .then((data) => {
         if (data.submissions) {
@@ -144,19 +110,13 @@ function AdminView() {
       });
   }, []);
 
-  const [deletingId, setDeletingId] = useState<string | null>(null);
-
   const handleDelete = async (id: string) => {
     if (!confirm("Are you sure you want to delete this entry?")) return;
     setDeletingId(id);
-    const token = localStorage.getItem("portal_token");
     try {
       const res = await fetch("/api/submissions", {
         method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ id }),
       });
       if (res.ok) {
@@ -283,7 +243,7 @@ function AdminView() {
 }
 
 /* ========== USER VIEW — Data Entry Form ========== */
-function UserFormView({ user }: { user: UserInfo | null }) {
+function UserFormView({ userName }: { userName: string }) {
   const [deviceId, setDeviceId] = useState("");
   const [personName, setPersonName] = useState("");
   const [supervisorName, setSupervisorName] = useState("");
@@ -300,15 +260,10 @@ function UserFormView({ user }: { user: UserInfo | null }) {
     setError("");
     setSubmitting(true);
 
-    const token = localStorage.getItem("portal_token");
-
     try {
       const res = await fetch("/api/submissions", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           deviceId,
           personName,
@@ -379,91 +334,46 @@ function UserFormView({ user }: { user: UserInfo | null }) {
             <label className="block text-xs font-medium text-[#9DA2B3] mb-1.5 uppercase tracking-wider">
               Device ID <span className="text-red-400">*</span>
             </label>
-            <input
-              type="text"
-              value={deviceId}
-              onChange={(e) => setDeviceId(e.target.value)}
-              placeholder="e.g. DEV-001"
-              required
-              className="form-input"
-            />
+            <input type="text" value={deviceId} onChange={(e) => setDeviceId(e.target.value)} placeholder="e.g. DEV-001" required className="form-input" />
           </div>
 
           <div>
             <label className="block text-xs font-medium text-[#9DA2B3] mb-1.5 uppercase tracking-wider">
               Person Name <span className="text-red-400">*</span>
             </label>
-            <input
-              type="text"
-              value={personName}
-              onChange={(e) => setPersonName(e.target.value)}
-              placeholder="Full name of the person"
-              required
-              className="form-input"
-            />
+            <input type="text" value={personName} onChange={(e) => setPersonName(e.target.value)} placeholder="Full name of the person" required className="form-input" />
           </div>
 
           <div>
             <label className="block text-xs font-medium text-[#9DA2B3] mb-1.5 uppercase tracking-wider">
               Supervisor Name <span className="text-red-400">*</span>
             </label>
-            <input
-              type="text"
-              value={supervisorName}
-              onChange={(e) => setSupervisorName(e.target.value)}
-              placeholder="Name of the supervisor"
-              required
-              className="form-input"
-            />
+            <input type="text" value={supervisorName} onChange={(e) => setSupervisorName(e.target.value)} placeholder="Name of the supervisor" required className="form-input" />
           </div>
 
           <div>
             <label className="block text-xs font-medium text-[#9DA2B3] mb-1.5 uppercase tracking-wider">
               Location Description <span className="text-red-400">*</span>
             </label>
-            <input
-              type="text"
-              value={locationDescription}
-              onChange={(e) => setLocationDescription(e.target.value)}
-              placeholder="e.g. Building A, Floor 2, Lab 3"
-              required
-              className="form-input"
-            />
+            <input type="text" value={locationDescription} onChange={(e) => setLocationDescription(e.target.value)} placeholder="e.g. Building A, Floor 2, Lab 3" required className="form-input" />
           </div>
 
           <div>
             <label className="block text-xs font-medium text-[#9DA2B3] mb-1.5 uppercase tracking-wider">
               Task Person is Doing <span className="text-red-400">*</span>
             </label>
-            <textarea
-              value={task}
-              onChange={(e) => setTask(e.target.value)}
-              placeholder="Describe the task being performed"
-              required
-              rows={3}
-              className="form-input resize-none"
-            />
+            <textarea value={task} onChange={(e) => setTask(e.target.value)} placeholder="Describe the task being performed" required rows={3} className="form-input resize-none" />
           </div>
 
           <div>
             <label className="block text-xs font-medium text-[#9DA2B3] mb-1.5 uppercase tracking-wider">
               Comments <span className="text-[#6E7180]">(optional)</span>
             </label>
-            <textarea
-              value={comments}
-              onChange={(e) => setComments(e.target.value)}
-              placeholder="Any additional notes..."
-              rows={2}
-              className="form-input resize-none"
-            />
+            <textarea value={comments} onChange={(e) => setComments(e.target.value)} placeholder="Any additional notes..." rows={2} className="form-input resize-none" />
           </div>
 
           {error && (
-            <motion.p
-              initial={{ opacity: 0, y: -5 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="text-red-400 text-sm"
-            >
+            <motion.p initial={{ opacity: 0, y: -5 }} animate={{ opacity: 1, y: 0 }} className="text-red-400 text-sm">
               {error}
             </motion.p>
           )}

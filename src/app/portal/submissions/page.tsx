@@ -1,8 +1,8 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-
-const ADMIN_PASSWORD = "TronAdmin@2024";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 interface Submission {
   id: string;
@@ -17,47 +17,41 @@ interface Submission {
 }
 
 export default function SubmissionsPage() {
-  const [authenticated, setAuthenticated] = useState(false);
-  const [adminPass, setAdminPass] = useState("");
-  const [passError, setPassError] = useState("");
+  const router = useRouter();
+  const { data: session, status } = useSession();
 
   const [submissions, setSubmissions] = useState<Submission[]>([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [expandedId, setExpandedId] = useState<string | null>(null);
 
-  const handleAdminLogin = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (adminPass === ADMIN_PASSWORD) {
-      setAuthenticated(true);
-      setPassError("");
-      loadSubmissions();
-    } else {
-      setPassError("Incorrect admin password");
+  useEffect(() => {
+    if (status === "unauthenticated") {
+      router.push("/portal/login");
     }
-  };
+  }, [status, router]);
 
-  const loadSubmissions = () => {
-    setLoading(true);
-    const token = localStorage.getItem("portal_token");
-
-    fetch("/api/submissions", {
-      headers: { Authorization: `Bearer ${token || "admin"}` },
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.submissions) {
-          setSubmissions([...data.submissions].reverse());
-        } else {
+  useEffect(() => {
+    if (status === "authenticated" && session?.user?.role === "admin") {
+      fetch("/api/submissions")
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.submissions) {
+            setSubmissions([...data.submissions].reverse());
+          } else {
+            setError("Failed to load submissions");
+          }
+          setLoading(false);
+        })
+        .catch(() => {
           setError("Failed to load submissions");
-        }
-        setLoading(false);
-      })
-      .catch(() => {
-        setError("Failed to load submissions");
-        setLoading(false);
-      });
-  };
+          setLoading(false);
+        });
+    } else if (status === "authenticated") {
+      // Not an admin — redirect to portal
+      router.push("/portal");
+    }
+  }, [status, session, router]);
 
   const formatDate = (iso: string) => {
     const d = new Date(iso);
@@ -70,66 +64,7 @@ export default function SubmissionsPage() {
     });
   };
 
-  // Admin password gate
-  if (!authenticated) {
-    return (
-      <section className="min-h-screen bg-black flex items-center justify-center px-6">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="w-full max-w-sm"
-        >
-          <div className="bg-[#1E1E24] border border-[#40424D] rounded-2xl p-8">
-            <div className="flex items-center gap-3 mb-6">
-              <div className="w-10 h-10 rounded-xl bg-[#252530] flex items-center justify-center">
-                <svg className="w-5 h-5 text-[#9DA2B3]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
-                </svg>
-              </div>
-              <div>
-                <h1 className="text-lg font-bold text-[#EDEFF7]">Admin Access</h1>
-                <p className="text-xs text-[#6E7180]">Enter admin password to view submissions</p>
-              </div>
-            </div>
-
-            <form onSubmit={handleAdminLogin} className="space-y-4">
-              <div>
-                <label className="block text-xs font-medium text-[#9DA2B3] mb-1.5 uppercase tracking-wider">
-                  Admin Password
-                </label>
-                <input
-                  type="password"
-                  value={adminPass}
-                  onChange={(e) => { setAdminPass(e.target.value); setPassError(""); }}
-                  placeholder="Enter admin password"
-                  required
-                  className="form-input"
-                  autoFocus
-                />
-              </div>
-
-              {passError && (
-                <p className="text-red-400 text-sm">{passError}</p>
-              )}
-
-              <motion.button
-                type="submit"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                className="w-full btn-primary justify-center"
-              >
-                View Submissions
-              </motion.button>
-            </form>
-          </div>
-        </motion.div>
-      </section>
-    );
-  }
-
-  // Loading state
-  if (loading) {
+  if (status === "loading" || loading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-black">
         <div className="text-[#6E7180]">Loading submissions...</div>
@@ -137,7 +72,6 @@ export default function SubmissionsPage() {
     );
   }
 
-  // Submissions view
   return (
     <section className="min-h-screen bg-black px-6 py-8">
       <div className="max-w-5xl mx-auto">
@@ -149,14 +83,12 @@ export default function SubmissionsPage() {
               {submissions.length} {submissions.length === 1 ? "entry" : "entries"} total
             </p>
           </div>
-          <motion.button
-            onClick={() => setAuthenticated(false)}
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
+          <a
+            href="/portal"
             className="text-sm text-[#6E7180] hover:text-[#EDEFF7] transition-colors border border-[#40424D] rounded-lg px-4 py-2"
           >
-            Lock
-          </motion.button>
+            Back to Portal
+          </a>
         </div>
 
         {error && (

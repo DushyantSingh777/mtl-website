@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import fs from "fs";
 import path from "path";
+import { auth } from "@/lib/auth";
 
 // Use /tmp on Vercel (writable), fallback to data/ for local dev
 const isVercel = process.env.VERCEL === "1";
@@ -34,20 +35,12 @@ function saveSubmissions(submissions: unknown[]) {
 // POST — submit a new form entry
 export async function POST(req: NextRequest) {
   try {
-    const token = req.headers.get("authorization")?.replace("Bearer ", "");
-    if (!token) {
+    const session = await auth();
+    if (!session?.user?.email) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    // Decode token to get email
-    let email: string;
-    try {
-      const decoded = Buffer.from(token, "base64").toString("utf-8");
-      email = decoded.split(":")[0];
-    } catch {
-      return NextResponse.json({ error: "Invalid token" }, { status: 401 });
-    }
-
+    const email = session.user.email;
     const body = await req.json();
     const { deviceId, personName, supervisorName, locationDescription, task, comments } = body;
 
@@ -79,9 +72,9 @@ export async function POST(req: NextRequest) {
 }
 
 // GET — retrieve all submissions (for admin view)
-export async function GET(req: NextRequest) {
-  const token = req.headers.get("authorization")?.replace("Bearer ", "");
-  if (!token) {
+export async function GET() {
+  const session = await auth();
+  if (!session?.user?.email) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
@@ -92,9 +85,13 @@ export async function GET(req: NextRequest) {
 // DELETE — remove a submission by id (admin only)
 export async function DELETE(req: NextRequest) {
   try {
-    const token = req.headers.get("authorization")?.replace("Bearer ", "");
-    if (!token) {
+    const session = await auth();
+    if (!session?.user?.email) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+
+    if (session.user.role !== "admin") {
+      return NextResponse.json({ error: "Forbidden" }, { status: 403 });
     }
 
     const { id } = await req.json();
