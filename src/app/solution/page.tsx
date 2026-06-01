@@ -70,7 +70,7 @@ export default function SolutionPage() {
         <div className="video-overlay-left" />
         <div className="video-overlay-right" />
         <video
-          src="/splash-bg.mp4"
+          src="/solution-bg.mp4"
           autoPlay
           loop
           muted

@@ -15,6 +15,18 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
     return <>{children}</>;
   }
 
+  // These routes skip the splash and render the full shell immediately
+  const SPLASH_FREE = ["/main", "/mission", "/blog", "/faq", "/about", "/solution", "/products", "/partners", "/careers", "/contact"];
+  if (SPLASH_FREE.some((p) => pathname.startsWith(p))) {
+    return (
+      <>
+        <Navbar />
+        <main>{children}</main>
+        <Footer />
+      </>
+    );
+  }
+
   return (
     <>
       <AnimatePresence mode="wait">

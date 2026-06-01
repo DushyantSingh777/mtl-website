@@ -1,0 +1,18 @@
+User-agent: *
+Allow: /main
+Allow: /mission
+Allow: /blog
+Allow: /about
+Allow: /solution
+Allow: /products
+Allow: /partners
+Allow: /careers
+Allow: /contact
+
+# Splash screen root — JS-rendered, not meaningful for crawlers
+Disallow: /?
+
+# Internal / authenticated routes
+Disallow: /portal/
+
+Sitemap: https://www.mytronlabs.com/sitemap.xml
