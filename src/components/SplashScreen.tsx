@@ -41,7 +41,7 @@ export default function SplashScreen({ onEnter }: Props) {
       {/* Background video */}
       <video
         className="absolute inset-0 w-full h-full object-cover z-0"
-        style={{ opacity: 0.35 }}
+        style={{ opacity: 0.35, objectPosition: "center 20%" }}
         src="/splash-bg.mp4"
         autoPlay
         loop

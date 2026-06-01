@@ -1,0 +1,40 @@
+---
+title: "What Makes a Good Robotics Dataset?"
+date: "2025-04-28"
+author: "MyTron Labs"
+excerpt: "Not all training data is created equal. Here's what separates dataset noise from dataset signal for embodied AI."
+tags: ["Data Quality", "Annotation", "Research"]
+---
+
+Building a robotics model is only as good as the data you train it on. But in the Physical AI space, most teams are discovering something uncomfortable: data quantity alone isn't enough. The structure, annotation quality, and modality alignment matter just as much.
+
+## Coverage Over Quantity
+
+A million hours of unstructured video is less valuable than ten thousand hours of well-annotated, task-segmented, multi-sensor recordings. Coverage across environments, lighting conditions, object types, and human variation matters more than raw volume.
+
+The best datasets are deliberately designed — not scraped.
+
+## Long-Horizon Task Structure
+
+Most current video datasets capture clips of a few seconds. Real physical tasks — cooking a meal, assembling a product, navigating a facility — unfold over minutes or hours, with hierarchical sub-tasks, intent shifts, and error recovery.
+
+Models trained only on short clips fail to generalize to long-horizon planning. Good robotics datasets capture complete task sequences, segmented with hierarchical labels.
+
+## Multi-Modal Alignment
+
+A robot doesn't just see — it hears, measures depth, senses acceleration, and tracks position. Training data should reflect this. Synchronized video, spatial audio, depth, LiDAR, and IMU data — aligned in time — gives models the full sensory context they need.
+
+## Annotation Depth
+
+Surface-level labels ("picking up cup") aren't enough. Useful annotations include:
+
+- Hand-object contact points and grasp types
+- Intent and sub-goal segmentation
+- Scene graph relationships
+- Failure modes and recovery actions
+
+This is what separates a research-ready dataset from a raw recording.
+
+## What We Build For
+
+Every dataset we produce at MyTron Labs is designed with these principles — captured at scale, annotated with depth, and delivered with the infrastructure AI teams need to actually use it.
