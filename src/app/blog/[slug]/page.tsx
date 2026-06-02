@@ -1,8 +1,8 @@
 import { getAllPosts, getPostBySlug } from "@/lib/blog";
-import { MDXRemote } from "next-mdx-remote/rsc";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
+import { compileMDX } from "next-mdx-remote/rsc";
 
 export const dynamic = "force-static";
 export const dynamicParams = false;
@@ -33,6 +33,11 @@ export default async function BlogPostPage({ params }: Props) {
   } catch {
     notFound();
   }
+
+  const { content } = await compileMDX({
+    source: post.content,
+    options: { parseFrontmatter: false },
+  });
 
   return (
     <>
@@ -76,7 +81,7 @@ export default async function BlogPostPage({ params }: Props) {
           prose-li:text-[#9DA2B3]
           prose-hr:border-[#40424D]
           max-w-none">
-          <MDXRemote source={post.content} />
+          {content}
         </div>
       </section>
 
