@@ -2,6 +2,8 @@ import Link from "next/link";
 import { getAllPosts } from "@/lib/blog";
 import type { Metadata } from "next";
 
+export const dynamic = "force-static";
+
 export const metadata: Metadata = {
   title: "Blog – MyTron Labs",
   description: "Insights on Physical AI, robotics data, and egocentric datasets from the MyTron Labs team.",
