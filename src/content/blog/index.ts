@@ -122,27 +122,16 @@ That's why we started MyTron Labs.
     excerpt: "A first-person account of what precision video annotation looks like at scale — and why it matters for Physical AI.",
     tags: ["Annotation", "Data", "Behind the Scenes"],
     content: `
-Most people building AI models never meet the people who label their training data. This is one account of what that work actually looks like.
+Nobody talks about the boring parts of building an AI company. Everyone wants to hear about models and demos. But for the last several months, a big chunk of my time has just been making sure videos get labeled correctly.
 
-## The Setup
+At MytronLabs, we work with egocentric footage - basically, video shot from a first-person perspective. Our job is to understand what's happening in that footage: what action is being performed, what object is involved, which hand is doing it. Sounds simple right, the hard part is, it is not that simple 😀.
 
-Every morning starts with a queue. Clips range from 30 seconds to 20 minutes — first-person footage of hands manipulating objects, navigating spaces, completing tasks. The job is to understand exactly what's happening and document it in a structured way.
+You quickly realize that raw video is basically useless without structure around it. So we built tooling to run automated labeling across our video corpus, review the output, catch errors, and feed corrections back in. A lot of the work is quality control - watching clips, comparing labels, spotting where the system got confused and figuring out why.
 
-Not just "person picks up screwdriver." But: which hand, what grasp type, what object state before and after, what was the intent, did anything go wrong, how was it corrected.
+We also have to deal with privacy for compliance. People appear in egocentric footage unexpectedly, so we built a pipeline to detect and anonymize faces before anything leaves our servers. Figuring out which model works best for us, fine tuning them to get better results.
 
-## Why Precision Matters
+This is the foundation - if the labels are wrong, everything downstream is wrong. So we take it seriously. By the way I enjoy solving every piece of problem I encounter here 🤩.
 
-A label that's 80% right is often 100% useless for training a manipulation policy. If the grasp type is wrong, the model learns the wrong affordance. If the intent is mislabeled, the model can't learn goal-directed behavior.
-
-The hardest part isn't identifying what happened. It's identifying *why* — inferring intent from motion, distinguishing a planned pause from an error, understanding what the person was trying to achieve when things went sideways.
-
-## What We've Learned
-
-The annotators who do this work develop genuine expertise in human motion and task structure. They notice things — patterns in how people recover from mistakes, how grasp strategies vary by object weight, how task context changes hand positioning.
-
-That expertise is exactly what makes the data valuable. It's not just labeling. It's structured observation of how humans interact with the physical world.
-
-That's the data Physical AI needs to learn from.
     `.trim(),
   },
 ];
