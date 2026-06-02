@@ -115,9 +115,22 @@ function FAQItem({ q, a }: { q: string; a: string }) {
   );
 }
 
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.flatMap((section) =>
+    section.items.map((item) => ({
+      "@type": "Question",
+      name: item.q,
+      acceptedAnswer: { "@type": "Answer", text: item.a },
+    }))
+  ),
+};
+
 export default function FAQPage() {
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
       {/* Hero */}
       <section className="relative pt-24 md:pt-32 pb-10 md:pb-20 px-4 sm:px-6 bg-black grid-bg md:min-h-[50vh] flex items-center">
         <div className="max-w-6xl mx-auto w-full">
