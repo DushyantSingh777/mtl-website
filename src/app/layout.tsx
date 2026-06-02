@@ -48,6 +48,33 @@ export default function RootLayout({
             gtag('config', '${GA_ID}');
           `}
         </Script>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@graph": [
+                {
+                  "@type": "Organization",
+                  "@id": "https://www.mytronlabs.com/#organization",
+                  name: "MyTron Labs",
+                  url: "https://www.mytronlabs.com",
+                  logo: "https://www.mytronlabs.com/logo-glow.png",
+                  description: "MyTron Labs builds large-scale egocentric, multimodal datasets powering robotics, wearable AI, and embodied intelligence.",
+                  sameAs: ["https://www.linkedin.com/company/mytronlabs"],
+                  contactPoint: { "@type": "ContactPoint", email: "founders@mytronlabs.com", contactType: "customer support" },
+                },
+                {
+                  "@type": "WebSite",
+                  "@id": "https://www.mytronlabs.com/#website",
+                  url: "https://www.mytronlabs.com",
+                  name: "MyTron Labs",
+                  publisher: { "@id": "https://www.mytronlabs.com/#organization" },
+                },
+              ],
+            }),
+          }}
+        />
         <ClientLayout>{children}</ClientLayout>
       </body>
     </html>

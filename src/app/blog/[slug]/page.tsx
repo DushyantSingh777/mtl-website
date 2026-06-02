@@ -36,8 +36,20 @@ export default async function BlogPostPage({ params }: Props) {
   // Render plain text content with basic markdown-like formatting
   const paragraphs = post.content.split("\n\n").filter(Boolean);
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: post.title,
+    description: post.excerpt,
+    author: { "@type": "Person", name: post.author },
+    publisher: { "@type": "Organization", name: "MyTron Labs", url: "https://www.mytronlabs.com" },
+    datePublished: post.date,
+    url: `https://www.mytronlabs.com/blog/${post.slug}`,
+  };
+
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       {/* Hero */}
       <section className="relative pt-24 md:pt-32 pb-10 px-4 sm:px-6 bg-black grid-bg">
         <div className="max-w-3xl mx-auto">
