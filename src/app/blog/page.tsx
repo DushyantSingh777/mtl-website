@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { getAllPosts } from "@/lib/blog";
+import { getAllPosts } from "@/content/blog";
 import type { Metadata } from "next";
 
 export const dynamic = "force-static";

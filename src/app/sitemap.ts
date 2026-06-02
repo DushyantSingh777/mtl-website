@@ -1,5 +1,5 @@
 import { MetadataRoute } from "next";
-import { getAllPosts } from "@/lib/blog";
+import { getAllPosts } from "@/content/blog";
 
 const BASE_URL = "https://www.mytronlabs.com";
 

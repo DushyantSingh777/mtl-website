@@ -1,14 +1,13 @@
-import { getAllPosts, getPostBySlug } from "@/lib/blog";
+import { getAllPosts, getPostBySlug } from "@/content/blog";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import { compileMDX } from "next-mdx-remote/rsc";
 
 export const dynamic = "force-static";
 export const dynamicParams = false;
 
 interface Props {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }
 
 export async function generateStaticParams() {
@@ -34,10 +33,8 @@ export default async function BlogPostPage({ params }: Props) {
     notFound();
   }
 
-  const { content } = await compileMDX({
-    source: post.content,
-    options: { parseFrontmatter: false },
-  });
+  // Render plain text content with basic markdown-like formatting
+  const paragraphs = post.content.split("\n\n").filter(Boolean);
 
   return (
     <>
@@ -73,15 +70,41 @@ export default async function BlogPostPage({ params }: Props) {
 
       {/* Content */}
       <section className="bg-[#1E1E24] py-10 md:py-16 px-4 sm:px-6">
-        <div className="max-w-3xl mx-auto prose prose-invert prose-lg
-          prose-headings:text-[#EDEFF7] prose-headings:font-bold
-          prose-p:text-[#9DA2B3] prose-p:leading-relaxed
-          prose-a:text-[#EDEFF7] prose-a:no-underline hover:prose-a:underline
-          prose-strong:text-[#EDEFF7]
-          prose-li:text-[#9DA2B3]
-          prose-hr:border-[#40424D]
-          max-w-none">
-          {content}
+        <div className="max-w-3xl mx-auto space-y-6">
+          {paragraphs.map((block, i) => {
+            if (block.startsWith("## ")) {
+              return (
+                <h2 key={i} className="text-2xl font-bold text-[#EDEFF7] mt-10 mb-2">
+                  {block.replace("## ", "")}
+                </h2>
+              );
+            }
+            if (block.startsWith("**") && block.endsWith("**")) {
+              return (
+                <p key={i} className="text-[#EDEFF7] font-semibold leading-relaxed">
+                  {block.replace(/\*\*/g, "")}
+                </p>
+              );
+            }
+            if (block.startsWith("- ")) {
+              const items = block.split("\n").filter((l) => l.startsWith("- "));
+              return (
+                <ul key={i} className="space-y-2 pl-4">
+                  {items.map((item, j) => (
+                    <li key={j} className="text-[#9DA2B3] leading-relaxed flex gap-2">
+                      <span className="text-[#6E7180] flex-shrink-0">—</span>
+                      {item.replace("- ", "")}
+                    </li>
+                  ))}
+                </ul>
+              );
+            }
+            return (
+              <p key={i} className="text-[#9DA2B3] leading-relaxed text-lg">
+                {block.replace(/\*([^*]+)\*/g, "$1")}
+              </p>
+            );
+          })}
         </div>
       </section>
 

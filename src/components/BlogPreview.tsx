@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { getAllPosts } from "@/lib/blog";
+import { getAllPosts } from "@/content/blog";
 
 export default function BlogPreview() {
   const posts = getAllPosts().slice(0, 3);
