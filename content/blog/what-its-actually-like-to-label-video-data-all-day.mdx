@@ -1,0 +1,18 @@
+---
+title: "What It's Actually Like to Label Video Data All Day"
+date: "2026-06-02"
+author: "Tilok Doley"
+excerpt: "VLA"
+tags: ["Robotics", "Physical AI", "Data"]
+---
+
+
+Nobody talks about the boring parts of building an AI company. Everyone wants to hear about models and demos. But for the last several months, a big chunk of my time has just been making sure videos get labeled correctly.
+
+At MytronLabs, we work with egocentric footage - basically, video shot from a first-person perspective. Our job is to understand what's happening in that footage: what action is being performed, what object is involved, which hand is doing it. Sounds simple right, the hard part is, it is not that simple 😀.
+
+You quickly realize that raw video is basically useless without structure around it. So we built tooling to run automated labeling across our video corpus, review the output, catch errors, and feed corrections back in. A lot of the work is quality control - watching clips, comparing labels, spotting where the system got confused and figuring out why.
+
+We also have to deal with privacy for compliance. People appear in egocentric footage unexpectedly, so we built a pipeline to detect and anonymize faces before anything leaves our servers. Figuring out which model works best for us, fine tuning them to get better results.
+
+This is the foundation - if the labels are wrong, everything downstream is wrong. So we take it seriously. By the way I enjoy solving every piece of problem I encounter here 🤩.
