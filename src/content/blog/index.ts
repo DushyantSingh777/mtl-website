@@ -134,6 +134,91 @@ This is the foundation - if the labels are wrong, everything downstream is wrong
 
     `.trim(),
   },
+  {
+  slug: "the-factory-floor-as-a-training-ground-for-physical-ai",
+  title: "The Factory Floor as a Training Ground for Physical AI",
+  date: "2026-05-04",
+  author: "Yashwardhan Gupta",
+  excerpt: "The factory floor is becoming one of the most valuable sources of training data for physical AI — and the skilled workers on it are the unsung teachers of the next generation of robots.",
+  tags: ["Physical AI", "Manufacturing", "Robotics", "Training Data"],
+  content: `
+For decades, artificial intelligence has been trained primarily in digital environments. Large language models learn from text, computer vision systems learn from images, and recommendation engines learn from user behavior online. But as AI moves beyond screens and into the physical world, a new challenge has emerged: teaching machines how to interact with reality.
+Unlike digital AI, physical AI must understand motion, objects, environments, and the countless variables that influence real-world tasks. A robot assembling components on a production line cannot rely solely on internet-scale datasets or simulated environments. It needs exposure to authentic human behavior and real-world conditions. Increasingly, the factory floor is becoming the ideal laboratory for this next generation of AI.
+Modern manufacturing environments generate an extraordinary amount of valuable information. Every day, skilled workers perform complex tasks that require precision, adaptability, and decision-making. They navigate changing conditions, recover from mistakes, and make subtle adjustments that are rarely documented in manuals or standard operating procedures. These actions represent a rich source of physical intelligence that machines can learn from.
+Unlike controlled research labs, factories provide real-world complexity at scale. Components arrive with slight variations, tools experience wear, lighting conditions change, and unexpected situations occur regularly. Human workers continuously adapt to these challenges, often without consciously thinking about their decisions. Capturing these interactions creates training data that reflects how work is actually performed rather than how it is ideally described.
+The rise of first-person, or egocentric, data collection has made it possible to record these experiences in unprecedented detail. By capturing tasks from the worker's perspective, organizations can observe exactly how tools are handled, how components are positioned, and how physical tasks are executed. When combined with additional sensor streams such as spatial audio, depth information, and motion tracking, these recordings provide a comprehensive view of human activity.
+However, collecting data is only the first step. Raw video footage alone offers limited value to AI systems. To transform observations into usable training data, each action must be structured and annotated. Object interactions, task sequences, movement patterns, and recovery actions all need to be identified and labeled. This process converts real-world behavior into machine-readable intelligence that can be used to train physical AI models.
+Factories are uniquely suited for this process because they contain a vast range of repeatable yet variable activities. Assembly, inspection, material handling, packaging, and maintenance tasks all generate valuable examples of human problem-solving and physical execution. Over time, these examples can form the foundation of large-scale datasets that teach machines not only what to do, but how to do it effectively in unpredictable environments.
+As the demand for autonomous systems and intelligent robots continues to grow, access to high-quality real-world data will become a defining advantage. The companies that can successfully capture, structure, and learn from physical work will help shape the future of robotics.
+The factory floor is no longer just a place where products are built. It is becoming one of the world's most valuable sources of training data—a living laboratory where human expertise is transformed into the intelligence that will power the next generation of physical AI.
+  `.trim(),
+ },
+ {
+  slug: "what-is-embodied-ai-and-why-it-matters",
+  title: "Embodied AI: Teaching Machines to Act in the Physical World",
+  date: "2026-05-020",
+  author: "Yashwardhan Gupta",
+  excerpt: "Embodied AI represents a fundamental shift — intelligence that isn't just computed, but experienced through real physical interaction with the world.",
+  tags: ["Embodied AI", "Physical AI", "Robotics", "Machine Learning"],
+  content: `
+Artificial intelligence has made significant progress in areas such as understanding language, generating images, and analyzing large datasets. Modern systems can summarize documents, create visuals, and identify patterns across vast amounts of information. However, most of these capabilities remain limited to digital environments.
+When AI systems move into the physical world—where factors like gravity, friction, and uncertainty matter—they encounter a very different challenge. This is where Embodied AI becomes essential.
+Embodied AI refers to systems that can understand, think, and act within a physical environment. Unlike traditional AI models that work only with static inputs such as text or images, embodied systems continuously interact with the real world. They must understand spatial relationships, manipulate objects, respond to feedback, and adapt to changing conditions over time. In short, embodied AI gives machines a “body” and enables them to use it effectively.
+
+## Why Embodiment Is Necessary
+
+A robot working in a factory or household cannot rely on reasoning alone. It must understand how to pick up objects, how much force to apply, and how to adjust when something does not go as expected. These are not purely computational problems—they are physical ones.
+For example, picking up a metal part is not just about recognizing its shape. The system must estimate weight, surface texture, balance, and orientation. If the grip is slightly misaligned, the task may fail. Humans perform these actions easily because their intelligence is shaped by continuous interaction with the physical world. Embodied AI aims to replicate this capability in machines.
+
+## Perception, Decision, and Action
+
+Embodied AI systems typically operate in a continuous loop of perception, decision-making, and action.
+Perception involves understanding the environment using sensors such as cameras, depth sensors, or motion trackers. This allows the system to interpret what is happening in its surroundings.
+Decision-making involves selecting the next action based on goals, context, and environmental conditions. This step often relies on machine learning models that evaluate possible outcomes.
+Action translates those decisions into physical movement through robotic control systems. This may involve moving a robotic arm, navigating a space, or manipulating an object.
+Unlike traditional AI systems, these components are tightly connected. A small error in perception can lead to incorrect actions, while slight inaccuracies in control can cause task failure. This makes embodied systems highly sensitive to real-world conditions.
+
+## The Importance of Real-World Data
+
+At the core of embodied AI is data—but not the kind used for language or vision models. Embodied systems require data that captures how actions are performed, not just their outcomes.
+This includes video recordings of human activity, sensor data such as motion and force readings, and detailed sequences of task execution. It also includes edge cases—situations where things go wrong, objects slip, or conditions change unexpectedly. These scenarios are critical for building systems that can operate reliably in unpredictable environments.
+However, raw video alone is not enough. Without structure, it is simply a stream of pixels. To become useful, it must be transformed into annotated datasets that define actions, object interactions, and relationships between events over time.
+
+## Learning From Human Demonstration
+
+One of the most promising approaches to training embodied AI is learning from human demonstration. By observing skilled workers performing tasks, AI systems can learn patterns of movement, timing, and decision-making.
+However, observation alone is not sufficient. It must be paired with structured annotation. Annotation converts human behavior into machine-readable data by labeling actions, identifying objects, marking key moments, and tracking movement over time.
+This process allows continuous real-world activity to be transformed into structured training data for AI systems.
+
+## The Road Ahead
+
+Despite rapid progress, embodied AI still faces several challenges. These include the difficulty of collecting large-scale real-world datasets, the complexity of transferring knowledge from simulation to reality, and the need for precise, high-quality annotations. Safety and reliability also remain critical concerns when deploying systems in human environments.
+As these challenges are addressed, embodied AI is expected to play a major role across industries such as manufacturing, logistics, healthcare, and domestic robotics. The ability to perceive and act in the physical world will define the next generation of intelligent systems.
+
+## Conclusion
+
+Embodied AI represents a fundamental shift in how we think about intelligence. It is no longer limited to words or images—it extends into motion, interaction, and experience.
+In this new paradigm, intelligence is not only computed. It is embodied in the physical world, where machines learn to understand and act through real experience.
+  `.trim(),
+ },
+ {
+  slug: "can-an-off-the-shelf-vlm-read-first-person-video-we-tried",
+  title: "Can an Off-the-Shelf VLM Read First-Person Video? We Tried",
+  date: "2026-06-04",
+  author: "Yash Shah",
+  excerpt: "We pointed Qwen2.5-VL at egocentric worker footage to see how far an off-the-shelf VLM gets you before you need anything custom. Here's the honest answer.",
+  tags: ["Vision-Language Models", "Egocentric Video", "Physical AI"],
+  content: `
+We keep coming back to the same idea here: egocentric data is the missing layer for robotics. But raw first-person video on its own doesn't really do much for you. A head-mounted camera following a worker through a shift gives you footage that's long, messy, and almost completely unlabeled. The value was never in the pixels - it's in the structure you can pull out of them. What task is happening, when it starts and stops, which objects are involved, where the hands go.
+So we asked a pretty practical question. How far can an off-the-shelf vision-language model get you on that problem before you have to reach for anything custom? We pointed Qwen2.5-VL at a stack of egocentric worker footage and just watched what it did. Here's what we found.
+Why this model and not a pile of others? Most video pipelines are a bunch of narrow models duct-taped together - one for detection, one for tracking, one for action classification - each trained on a fixed set of labels. The second the task changes, the whole thing falls over. Qwen2.5-VL folds a lot of that into one model, and the things it's good at line up almost suspiciously well with what egocentric analysis actually needs. It can reason over footage longer than an hour, which matters when one task takes minutes and a whole shift takes hours. It can tell you when something happens, not just that it happened. It grounds objects with boxes and points, and - this is the part I love - it emits clean JSON instead of a paragraph of prose, so the model's reading of a video becomes a data structure you can actually use. It even adapts its frame rate, so you can run cheap over dead time and dense over the moments that matter.
+The pipeline we landed on was deliberately boring, which is usually a good sign. Pull the stream in and sample frames faster where there's motion, slower over the nothing. Ask the model for a task timeline as JSON - task name, start, end, objects in view - instead of a description. Have it draw boxes around the items the worker touches. Break the continuous shift into ordered steps that something downstream can use. Then hold every output against real labels, because of course you do.
+And honestly? For a first pass it's good. The model is strongest exactly where you'd expect a big VLM to be strong - naming the high-level activity, describing the scene, giving you a serviceable guess at when a task changed. There were moments it captioned something correctly that genuinely surprised me.
+But here's the part nobody puts in the demo, and it's the part that actually defines the work. Fine motor actions blur together - it knows a part is being assembled, it can't reliably tell you which sub-step. Occlusion is the egocentric tax: the worker's own hands hide the very thing you care about, and the model fills the gap with a confident guess. Temporal boundaries drift - directionally right, but late by enough seconds to wreck a cycle-time number. And over long sequences it starts hallucinating steps, inventing a plausible action that never actually happened.
+That gap - between "the model says" and "this is actually true" - is the whole job. The occluded hand, the missed sub-step, the boundary that's three seconds late. A VLM hands you a fast, cheap, flexible first draft of structured signal, and that genuinely changes the economics of getting started. But a first draft isn't ground truth, and the distance between the two is exactly the layer you have to close before this footage can train anything you'd trust in the physical world.
+That's the work. It's the layer MyTron is built to close 🤖
+  `.trim(),
+ }, 
 ];
 
 export function getAllPosts(): Omit<Post, "content">[] {
