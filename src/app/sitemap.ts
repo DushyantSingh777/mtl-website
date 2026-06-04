@@ -1,10 +1,15 @@
 import { MetadataRoute } from "next";
-import { getAllPosts } from "@/content/blog";
+import { getAllNotionPosts } from "@/lib/notion";
 
 const BASE_URL = "https://www.mytronlabs.com";
 
-export default function sitemap(): MetadataRoute.Sitemap {
-  const posts = getAllPosts();
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  let posts: Awaited<ReturnType<typeof getAllNotionPosts>> = [];
+  try {
+    posts = await getAllNotionPosts();
+  } catch {
+    posts = [];
+  }
 
   const blogPostEntries: MetadataRoute.Sitemap = posts.map((post) => ({
     url: `${BASE_URL}/blog/${post.slug}`,
