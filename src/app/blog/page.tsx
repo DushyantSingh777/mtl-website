@@ -1,20 +1,20 @@
 import Link from "next/link";
-import { getAllPosts } from "@/content/blog";
+import { getAllNotionPosts } from "@/lib/notion";
 import type { Metadata } from "next";
 
-export const dynamic = "force-static";
+export const dynamic = "force-dynamic";
+export const revalidate = 60;
 
 export const metadata: Metadata = {
   title: "Blog – MyTron Labs",
   description: "Insights on Physical AI, robotics data, and egocentric datasets from the MyTron Labs team.",
 };
 
-export default function BlogPage() {
-  const posts = getAllPosts();
+export default async function BlogPage() {
+  const posts = await getAllNotionPosts();
 
   return (
     <>
-      {/* Hero */}
       <section className="relative pt-24 md:pt-32 pb-10 md:pb-20 px-4 sm:px-6 bg-black grid-bg md:min-h-[50vh] flex items-center">
         <div className="max-w-6xl mx-auto w-full">
           <p className="eyebrow mb-4">Blog</p>
@@ -28,7 +28,6 @@ export default function BlogPage() {
         </div>
       </section>
 
-      {/* Posts grid */}
       <section className="bg-[#1E1E24] py-10 md:py-24 px-4 sm:px-6">
         <div className="max-w-6xl mx-auto">
           {posts.length === 0 ? (
@@ -39,20 +38,16 @@ export default function BlogPage() {
                 <Link key={post.slug} href={`/blog/${post.slug}`} className="group block bg-[#1E1E24] hover:bg-[#252530] transition-colors duration-200 p-6 md:p-8 border border-[#40424D]/30">
                   <div className="flex flex-wrap gap-2 mb-4">
                     {post.tags.map((tag) => (
-                      <span key={tag} className="text-xs font-medium text-[#6E7180] bg-black/40 px-2.5 py-1 rounded">
-                        {tag}
-                      </span>
+                      <span key={tag} className="text-xs font-medium text-[#6E7180] bg-black/40 px-2.5 py-1 rounded">{tag}</span>
                     ))}
                   </div>
                   <h2 className="text-lg font-bold text-[#EDEFF7] mb-3 leading-snug group-hover:text-white transition-colors">
                     {post.title}
                   </h2>
-                  <p className="text-sm text-[#9DA2B3] leading-relaxed mb-6 line-clamp-3">
-                    {post.excerpt}
-                  </p>
+                  <p className="text-sm text-[#9DA2B3] leading-relaxed mb-6 line-clamp-3">{post.excerpt}</p>
                   <div className="flex items-center justify-between mt-auto">
                     <span className="text-xs text-[#6E7180]">
-                      {new Date(post.date).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}
+                      {post.date ? new Date(post.date).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" }) : ""}
                     </span>
                     <span className="text-xs font-medium text-[#9DA2B3] group-hover:text-[#EDEFF7] transition-colors flex items-center gap-1">
                       Read
