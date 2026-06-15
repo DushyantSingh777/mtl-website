@@ -262,7 +262,7 @@ export default function EarnPage() {
                 <span className="text-display-secondary">Earn Together.</span>
               </h2>
               <p className="text-[#9DA2B3] leading-relaxed mb-8">
-                Invite someone to join MyTron Labs and earn a percentage of their total recorded hours once they hit 1,000 hours of data. The more your network records, the more you earn - passively, with no extra effort on your part.
+                Invite friends to join MyTron Labs and earn 20% of everything they make — every single payout, forever. The more your network records, the more you earn passively with no extra effort.
               </p>
               <div className="flex flex-col gap-5">
                 <div className="flex items-start gap-4">
@@ -276,35 +276,35 @@ export default function EarnPage() {
                   <div className="w-8 h-8 rounded-full bg-[#40424D]/50 flex items-center justify-center shrink-0 text-sm font-bold text-[#EDEFF7]">2</div>
                   <div>
                     <p className="text-[#EDEFF7] font-medium mb-1">Your friend signs up with your code</p>
-                    <p className="text-[#9DA2B3] text-sm">They enter your referral code in the sign-up form. That&apos;s it — they&apos;re linked to you.</p>
+                    <p className="text-[#9DA2B3] text-sm">They enter your referral code in the sign-up form — that links them to you permanently.</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-4">
                   <div className="w-8 h-8 rounded-full bg-[#40424D]/50 flex items-center justify-center shrink-0 text-sm font-bold text-[#EDEFF7]">3</div>
                   <div>
-                    <p className="text-[#EDEFF7] font-medium mb-1">They hit 1,000 hours — you get rewarded</p>
-                    <p className="text-[#9DA2B3] text-sm">Once your referred friend completes 1,000 hours of recorded data, you receive a percentage of their earnings as a referral reward.</p>
+                    <p className="text-[#EDEFF7] font-medium mb-1">They earn — you earn 20%, every time</p>
+                    <p className="text-[#9DA2B3] text-sm">Every time your referred friend gets paid, you automatically receive 20% of their earnings on top of your own.</p>
                   </div>
                 </div>
               </div>
             </FadeUp>
             <FadeUp delay={150}>
               <div className="bg-black border border-[#40424D] rounded-2xl p-8 md:p-10">
-                <p className="text-[#9DA2B3] text-sm mb-2">Referral reward at 1,000 hrs</p>
-                <p className="text-5xl font-bold text-[#EDEFF7] mb-2">5% <span className="text-[#6E7180] text-2xl font-normal">of their earnings</span></p>
-                <p className="text-[#6E7180] text-xs mb-8">Paid out once your referred friend completes their first 1,000 hours of recorded data.</p>
+                <p className="text-[#9DA2B3] text-sm mb-2">Referral bonus — every payout</p>
+                <p className="text-5xl font-bold text-[#EDEFF7] mb-2">20% <span className="text-[#6E7180] text-2xl font-normal">of their earnings</span></p>
+                <p className="text-[#6E7180] text-xs mb-8">Paid every time your referred friend gets paid — no milestone needed, no cap.</p>
                 <div className="space-y-3 mb-8">
                   <div className="flex items-center justify-between py-3 border-b border-[#40424D]/50">
-                    <span className="text-[#9DA2B3] text-sm">Friend earns $2,000</span>
-                    <span className="text-[#EDEFF7] font-medium">You get +$100</span>
+                    <span className="text-[#9DA2B3] text-sm">Friend earns $100</span>
+                    <span className="text-[#EDEFF7] font-medium">You get +$20</span>
                   </div>
                   <div className="flex items-center justify-between py-3 border-b border-[#40424D]/50">
-                    <span className="text-[#9DA2B3] text-sm">Friend earns $5,000</span>
-                    <span className="text-[#EDEFF7] font-medium">You get +$250</span>
+                    <span className="text-[#9DA2B3] text-sm">Friend earns $500</span>
+                    <span className="text-[#EDEFF7] font-medium">You get +$100</span>
                   </div>
                   <div className="flex items-center justify-between py-3">
-                    <span className="text-[#9DA2B3] text-sm">3 friends × $3,000 each</span>
-                    <span className="text-[#EDEFF7] font-medium">You get +$450</span>
+                    <span className="text-[#9DA2B3] text-sm">3 friends × $500 each</span>
+                    <span className="text-[#EDEFF7] font-medium">You get +$300</span>
                   </div>
                 </div>
                 <Link
@@ -370,7 +370,7 @@ export default function EarnPage() {
                   <div className="bg-[#1E1E24] border border-[#40424D] rounded-lg p-4">
                     <p className="text-[#6E7180] text-xs uppercase tracking-widest mb-2">Your Referral Code</p>
                     <p className="text-2xl font-bold text-[#EDEFF7] tracking-[0.2em] mb-3">{myReferralCode}</p>
-                    <p className="text-[#9DA2B3] text-xs">Share this code with friends. When they sign up and record 1,000 hrs, you earn 5% of their earnings.</p>
+                    <p className="text-[#9DA2B3] text-xs">Share this code with friends. Every time they get paid, you automatically earn 20% of their earnings too.</p>
                   </div>
                 )}
               </div>
