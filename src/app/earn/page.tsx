@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import FadeUp from "@/components/FadeUp";
 
@@ -79,6 +79,15 @@ export default function EarnPage() {
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
   const [myReferralCode, setMyReferralCode] = useState("");
 
+  // Restore referral code from localStorage on mount
+  useEffect(() => {
+    const saved = localStorage.getItem("mtl_referral_code");
+    if (saved) {
+      setMyReferralCode(saved);
+      setStatus("sent");
+    }
+  }, []);
+
   // Generate a referral code from name + 4 random digits e.g. "GUR4821"
   const generateCode = (name: string) => {
     const prefix = name.replace(/[^a-zA-Z]/g, "").slice(0, 4).toUpperCase() || "MTL";
@@ -124,6 +133,7 @@ export default function EarnPage() {
         body: JSON.stringify(payload),
       });
       setMyReferralCode(code);
+      localStorage.setItem("mtl_referral_code", code);
       setStatus("sent");
       setForm({ name: "", email: "", country: "", customCountry: "", projectType: "", device: "", referralCode: "" });
       setVideoFile(null);
@@ -373,6 +383,12 @@ export default function EarnPage() {
                     <p className="text-[#9DA2B3] text-xs">Share this code with friends. Every time they get paid, you automatically earn 20% of their earnings too.</p>
                   </div>
                 )}
+                <button
+                  onClick={() => { localStorage.removeItem("mtl_referral_code"); setMyReferralCode(""); setStatus("idle"); }}
+                  className="mt-6 text-xs text-[#6E7180] hover:text-[#9DA2B3] underline transition-colors"
+                >
+                  Sign up with a different account
+                </button>
               </div>
             ) : (
               <form className="flex flex-col gap-4 max-w-md mx-auto" onSubmit={handleSubmit}>
