@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import ClientLayout from "@/components/ClientLayout";
 import Script from "next/script";
+import { Analytics } from "@vercel/analytics/next";
 
 const GA_ID = "G-6XQRVMFJPE";
 
@@ -75,6 +76,7 @@ export default function RootLayout({
             }),
           }}
         />
+        <Analytics />
         <ClientLayout>{children}</ClientLayout>
       </body>
     </html>

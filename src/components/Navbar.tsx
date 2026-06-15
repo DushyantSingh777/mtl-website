@@ -26,6 +26,7 @@ const navItems: NavItem[] = [
     dropdown: [
       { href: "/partners", label: "Partners", desc: "Become an early partner" },
       { href: "/careers",  label: "Careers",  desc: "Open roles at MyTron Labs" },
+      { href: "/earn",     label: "Earn",     desc: "Get paid to collect AI data" },
     ],
   },
 ];
