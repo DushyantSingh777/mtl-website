@@ -8,7 +8,7 @@ const PROJECTS = [
     icon: "🏠",
     title: "Residential",
     pay: "$3–$8 / hr",
-    description: "Capture everyday activities inside homes — kitchens, living rooms, hallways.",
+    description: "Capture everyday activities inside homes - kitchens, living rooms, hallways.",
   },
   {
     icon: "🏭",
@@ -87,7 +87,7 @@ export default function EarnPage() {
           </FadeUp>
           <FadeUp delay={200}>
             <p className="text-[#9DA2B3] text-lg md:text-xl max-w-2xl mx-auto leading-relaxed mb-10">
-              Use your smartphone to record everyday activities and earn money. Your footage helps train the next generation of Physical AI and robotics — no experience needed.
+              Use your smartphone to record everyday activities and earn money. Your footage helps train the next generation of Physical AI and robotics - no experience needed.
             </p>
           </FadeUp>
           <FadeUp delay={300}>
@@ -126,7 +126,7 @@ export default function EarnPage() {
             </div>
             <div className="bg-black p-8 md:p-12 flex flex-col gap-3">
               <p className="text-4xl md:text-5xl font-bold text-[#EDEFF7]">100%</p>
-              <p className="text-[#9DA2B3]">remote — record from wherever you are, on your own schedule</p>
+              <p className="text-[#9DA2B3]">remote - record from wherever you are, on your own schedule</p>
             </div>
             <div className="bg-black p-8 md:p-12 flex flex-col gap-3">
               <p className="text-4xl md:text-5xl font-bold text-[#EDEFF7]">Weekly</p>
@@ -201,7 +201,7 @@ export default function EarnPage() {
                 <span className="text-display-secondary">Earn Together.</span>
               </h2>
               <p className="text-[#9DA2B3] leading-relaxed mb-8">
-                Invite someone to join MyTron Labs and earn a percentage of their total recorded hours once they hit 1,000 hours of data. The more your network records, the more you earn — passively, with no extra effort on your part.
+                Invite someone to join MyTron Labs and earn a percentage of their total recorded hours once they hit 1,000 hours of data. The more your network records, the more you earn - passively, with no extra effort on your part.
               </p>
               <div className="flex flex-col gap-5">
                 <div className="flex items-start gap-4">
@@ -221,7 +221,7 @@ export default function EarnPage() {
                 <div className="flex items-start gap-4">
                   <div className="w-8 h-8 rounded-full bg-[#40424D]/50 flex items-center justify-center shrink-0 text-sm font-bold text-[#EDEFF7]">3</div>
                   <div>
-                    <p className="text-[#EDEFF7] font-medium mb-1">They hit 1,000 hours — you get rewarded</p>
+                    <p className="text-[#EDEFF7] font-medium mb-1">They hit 1,000 hours - you get rewarded</p>
                     <p className="text-[#9DA2B3] text-sm">Once your referred friend completes 1,000 hours of recorded data, you receive a percentage of the earnings from those hours as a referral reward.</p>
                   </div>
                 </div>
@@ -277,6 +277,9 @@ export default function EarnPage() {
                 </div>
               ))}
               <div className="flex items-center gap-2 bg-[#1E1E24] border border-[#40424D]/50 rounded-full px-4 py-2">
+                <span className="text-[#6E7180] text-sm">🌏 Other Southeast Asia</span>
+              </div>
+              <div className="flex items-center gap-2 bg-[#1E1E24] border border-[#40424D]/50 rounded-full px-4 py-2">
                 <span className="text-[#6E7180] text-sm">+ more coming soon</span>
               </div>
             </div>
@@ -293,7 +296,7 @@ export default function EarnPage() {
               Ready to Start <span className="text-display-secondary">Earning?</span>
             </h2>
             <p className="text-[#9DA2B3] mb-10 leading-relaxed">
-              Sign up takes under 2 minutes. No equipment needed — just your smartphone. We&apos;ll be in touch to discuss your setup before you start recording.
+              Sign up takes under 2 minutes. No equipment needed - just your smartphone. We&apos;ll be in touch to discuss your setup before you start recording.
             </p>
           </FadeUp>
           <FadeUp delay={100}>
@@ -332,6 +335,7 @@ export default function EarnPage() {
                   <option value="indonesia">Indonesia</option>
                   <option value="malaysia">Malaysia</option>
                   <option value="philippines">Philippines</option>
+                  <option value="other-sea">Other Southeast Asian country</option>
                 </optgroup>
               </select>
               <select
@@ -357,7 +361,7 @@ export default function EarnPage() {
               {/* Note */}
               <div className="bg-black/60 border border-[#40424D]/60 rounded-lg px-4 py-3 text-left">
                 <p className="text-xs text-[#6E7180] leading-relaxed">
-                  <span className="text-[#9DA2B3] font-medium">Note:</span> We prefer if you upload a short 2-minute video of your recording environment along with your sign-up — this helps our team assess the setup before onboarding you. It&apos;s not required, but highly preferred.
+                  <span className="text-[#9DA2B3] font-medium">Note:</span> We prefer if you upload a short 2-minute video of your recording environment along with your sign-up - this helps our team assess the setup before onboarding you. It&apos;s not required, but highly preferred.
                 </p>
               </div>
 
@@ -367,7 +371,7 @@ export default function EarnPage() {
                 whileTap={{ scale: 0.98 }}
                 className="w-full bg-[#EDEFF7] text-black py-4 rounded-lg text-sm font-semibold hover:bg-[#D3D6E0] transition-colors duration-200"
               >
-                Sign Up — It&apos;s Free
+                Sign Up - It&apos;s Free
               </motion.button>
               <p className="text-xs text-[#6E7180]">
                 By signing up you agree to our{" "}
