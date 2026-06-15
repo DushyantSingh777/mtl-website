@@ -74,16 +74,38 @@ const REGIONS = [
 ];
 
 export default function EarnPage() {
-  const [form, setForm] = useState({ name: "", email: "", country: "", customCountry: "", projectType: "", device: "" });
+  const [form, setForm] = useState({ name: "", email: "", country: "", customCountry: "", projectType: "", device: "", referralCode: "" });
+  const [videoFile, setVideoFile] = useState<File | null>(null);
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setStatus("sending");
     try {
+      // Upload video to GCS if present
+      let videoUrl = "No";
+      if (videoFile) {
+        const res = await fetch("/api/upload-url", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ filename: videoFile.name, contentType: videoFile.type || "video/mp4" }),
+        });
+        if (!res.ok) throw new Error("Failed to get upload URL");
+        const { url, key } = await res.json();
+
+        await fetch(url, {
+          method: "PUT",
+          headers: { "Content-Type": videoFile.type || "video/mp4" },
+          body: videoFile,
+        });
+
+        videoUrl = `gs://${process.env.NEXT_PUBLIC_GCS_BUCKET ?? "mtl-earn_uploads"}/${key}`;
+      }
+
       const payload = {
         ...form,
         country: form.country.startsWith("Other") && form.customCountry ? form.customCountry : form.country,
+        videoUploaded: videoUrl,
       };
       await fetch(SHEET_URL, {
         method: "POST",
@@ -92,7 +114,8 @@ export default function EarnPage() {
         body: JSON.stringify(payload),
       });
       setStatus("sent");
-      setForm({ name: "", email: "", country: "", customCountry: "", projectType: "", device: "" });
+      setForm({ name: "", email: "", country: "", customCountry: "", projectType: "", device: "", referralCode: "" });
+      setVideoFile(null);
     } catch {
       setStatus("error");
     }
@@ -405,9 +428,48 @@ export default function EarnPage() {
                   <option value="Android">Android</option>
                   <option value="iOS">iOS (iPhone)</option>
                 </select>
+                <input
+                  type="text"
+                  placeholder="Referral code (if you have one)"
+                  value={form.referralCode}
+                  onChange={(e) => setForm({ ...form, referralCode: e.target.value.toUpperCase() })}
+                  className="w-full bg-black border border-[#40424D] rounded-lg px-4 py-3.5 text-[#EDEFF7] placeholder-[#6E7180] text-sm focus:outline-none focus:border-[#9DA2B3] transition-colors tracking-widest"
+                />
+
+                {/* Video upload */}
+                <div className="w-full">
+                  <label className="block w-full cursor-pointer">
+                    <div className={`border-2 border-dashed rounded-lg px-4 py-5 text-center transition-colors ${videoFile ? "border-[#9DA2B3] bg-[#1E1E24]" : "border-[#40424D] hover:border-[#6E7180]"}`}>
+                      {videoFile ? (
+                        <div className="flex items-center justify-between gap-2">
+                          <span className="text-[#EDEFF7] text-sm truncate">📹 {videoFile.name}</span>
+                          <button
+                            type="button"
+                            onClick={(e) => { e.preventDefault(); setVideoFile(null); }}
+                            className="text-[#6E7180] hover:text-[#EDEFF7] text-xs shrink-0"
+                          >
+                            Remove
+                          </button>
+                        </div>
+                      ) : (
+                        <>
+                          <p className="text-[#9DA2B3] text-sm mb-1">Upload a 2-min video of your environment</p>
+                          <p className="text-[#6E7180] text-xs">MP4, MOV up to 200MB · Optional but preferred</p>
+                        </>
+                      )}
+                    </div>
+                    <input
+                      type="file"
+                      accept="video/mp4,video/quicktime,video/*"
+                      className="hidden"
+                      onChange={(e) => setVideoFile(e.target.files?.[0] ?? null)}
+                    />
+                  </label>
+                </div>
+
                 <div className="bg-black/60 border border-[#40424D]/60 rounded-lg px-4 py-3 text-left">
                   <p className="text-xs text-[#6E7180] leading-relaxed">
-                    <span className="text-[#9DA2B3] font-medium">Note:</span> We prefer if you upload a short 2-minute video of your recording environment along with your sign-up - this helps our team assess the setup before onboarding you. It&apos;s not required, but highly preferred.
+                    <span className="text-[#9DA2B3] font-medium">Note:</span> The video helps our team assess your recording setup before onboarding. It&apos;s not required, but highly preferred.
                   </p>
                 </div>
                 <motion.button
