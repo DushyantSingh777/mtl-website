@@ -77,6 +77,14 @@ export default function EarnPage() {
   const [form, setForm] = useState({ name: "", email: "", country: "", customCountry: "", projectType: "", device: "", referralCode: "" });
   const [videoFile, setVideoFile] = useState<File | null>(null);
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
+  const [myReferralCode, setMyReferralCode] = useState("");
+
+  // Generate a referral code from name + 4 random digits e.g. "GUR4821"
+  const generateCode = (name: string) => {
+    const prefix = name.replace(/[^a-zA-Z]/g, "").slice(0, 4).toUpperCase() || "MTL";
+    const digits = Math.floor(1000 + Math.random() * 9000);
+    return `${prefix}${digits}`;
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -102,10 +110,12 @@ export default function EarnPage() {
         videoUrl = `gs://${process.env.NEXT_PUBLIC_GCS_BUCKET ?? "mtl-earn_uploads"}/${key}`;
       }
 
+      const code = generateCode(form.name);
       const payload = {
         ...form,
         country: form.country.startsWith("Other") && form.customCountry ? form.customCountry : form.country,
         videoUploaded: videoUrl,
+        myReferralCode: code,
       };
       await fetch(SHEET_URL, {
         method: "POST",
@@ -113,6 +123,7 @@ export default function EarnPage() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
       });
+      setMyReferralCode(code);
       setStatus("sent");
       setForm({ name: "", email: "", country: "", customCountry: "", projectType: "", device: "", referralCode: "" });
       setVideoFile(null);
@@ -258,7 +269,7 @@ export default function EarnPage() {
                   <div className="w-8 h-8 rounded-full bg-[#40424D]/50 flex items-center justify-center shrink-0 text-sm font-bold text-[#EDEFF7]">1</div>
                   <div>
                     <p className="text-[#EDEFF7] font-medium mb-1">Get your unique referral code</p>
-                    <p className="text-[#9DA2B3] text-sm">After signing up, we&apos;ll email you your personal referral code.</p>
+                    <p className="text-[#9DA2B3] text-sm">Your personal code is shown instantly after you sign up below. Share it with friends.</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-4">
@@ -354,7 +365,14 @@ export default function EarnPage() {
               <div className="max-w-md mx-auto bg-black border border-[#40424D] rounded-xl p-8 text-center">
                 <p className="text-2xl mb-3">✅</p>
                 <p className="text-[#EDEFF7] font-bold text-lg mb-2">You&apos;re on the list!</p>
-                <p className="text-[#9DA2B3] text-sm">Our team will reach out soon to discuss your recording environment and get you started.</p>
+                <p className="text-[#9DA2B3] text-sm mb-6">Our team will reach out soon to discuss your recording environment and get you started.</p>
+                {myReferralCode && (
+                  <div className="bg-[#1E1E24] border border-[#40424D] rounded-lg p-4">
+                    <p className="text-[#6E7180] text-xs uppercase tracking-widest mb-2">Your Referral Code</p>
+                    <p className="text-2xl font-bold text-[#EDEFF7] tracking-[0.2em] mb-3">{myReferralCode}</p>
+                    <p className="text-[#9DA2B3] text-xs">Share this code with friends. When they sign up and record 1,000 hrs, you earn 5% of their earnings.</p>
+                  </div>
+                )}
               </div>
             ) : (
               <form className="flex flex-col gap-4 max-w-md mx-auto" onSubmit={handleSubmit}>
