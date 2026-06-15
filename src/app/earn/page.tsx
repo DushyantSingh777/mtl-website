@@ -88,7 +88,7 @@ export default function EarnPage() {
         const res = await fetch("/api/upload-url", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ filename: videoFile.name, contentType: videoFile.type || "video/mp4" }),
+          body: JSON.stringify({ filename: videoFile.name, contentType: videoFile.type || "video/mp4", email: form.email }),
         });
         if (!res.ok) throw new Error("Failed to get upload URL");
         const { url, key } = await res.json();
@@ -257,22 +257,22 @@ export default function EarnPage() {
                 <div className="flex items-start gap-4">
                   <div className="w-8 h-8 rounded-full bg-[#40424D]/50 flex items-center justify-center shrink-0 text-sm font-bold text-[#EDEFF7]">1</div>
                   <div>
-                    <p className="text-[#EDEFF7] font-medium mb-1">Share your unique referral link</p>
-                    <p className="text-[#9DA2B3] text-sm">Get a personal link from your dashboard after signing up.</p>
+                    <p className="text-[#EDEFF7] font-medium mb-1">Get your unique referral code</p>
+                    <p className="text-[#9DA2B3] text-sm">After signing up, we&apos;ll email you your personal referral code.</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-4">
                   <div className="w-8 h-8 rounded-full bg-[#40424D]/50 flex items-center justify-center shrink-0 text-sm font-bold text-[#EDEFF7]">2</div>
                   <div>
-                    <p className="text-[#EDEFF7] font-medium mb-1">Your friend signs up and starts recording</p>
-                    <p className="text-[#9DA2B3] text-sm">They join, complete onboarding, and start uploading data through the app.</p>
+                    <p className="text-[#EDEFF7] font-medium mb-1">Your friend signs up with your code</p>
+                    <p className="text-[#9DA2B3] text-sm">They enter your referral code in the sign-up form. That&apos;s it — they&apos;re linked to you.</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-4">
                   <div className="w-8 h-8 rounded-full bg-[#40424D]/50 flex items-center justify-center shrink-0 text-sm font-bold text-[#EDEFF7]">3</div>
                   <div>
-                    <p className="text-[#EDEFF7] font-medium mb-1">They hit 1,000 hours - you get rewarded</p>
-                    <p className="text-[#9DA2B3] text-sm">Once your referred friend completes 1,000 hours of recorded data, you receive a percentage of the earnings from those hours as a referral reward.</p>
+                    <p className="text-[#EDEFF7] font-medium mb-1">They hit 1,000 hours — you get rewarded</p>
+                    <p className="text-[#9DA2B3] text-sm">Once your referred friend completes 1,000 hours of recorded data, you receive a percentage of their earnings as a referral reward.</p>
                   </div>
                 </div>
               </div>
@@ -300,7 +300,7 @@ export default function EarnPage() {
                   href="#signup"
                   className="block text-center bg-[#EDEFF7] text-black px-6 py-3 rounded-lg text-sm font-semibold hover:bg-[#D3D6E0] transition-colors duration-200"
                 >
-                  Sign Up to Get Your Link
+                  Sign Up to Get Your Code
                 </Link>
               </div>
             </FadeUp>

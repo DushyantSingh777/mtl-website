@@ -14,15 +14,16 @@ const EXPIRES_MINUTES = 15;
 
 export async function POST(req: NextRequest) {
   try {
-    const { filename, contentType } = await req.json();
+    const { filename, contentType, email } = await req.json();
 
     if (!filename || !contentType) {
       return NextResponse.json({ error: "filename and contentType required" }, { status: 400 });
     }
 
-    // Sanitize filename and add timestamp prefix to avoid collisions
+    // Sanitize and build path: uploads/<email>/<timestamp>_<filename>
     const safe = filename.replace(/[^a-zA-Z0-9._-]/g, "_");
-    const key = `uploads/${Date.now()}_${safe}`;
+    const safeEmail = (email ?? "unknown").replace(/[^a-zA-Z0-9@._-]/g, "_");
+    const key = `uploads/${safeEmail}/${Date.now()}_${safe}`;
 
     const [url] = await storage
       .bucket(BUCKET)
