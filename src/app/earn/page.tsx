@@ -1,7 +1,10 @@
 "use client";
 import Link from "next/link";
+import { useState } from "react";
 import { motion } from "framer-motion";
 import FadeUp from "@/components/FadeUp";
+
+const SHEET_URL = "https://script.google.com/macros/s/AKfycbwgb79IFShTtjHifccDC2sP5D0VCrCbns3UCtNCEunQ4X3Zc7ny-1CTXnum6yOjlgRwEQ/exec";
 
 const PROJECTS = [
   {
@@ -71,6 +74,30 @@ const REGIONS = [
 ];
 
 export default function EarnPage() {
+  const [form, setForm] = useState({ name: "", email: "", country: "", customCountry: "", projectType: "", device: "" });
+  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setStatus("sending");
+    try {
+      const payload = {
+        ...form,
+        country: form.country.startsWith("Other") && form.customCountry ? form.customCountry : form.country,
+      };
+      await fetch(SHEET_URL, {
+        method: "POST",
+        mode: "no-cors",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+      setStatus("sent");
+      setForm({ name: "", email: "", country: "", customCountry: "", projectType: "", device: "" });
+    } catch {
+      setStatus("error");
+    }
+  };
+
   return (
     <>
       {/* Hero */}
@@ -300,85 +327,108 @@ export default function EarnPage() {
             </p>
           </FadeUp>
           <FadeUp delay={100}>
-            <form
-              className="flex flex-col gap-4 max-w-md mx-auto"
-              onSubmit={(e) => e.preventDefault()}
-            >
-              <input
-                type="text"
-                placeholder="Full name"
-                required
-                className="w-full bg-black border border-[#40424D] rounded-lg px-4 py-3.5 text-[#EDEFF7] placeholder-[#6E7180] text-sm focus:outline-none focus:border-[#9DA2B3] transition-colors"
-              />
-              <input
-                type="email"
-                placeholder="Email address"
-                required
-                className="w-full bg-black border border-[#40424D] rounded-lg px-4 py-3.5 text-[#EDEFF7] placeholder-[#6E7180] text-sm focus:outline-none focus:border-[#9DA2B3] transition-colors"
-              />
-              <select
-                required
-                defaultValue=""
-                className="w-full bg-black border border-[#40424D] rounded-lg px-4 py-3.5 text-sm focus:outline-none focus:border-[#9DA2B3] transition-colors appearance-none text-[#6E7180]"
-              >
-                <option value="" disabled>Select your country</option>
-                <optgroup label="Latin America">
-                  <option value="brazil">Brazil</option>
-                  <option value="mexico">Mexico</option>
-                  <option value="colombia">Colombia</option>
-                  <option value="peru">Peru</option>
-                  <option value="argentina">Argentina</option>
-                  <option value="chile">Chile</option>
-                  <option value="other-latam">Other LATAM country</option>
-                </optgroup>
-                <optgroup label="Southeast Asia">
-                  <option value="indonesia">Indonesia</option>
-                  <option value="malaysia">Malaysia</option>
-                  <option value="philippines">Philippines</option>
-                  <option value="other-sea">Other Southeast Asian country</option>
-                </optgroup>
-              </select>
-              <select
-                defaultValue=""
-                className="w-full bg-black border border-[#40424D] rounded-lg px-4 py-3.5 text-sm focus:outline-none focus:border-[#9DA2B3] transition-colors appearance-none text-[#6E7180]"
-              >
-                <option value="" disabled>Preferred project type (optional)</option>
-                <option value="residential">Residential</option>
-                <option value="factory">Factory & Warehouse</option>
-                <option value="outdoor">Outdoor & Street</option>
-                <option value="retail">Retail & Commercial</option>
-              </select>
-              <select
-                required
-                defaultValue=""
-                className="w-full bg-black border border-[#40424D] rounded-lg px-4 py-3.5 text-sm focus:outline-none focus:border-[#9DA2B3] transition-colors appearance-none text-[#6E7180]"
-              >
-                <option value="" disabled>Device type</option>
-                <option value="android">Android</option>
-                <option value="ios">iOS (iPhone)</option>
-              </select>
-
-              {/* Note */}
-              <div className="bg-black/60 border border-[#40424D]/60 rounded-lg px-4 py-3 text-left">
-                <p className="text-xs text-[#6E7180] leading-relaxed">
-                  <span className="text-[#9DA2B3] font-medium">Note:</span> We prefer if you upload a short 2-minute video of your recording environment along with your sign-up - this helps our team assess the setup before onboarding you. It&apos;s not required, but highly preferred.
-                </p>
+            {status === "sent" ? (
+              <div className="max-w-md mx-auto bg-black border border-[#40424D] rounded-xl p-8 text-center">
+                <p className="text-2xl mb-3">✅</p>
+                <p className="text-[#EDEFF7] font-bold text-lg mb-2">You&apos;re on the list!</p>
+                <p className="text-[#9DA2B3] text-sm">Our team will reach out soon to discuss your recording environment and get you started.</p>
               </div>
-
-              <motion.button
-                type="submit"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                className="w-full bg-[#EDEFF7] text-black py-4 rounded-lg text-sm font-semibold hover:bg-[#D3D6E0] transition-colors duration-200"
-              >
-                Sign Up - It&apos;s Free
-              </motion.button>
-              <p className="text-xs text-[#6E7180]">
-                By signing up you agree to our{" "}
-                <Link href="/contact" className="underline hover:text-[#9DA2B3]">terms of service</Link>.
-                No spam, ever.
-              </p>
-            </form>
+            ) : (
+              <form className="flex flex-col gap-4 max-w-md mx-auto" onSubmit={handleSubmit}>
+                <input
+                  type="text"
+                  placeholder="Full name"
+                  required
+                  value={form.name}
+                  onChange={(e) => setForm({ ...form, name: e.target.value })}
+                  className="w-full bg-black border border-[#40424D] rounded-lg px-4 py-3.5 text-[#EDEFF7] placeholder-[#6E7180] text-sm focus:outline-none focus:border-[#9DA2B3] transition-colors"
+                />
+                <input
+                  type="email"
+                  placeholder="Email address"
+                  required
+                  value={form.email}
+                  onChange={(e) => setForm({ ...form, email: e.target.value })}
+                  className="w-full bg-black border border-[#40424D] rounded-lg px-4 py-3.5 text-[#EDEFF7] placeholder-[#6E7180] text-sm focus:outline-none focus:border-[#9DA2B3] transition-colors"
+                />
+                <select
+                  required
+                  value={form.country}
+                  onChange={(e) => setForm({ ...form, country: e.target.value })}
+                  className="w-full bg-black border border-[#40424D] rounded-lg px-4 py-3.5 text-sm focus:outline-none focus:border-[#9DA2B3] transition-colors appearance-none text-[#6E7180]"
+                >
+                  <option value="" disabled>Select your country</option>
+                  <optgroup label="Latin America">
+                    <option value="Brazil">Brazil</option>
+                    <option value="Mexico">Mexico</option>
+                    <option value="Colombia">Colombia</option>
+                    <option value="Peru">Peru</option>
+                    <option value="Argentina">Argentina</option>
+                    <option value="Chile">Chile</option>
+                    <option value="Other LATAM">Other LATAM country</option>
+                  </optgroup>
+                  <optgroup label="Southeast Asia">
+                    <option value="Indonesia">Indonesia</option>
+                    <option value="Malaysia">Malaysia</option>
+                    <option value="Philippines">Philippines</option>
+                    <option value="Other Southeast Asia">Other Southeast Asian country</option>
+                  </optgroup>
+                </select>
+                {form.country.startsWith("Other") && (
+                  <input
+                    type="text"
+                    placeholder="Please specify your country"
+                    required
+                    value={form.customCountry}
+                    onChange={(e) => setForm({ ...form, customCountry: e.target.value })}
+                    className="w-full bg-black border border-[#40424D] rounded-lg px-4 py-3.5 text-[#EDEFF7] placeholder-[#6E7180] text-sm focus:outline-none focus:border-[#9DA2B3] transition-colors"
+                  />
+                )}
+                <select
+                  value={form.projectType}
+                  onChange={(e) => setForm({ ...form, projectType: e.target.value })}
+                  className="w-full bg-black border border-[#40424D] rounded-lg px-4 py-3.5 text-sm focus:outline-none focus:border-[#9DA2B3] transition-colors appearance-none text-[#6E7180]"
+                >
+                  <option value="">Preferred project type (optional)</option>
+                  <option value="Residential">Residential</option>
+                  <option value="Factory & Warehouse">Factory & Warehouse</option>
+                  <option value="Outdoor & Street">Outdoor & Street</option>
+                  <option value="Retail & Commercial">Retail & Commercial</option>
+                </select>
+                <select
+                  required
+                  value={form.device}
+                  onChange={(e) => setForm({ ...form, device: e.target.value })}
+                  className="w-full bg-black border border-[#40424D] rounded-lg px-4 py-3.5 text-sm focus:outline-none focus:border-[#9DA2B3] transition-colors appearance-none text-[#6E7180]"
+                >
+                  <option value="" disabled>Device type</option>
+                  <option value="Android">Android</option>
+                  <option value="iOS">iOS (iPhone)</option>
+                </select>
+                <div className="bg-black/60 border border-[#40424D]/60 rounded-lg px-4 py-3 text-left">
+                  <p className="text-xs text-[#6E7180] leading-relaxed">
+                    <span className="text-[#9DA2B3] font-medium">Note:</span> We prefer if you upload a short 2-minute video of your recording environment along with your sign-up - this helps our team assess the setup before onboarding you. It&apos;s not required, but highly preferred.
+                  </p>
+                </div>
+                <motion.button
+                  type="submit"
+                  disabled={status === "sending"}
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="w-full bg-[#EDEFF7] text-black py-4 rounded-lg text-sm font-semibold hover:bg-[#D3D6E0] transition-colors duration-200 disabled:opacity-60"
+                >
+                  {status === "sending" ? "Submitting…" : "Sign Up — It's Free"}
+                </motion.button>
+                {status === "error" && (
+                  <p className="text-red-400 text-xs text-center">Something went wrong. Please try again.</p>
+                )}
+                <p className="text-xs text-[#6E7180]">
+                  By signing up you agree to our{" "}
+                  <Link href="/contact" className="underline hover:text-[#9DA2B3]">terms of service</Link>.
+                  No spam, ever.
+                </p>
+              </form>
+            )}
           </FadeUp>
         </div>
       </section>

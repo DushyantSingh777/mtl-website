@@ -42,13 +42,20 @@ export default function ContactPage() {
     return Object.keys(errs).length === 0;
   };
 
+  const SHEET_URL = "https://script.google.com/macros/s/AKfycbwXytPud89X3Cq1uUbeQQ96cNX5vTT2MyHf4sDlFc1YXZDEq19lPZAZ6a39ruWwZoQn/exec";
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!validate()) return;
     setStatus("sending");
 
     try {
-      await new Promise((r) => setTimeout(r, 1500));
+      await fetch(SHEET_URL, {
+        method: "POST",
+        mode: "no-cors",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
       setStatus("sent");
       setForm({ name: "", email: "", organization: "", type: "", message: "" });
     } catch {
