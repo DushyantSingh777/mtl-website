@@ -7,26 +7,26 @@ const PROJECTS = [
   {
     icon: "🏠",
     title: "Residential",
-    description: "Capture everyday activities inside homes — kitchens, living rooms, hallways. Help AI learn how people move and interact in domestic environments.",
-    pay: "$2–$5 / hr",
+    pay: "$3–$8 / hr",
+    description: "Capture everyday activities inside homes — kitchens, living rooms, hallways.",
   },
   {
     icon: "🏭",
     title: "Factory & Warehouse",
-    description: "Record manufacturing tasks, assembly lines, and material handling. High-value data for industrial robotics and automation AI.",
-    pay: "$5–$10 / hr",
+    pay: "$2–$10 / hr",
+    description: "Record manufacturing tasks, assembly lines, and material handling.",
   },
   {
     icon: "🌆",
     title: "Outdoor & Street",
-    description: "Capture navigation, pedestrian activity, and urban environments. Essential for autonomous mobility and outdoor robotics.",
-    pay: "$3–$6 / hr",
+    pay: "$3–$8 / hr",
+    description: "Capture navigation, pedestrian activity, and urban environments.",
   },
   {
     icon: "🛒",
     title: "Retail & Commercial",
-    description: "Record shopping, restocking, and customer service scenarios. Powers the next generation of retail AI and service robots.",
-    pay: "$3–$6 / hr",
+    pay: "$3–$8 / hr",
+    description: "Record shopping, restocking, and customer service scenarios.",
   },
 ];
 
@@ -38,16 +38,21 @@ const STEPS = [
   },
   {
     number: "02",
-    title: "Pick a Project",
-    description: "Browse available projects in your area. Choose what fits your schedule and location.",
+    title: "We Get in Touch",
+    description: "Our team reaches out to discuss your recording environment, setup requirements, and what to expect before you start.",
   },
   {
     number: "03",
+    title: "Pick a Project",
+    description: "Browse available projects that match your environment. Choose what fits your schedule and location.",
+  },
+  {
+    number: "04",
     title: "Record & Upload",
     description: "Use your phone to capture footage following simple guidelines. Upload directly from the app.",
   },
   {
-    number: "04",
+    number: "05",
     title: "Get Paid",
     description: "Earnings are tracked in real time. Withdraw to your local payment method weekly.",
   },
@@ -100,10 +105,10 @@ export default function EarnPage() {
               </motion.div>
               <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.98 }}>
                 <Link
-                  href="#projects"
+                  href="#referral"
                   className="inline-flex items-center gap-2 border border-[#40424D] text-[#EDEFF7] px-8 py-4 rounded-lg text-base font-medium hover:border-[#6E7180] transition-colors duration-200"
                 >
-                  See Projects
+                  Refer a Friend
                 </Link>
               </motion.div>
             </div>
@@ -168,12 +173,12 @@ export default function EarnPage() {
           <FadeUp>
             <p className="eyebrow mb-4">HOW IT WORKS</p>
             <h2 className="text-display text-3xl md:text-5xl mb-16">
-              Start Earning in <span className="text-display-secondary">4 Steps.</span>
+              Start Earning in <span className="text-display-secondary">5 Steps.</span>
             </h2>
           </FadeUp>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8">
             {STEPS.map((step, i) => (
-              <FadeUp key={i} delay={i * 100}>
+              <FadeUp key={i} delay={i * 80}>
                 <div className="flex flex-col gap-4">
                   <p className="text-5xl font-bold text-[#40424D]">{step.number}</p>
                   <h3 className="text-lg font-bold text-[#EDEFF7]">{step.title}</h3>
@@ -186,58 +191,59 @@ export default function EarnPage() {
       </section>
 
       {/* Refer a Friend */}
-      <section className="bg-[#1E1E24] py-10 md:py-28 px-4 sm:px-6 border-t border-[#40424D]">
+      <section id="referral" className="bg-[#1E1E24] py-10 md:py-28 px-4 sm:px-6 border-t border-[#40424D]">
         <div className="max-w-6xl mx-auto">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <FadeUp>
               <p className="eyebrow mb-4">REFERRAL PROGRAM</p>
               <h2 className="text-display text-3xl md:text-5xl mb-6">
                 Refer a Friend,{" "}
-                <span className="text-display-secondary">Earn More.</span>
+                <span className="text-display-secondary">Earn Together.</span>
               </h2>
               <p className="text-[#9DA2B3] leading-relaxed mb-8">
-                Know someone who would be a great data collector? Invite them to join MyTron Labs and earn a bonus for every friend who completes their first project. The more you refer, the more you earn — no limits.
+                Invite someone to join MyTron Labs and earn a percentage of their total recorded hours once they hit 1,000 hours of data. The more your network records, the more you earn — passively, with no extra effort on your part.
               </p>
-              <div className="flex flex-col gap-4">
+              <div className="flex flex-col gap-5">
                 <div className="flex items-start gap-4">
                   <div className="w-8 h-8 rounded-full bg-[#40424D]/50 flex items-center justify-center shrink-0 text-sm font-bold text-[#EDEFF7]">1</div>
                   <div>
-                    <p className="text-[#EDEFF7] font-medium mb-1">Share your unique link</p>
-                    <p className="text-[#9DA2B3] text-sm">Get a personal referral link from your dashboard after signing up.</p>
+                    <p className="text-[#EDEFF7] font-medium mb-1">Share your unique referral link</p>
+                    <p className="text-[#9DA2B3] text-sm">Get a personal link from your dashboard after signing up.</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-4">
                   <div className="w-8 h-8 rounded-full bg-[#40424D]/50 flex items-center justify-center shrink-0 text-sm font-bold text-[#EDEFF7]">2</div>
                   <div>
-                    <p className="text-[#EDEFF7] font-medium mb-1">Friend signs up & completes a project</p>
-                    <p className="text-[#9DA2B3] text-sm">They join, complete their first session, and both of you benefit.</p>
+                    <p className="text-[#EDEFF7] font-medium mb-1">Your friend signs up and starts recording</p>
+                    <p className="text-[#9DA2B3] text-sm">They join, complete onboarding, and start uploading data through the app.</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-4">
                   <div className="w-8 h-8 rounded-full bg-[#40424D]/50 flex items-center justify-center shrink-0 text-sm font-bold text-[#EDEFF7]">3</div>
                   <div>
-                    <p className="text-[#EDEFF7] font-medium mb-1">You earn a referral bonus</p>
-                    <p className="text-[#9DA2B3] text-sm">Bonus is credited to your account and paid out with your next weekly payout.</p>
+                    <p className="text-[#EDEFF7] font-medium mb-1">They hit 1,000 hours — you get rewarded</p>
+                    <p className="text-[#9DA2B3] text-sm">Once your referred friend completes 1,000 hours of recorded data, you receive a percentage of the earnings from those hours as a referral reward.</p>
                   </div>
                 </div>
               </div>
             </FadeUp>
             <FadeUp delay={150}>
               <div className="bg-black border border-[#40424D] rounded-2xl p-8 md:p-10">
-                <p className="text-[#9DA2B3] text-sm mb-2">Referral bonus per friend</p>
-                <p className="text-5xl font-bold text-[#EDEFF7] mb-6">+$5 <span className="text-[#6E7180] text-2xl font-normal">per referral</span></p>
+                <p className="text-[#9DA2B3] text-sm mb-2">Referral reward at 1,000 hrs</p>
+                <p className="text-5xl font-bold text-[#EDEFF7] mb-2">5% <span className="text-[#6E7180] text-2xl font-normal">of their earnings</span></p>
+                <p className="text-[#6E7180] text-xs mb-8">Paid out once your referred friend completes their first 1,000 hours of recorded data.</p>
                 <div className="space-y-3 mb-8">
                   <div className="flex items-center justify-between py-3 border-b border-[#40424D]/50">
-                    <span className="text-[#9DA2B3] text-sm">1 referral</span>
-                    <span className="text-[#EDEFF7] font-medium">+$5</span>
+                    <span className="text-[#9DA2B3] text-sm">Friend earns $2,000</span>
+                    <span className="text-[#EDEFF7] font-medium">You get +$100</span>
                   </div>
                   <div className="flex items-center justify-between py-3 border-b border-[#40424D]/50">
-                    <span className="text-[#9DA2B3] text-sm">5 referrals</span>
-                    <span className="text-[#EDEFF7] font-medium">+$25</span>
+                    <span className="text-[#9DA2B3] text-sm">Friend earns $5,000</span>
+                    <span className="text-[#EDEFF7] font-medium">You get +$250</span>
                   </div>
                   <div className="flex items-center justify-between py-3">
-                    <span className="text-[#9DA2B3] text-sm">10+ referrals</span>
-                    <span className="text-[#EDEFF7] font-medium">+$50 <span className="text-xs text-[#6E7180]">& more perks</span></span>
+                    <span className="text-[#9DA2B3] text-sm">3 friends × $3,000 each</span>
+                    <span className="text-[#EDEFF7] font-medium">You get +$450</span>
                   </div>
                 </div>
                 <Link
@@ -287,7 +293,7 @@ export default function EarnPage() {
               Ready to Start <span className="text-display-secondary">Earning?</span>
             </h2>
             <p className="text-[#9DA2B3] mb-10 leading-relaxed">
-              Sign up takes under 2 minutes. No equipment needed — just your smartphone. We&apos;ll notify you when a project is available in your region.
+              Sign up takes under 2 minutes. No equipment needed — just your smartphone. We&apos;ll be in touch to discuss your setup before you start recording.
             </p>
           </FadeUp>
           <FadeUp delay={100}>
@@ -338,6 +344,23 @@ export default function EarnPage() {
                 <option value="outdoor">Outdoor & Street</option>
                 <option value="retail">Retail & Commercial</option>
               </select>
+              <select
+                required
+                defaultValue=""
+                className="w-full bg-black border border-[#40424D] rounded-lg px-4 py-3.5 text-sm focus:outline-none focus:border-[#9DA2B3] transition-colors appearance-none text-[#6E7180]"
+              >
+                <option value="" disabled>Device type</option>
+                <option value="android">Android</option>
+                <option value="ios">iOS (iPhone)</option>
+              </select>
+
+              {/* Note */}
+              <div className="bg-black/60 border border-[#40424D]/60 rounded-lg px-4 py-3 text-left">
+                <p className="text-xs text-[#6E7180] leading-relaxed">
+                  <span className="text-[#9DA2B3] font-medium">Note:</span> We prefer if you upload a short 2-minute video of your recording environment along with your sign-up — this helps our team assess the setup before onboarding you. It&apos;s not required, but highly preferred.
+                </p>
+              </div>
+
               <motion.button
                 type="submit"
                 whileHover={{ scale: 1.02 }}

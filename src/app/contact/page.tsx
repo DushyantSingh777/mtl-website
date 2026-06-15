@@ -201,12 +201,6 @@ export default function ContactPage() {
                   <h3 className="text-[#EDEFF7] font-bold text-lg mb-1 uppercase">Priyank Patel</h3>
                   <div className="text-[#6E7180] text-xs tracking-widest uppercase mb-2">CO-FOUNDER</div>
                   <a
-                    href="tel:+919265200452"
-                    className="text-[#9DA2B3] text-sm hover:text-[#EDEFF7] transition-colors block"
-                  >
-                    +91 92652 00452
-                  </a>
-                  <a
                     href="mailto:priyank@mytronlabs.com"
                     className="text-[#9DA2B3] text-sm hover:text-[#EDEFF7] transition-colors block mb-6"
                   >
@@ -216,12 +210,6 @@ export default function ContactPage() {
                   {/* Aditya Gupta */}
                   <h3 className="text-[#EDEFF7] font-bold text-lg mb-1 uppercase">Aditya Gupta</h3>
                   <div className="text-[#6E7180] text-xs tracking-widest uppercase mb-2">CO-FOUNDER</div>
-                  <a
-                    href="tel:+919945365283"
-                    className="text-[#9DA2B3] text-sm hover:text-[#EDEFF7] transition-colors block"
-                  >
-                    +91 99453 65283
-                  </a>
                   <a
                     href="mailto:aditya@mytronlabs.com"
                     className="text-[#9DA2B3] text-sm hover:text-[#EDEFF7] transition-colors block mb-6"

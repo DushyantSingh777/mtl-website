@@ -16,17 +16,22 @@ const navItems: NavItem[] = [
       { href: "/about",   label: "About",   desc: "Who we are and what we do" },
       { href: "/mission", label: "Mission",  desc: "Our purpose, values, and vision" },
       { href: "/faq",     label: "FAQ",      desc: "Common questions answered" },
+      { href: "/blog",    label: "Blog",     desc: "Insights on Physical AI" },
     ],
   },
-  { href: "/solution",  label: "Solution" },
-  { href: "/products",  label: "Products" },
-  { href: "/blog",      label: "Blog" },
+  {
+    label: "Solution",
+    dropdown: [
+      { href: "/solution",  label: "Solution", desc: "How we solve the data problem" },
+      { href: "/products",  label: "Products", desc: "Our data products and tools" },
+    ],
+  },
+  { href: "/earn", label: "Earn" },
   {
     label: "Join Us",
     dropdown: [
       { href: "/partners", label: "Partners", desc: "Become an early partner" },
       { href: "/careers",  label: "Careers",  desc: "Open roles at MyTron Labs" },
-      { href: "/earn",     label: "Earn",     desc: "Get paid to collect AI data" },
     ],
   },
 ];
