@@ -1,10 +1,13 @@
 "use client";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import dynamic from "next/dynamic";
 import FadeUp from "@/components/FadeUp";
 import MotionCard from "@/components/MotionCard";
 import StaggerGroup, { StaggerItem } from "@/components/StaggerGroup";
-import NeuralGrid from "@/components/NeuralGrid";
+
+// Lazy-load heavy canvas animation — doesn't block initial render
+const NeuralGrid = dynamic(() => import("@/components/NeuralGrid"), { ssr: false, loading: () => null });
 export default function HomePageClient() {
   return (
     <>

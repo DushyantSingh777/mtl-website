@@ -2,22 +2,27 @@
 import { useState } from "react";
 import { usePathname } from "next/navigation";
 import { AnimatePresence } from "framer-motion";
+import dynamic from "next/dynamic";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
-import SplashScreen from "./SplashScreen";
+
+// Lazy-load the splash screen — it has a video and heavy animations
+const SplashScreen = dynamic(() => import("./SplashScreen"), { ssr: false });
+
+// Only show splash on the homepage; every other route gets the shell immediately
+const SPLASH_ROUTES = ["/"];
 
 export default function ClientLayout({ children }: { children: React.ReactNode }) {
   const [showSplash, setShowSplash] = useState(true);
   const pathname = usePathname();
 
-  // Portal pages render without site shell (no navbar, footer, splash)
+  // Portal pages: no site shell at all
   if (pathname.startsWith("/portal")) {
     return <>{children}</>;
   }
 
-  // These routes skip the splash and render the full shell immediately
-  const SPLASH_FREE = ["/main", "/mission", "/blog", "/faq", "/about", "/solution", "/products", "/partners", "/careers", "/contact"];
-  if (SPLASH_FREE.some((p) => pathname.startsWith(p))) {
+  // Every route except homepage: render shell immediately, no splash
+  if (!SPLASH_ROUTES.includes(pathname)) {
     return (
       <>
         <Navbar />
@@ -27,6 +32,7 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
     );
   }
 
+  // Homepage: show splash first
   return (
     <>
       <AnimatePresence mode="wait">

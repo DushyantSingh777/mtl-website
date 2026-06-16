@@ -6,7 +6,7 @@ const nextConfig = {
     removeConsole: process.env.NODE_ENV === "production",
   },
   experimental: {
-    optimizePackageImports: ["lucide-react"],
+    optimizePackageImports: ["lucide-react", "framer-motion"],
   },
 };
 
