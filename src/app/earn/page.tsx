@@ -1,10 +1,8 @@
 // Server component — all static content renders instantly on the server
 // Only EarnSignUpForm (the interactive part) is a client component
 import Link from "next/link";
-import dynamic from "next/dynamic";
 import FadeUp from "@/components/FadeUp";
-
-const EarnSignUpForm = dynamic(() => import("./EarnSignUpForm"), { ssr: false });
+import EarnSignUpForm from "./EarnSignUpForm";
 
 const PROJECTS = [
   { icon: "🏠", title: "Residential", pay: "$3–$8 / hr", description: "Capture everyday activities inside homes - kitchens, living rooms, hallways." },
