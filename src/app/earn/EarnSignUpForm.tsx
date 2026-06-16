@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 const SHEET_URL = "https://script.google.com/macros/s/AKfycbwgb79IFShTtjHifccDC2sP5D0VCrCbns3UCtNCEunQ4X3Zc7ny-1CTXnum6yOjlgRwEQ/exec";
 
 export default function EarnSignUpForm() {
-  const [form, setForm] = useState({ name: "", email: "", country: "", customCountry: "", projectType: "", device: "", referralCode: "" });
+  const [form, setForm] = useState({ name: "", email: "", phone: "", country: "", customCountry: "", projectType: "", device: "", referralCode: "" });
   const [videoFile, setVideoFile] = useState<File | null>(null);
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
   const [myReferralCode, setMyReferralCode] = useState("");
@@ -48,7 +48,7 @@ export default function EarnSignUpForm() {
       setMyReferralCode(code);
       localStorage.setItem("mtl_referral_code", code);
       setStatus("sent");
-      setForm({ name: "", email: "", country: "", customCountry: "", projectType: "", device: "", referralCode: "" });
+      setForm({ name: "", email: "", phone: "", country: "", customCountry: "", projectType: "", device: "", referralCode: "" });
       setVideoFile(null);
     } catch {
       setStatus("error");
@@ -84,6 +84,7 @@ export default function EarnSignUpForm() {
     <form className="flex flex-col gap-4 max-w-md mx-auto" onSubmit={handleSubmit}>
       <input type="text" placeholder="Full name" required value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} className={inputCls} />
       <input type="email" placeholder="Email address" required value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} className={inputCls} />
+      <input type="tel" placeholder="Mobile number (with country code, e.g. +91 98765 43210)" required value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} className={inputCls} />
 
       <select required value={form.country} onChange={(e) => setForm({ ...form, country: e.target.value })} className={`${inputCls} appearance-none text-[#6E7180]`}>
         <option value="" disabled>Select your country</option>
