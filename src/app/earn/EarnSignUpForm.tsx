@@ -103,6 +103,33 @@ export default function EarnSignUpForm() {
           <option value="Philippines">Philippines</option>
           <option value="Other Southeast Asia">Other Southeast Asian country</option>
         </optgroup>
+        <optgroup label="Africa">
+          <option value="Nigeria">Nigeria</option>
+          <option value="Kenya">Kenya</option>
+          <option value="South Africa">South Africa</option>
+          <option value="Ghana">Ghana</option>
+          <option value="Ethiopia">Ethiopia</option>
+          <option value="Other Africa">Other African country</option>
+        </optgroup>
+        <optgroup label="North America">
+          <option value="United States">United States</option>
+          <option value="Canada">Canada</option>
+          <option value="Other North America">Other North American country</option>
+        </optgroup>
+        <optgroup label="Europe">
+          <option value="United Kingdom">United Kingdom</option>
+          <option value="Germany">Germany</option>
+          <option value="France">France</option>
+          <option value="Spain">Spain</option>
+          <option value="Italy">Italy</option>
+          <option value="Netherlands">Netherlands</option>
+          <option value="Other Europe">Other European country</option>
+        </optgroup>
+        <optgroup label="Australia & Oceania">
+          <option value="Australia">Australia</option>
+          <option value="New Zealand">New Zealand</option>
+          <option value="Other Oceania">Other Oceania country</option>
+        </optgroup>
       </select>
 
       {form.country.startsWith("Other") && (

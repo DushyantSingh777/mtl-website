@@ -29,6 +29,16 @@ const REGIONS = [
   { flag: "🇮🇩", country: "Indonesia" },
   { flag: "🇲🇾", country: "Malaysia" },
   { flag: "🇵🇭", country: "Philippines" },
+  { flag: "🇳🇬", country: "Nigeria" },
+  { flag: "🇰🇪", country: "Kenya" },
+  { flag: "🇿🇦", country: "South Africa" },
+  { flag: "🇬🇭", country: "Ghana" },
+  { flag: "🇺🇸", country: "United States" },
+  { flag: "🇨🇦", country: "Canada" },
+  { flag: "🇬🇧", country: "United Kingdom" },
+  { flag: "🇩🇪", country: "Germany" },
+  { flag: "🇫🇷", country: "France" },
+  { flag: "🇦🇺", country: "Australia" },
 ];
 
 export default function EarnPage() {
@@ -196,7 +206,7 @@ export default function EarnPage() {
           <FadeUp>
             <p className="eyebrow mb-4">WHERE WE OPERATE</p>
             <h2 className="text-display text-3xl md:text-4xl mb-10">
-              Currently accepting collectors from <span className="text-display-secondary">these regions.</span>
+              Currently accepting collectors <span className="text-display-secondary">worldwide.</span>
             </h2>
           </FadeUp>
           <FadeUp delay={100}>
@@ -208,10 +218,7 @@ export default function EarnPage() {
                 </div>
               ))}
               <div className="flex items-center gap-2 bg-[#1E1E24] border border-[#40424D]/50 rounded-full px-4 py-2">
-                <span className="text-[#6E7180] text-sm">🌏 Other Southeast Asia</span>
-              </div>
-              <div className="flex items-center gap-2 bg-[#1E1E24] border border-[#40424D]/50 rounded-full px-4 py-2">
-                <span className="text-[#6E7180] text-sm">+ more coming soon</span>
+                <span className="text-[#6E7180] text-sm">🌍 + more countries</span>
               </div>
             </div>
           </FadeUp>
