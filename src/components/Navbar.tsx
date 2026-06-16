@@ -27,6 +27,7 @@ const navItems: NavItem[] = [
     ],
   },
   { href: "/earn", label: "Earn" },
+  { href: "/app", label: "App" },
   {
     label: "Join Us",
     dropdown: [
